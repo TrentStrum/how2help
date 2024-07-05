@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import QueryClientProvider from './app/Context/QueryClientProvider.tsx';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './app/router/Routes.tsx';
+import 'react-toastify/dist/ReactToastify.css';
 
 async function enableMocking() {
 	if (process.env.NODE_ENV !== 'development') {
@@ -11,12 +12,11 @@ async function enableMocking() {
 	return worker.start();
 }
 
+
 enableMocking().then(() => {
 	ReactDOM.createRoot(document.getElementById('root')!).render(
 		<React.StrictMode>
-			<QueryClientProvider>
-				<App />
-			</QueryClientProvider>
+			<RouterProvider router={router} />
 		</React.StrictMode>
 	);
 });

@@ -1,4 +1,4 @@
-import { User } from '../../src/app/Models/IUser';
+import { User } from '../../api/user.types';
 
 export const mockUsers: User[] = [
 	{
@@ -51,8 +51,7 @@ export const mockUsers: User[] = [
 			{
 				causeId: 4,
 				name: 'Palestine Liberation',
-				description:
-					'End the apartheid, colonization and genocide in Palestine.',
+				description: 'End the apartheid, colonization and genocide in Palestine.',
 				causeImageUrl: '',
 			},
 			{
@@ -92,15 +91,7 @@ export const mockUsers: User[] = [
 						causeImageUrl: '',
 					},
 				],
-				countryServing: [
-					'USA',
-					'Canada',
-					'Germany',
-					'France',
-					'UK',
-					'Mexico',
-					'Argentina',
-				],
+				countryServing: ['USA', 'Canada', 'Germany', 'France', 'UK', 'Mexico', 'Argentina'],
 				stateServing: 'Many',
 				cityServicing: 'Many',
 				userRating: '5',

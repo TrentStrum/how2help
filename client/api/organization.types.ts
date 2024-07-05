@@ -1,6 +1,6 @@
-import { Cause } from "./ICause";
+import { Cause } from './cause.types';
 
-export interface Organization {
+export type Organization = {
 	orgId: number;
 	name: string;
 	causes: Cause[];
@@ -10,4 +10,4 @@ export interface Organization {
 	userRating?: string;
 	orgImageUrl?: string;
 	orgWebUrl?: string;
-}
+};

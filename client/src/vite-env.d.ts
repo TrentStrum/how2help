@@ -1,10 +1,9 @@
 /// <reference types="vite/client" />
 
-declare const process: {
-	env: {
-		NODE_ENV: string;
-		VITE_BASE_URL: string;
-	};
-	cwd: () => string;
-};
+interface ImportMetaEnv {
+	readonly VITE_BASE_URL: string
+}
 
+interface ImportMeta {
+	readonly env: ImportMetaEnv
+}

@@ -1,4 +1,4 @@
-export interface Cause {
+export type Cause = {
 	causeId: number;
 	name: string;
 	description: string;

@@ -1,7 +1,7 @@
-import { Cause } from "./ICause";
-import { Organization } from "./IOrganization";
+import { Cause } from './cause.types';
+import { Organization } from './organization.types';
 
-export interface User {
+export type User = {
 	userId: number;
 	firstName: string;
 	lastName: string;
@@ -18,4 +18,4 @@ export interface User {
 	favoriteOrgs?: Organization[];
 	favoriteCauses?: Cause[];
 	profileImageUrl?: string;
-}
+};

@@ -1,9 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import agent from '../app/api/handlers/agent';
+import agent from '../../api/handlers/agent';
 
 export default function SingleUser() {
 	const userId = 1;
-	const { isLoading, isError, data: user, error } = useQuery({
+	const {
+		isLoading,
+		isError,
+		data: user,
+		error,
+	} = useQuery({
 		queryKey: ['getUserById'],
 		queryFn: async () => agent.User.get(userId),
 	});

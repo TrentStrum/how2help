@@ -6,11 +6,11 @@ export const handlers = [
 		return HttpResponse.json(mockUsers);
 	}),
 
-	http.get('/user/:id', ({ params }) => {
-		const { id } = params;
+	http.get('/user/:userId', ({ params }) => {
+		const { userId } = params;
 
-		const stringId: string = id.toString();
-		const numId: number = parseInt(stringId);
+		const stringId: string = userId.toString();
+		const numId: number = Number(stringId);
 
 		if (!numId) {
 			return new HttpResponse(null, { status: 404 });

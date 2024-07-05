@@ -1,6 +1,6 @@
 export const mockOrgs = [
 	{
-		id: '1',
+		orgId: 1,
 		name: 'Stand In Pride',
 		causes: [
 			{
@@ -11,23 +11,16 @@ export const mockOrgs = [
 				causeImageUrl: '',
 			},
 		],
-		countryServing: [
-			'USA',
-			'Canada',
-			'Germany',
-			'France',
-			'UK',
-			'Mexico',
-			'Argentina',
-		],
+		countryServing: ['USA', 'Canada', 'Germany', 'France', 'UK', 'Mexico', 'Argentina'],
 		stateServing: 'Many',
 		cityServicing: 'Many',
 		userRating: '5',
 		orgImageUrl: '',
 		orgWebUrl: 'https://standinpride.org/',
+		status: 'active',
 	},
 	{
-		id: '2',
+		orgId: 2,
 		name: 'UNRWA',
 		causes: [],
 		countryServing: ['Palestine'],
@@ -36,16 +29,16 @@ export const mockOrgs = [
 		userRating: '5',
 		orgImageUrl: '',
 		orgWebUrl: 'https://www.unrwa.org/',
+		status: 'active',
 	},
 	{
-		id: '3',
+		orgId: 3,
 		name: "Palestine Children's Relief Fund",
 		causes: [
 			{
 				id: '4',
 				name: 'Palestine Liberation',
-				description:
-					'End the apartheid, colonization and genocide in Palestine.',
+				description: 'End the apartheid, colonization and genocide in Palestine.',
 				causeImageUrl: '',
 			},
 		],
@@ -55,9 +48,10 @@ export const mockOrgs = [
 		userRating: '5',
 		orgImageUrl: '',
 		orgWebUrl: 'https://www.pcrf.net/',
+		status: 'active',
 	},
 	{
-		id: '4',
+		orgId: 4,
 		name: 'The Trevor Project',
 		causes: [
 			{
@@ -81,9 +75,10 @@ export const mockOrgs = [
 		userRating: '5',
 		orgImageUrl: '',
 		orgWebUrl: 'https://www.thetrevorproject.org/',
+		status: 'active',
 	},
 	{
-		id: '5',
+		orgId: 5,
 		name: 'Sandy Hook Promise',
 		causes: [
 			{
@@ -99,9 +94,10 @@ export const mockOrgs = [
 		userRating: '4',
 		orgImageUrl: '',
 		orgWebUrl: 'https://www.sandyhookpromise.org/',
+		status: 'active',
 	},
 	{
-		id: '6',
+		orgId: 6,
 		name: 'Womens March',
 		causes: [
 			{
@@ -118,9 +114,10 @@ export const mockOrgs = [
 		userRating: '5',
 		orgImageUrl: '',
 		orgWebUrl: 'https://www.womensmarch.com/',
+		status: 'closed',
 	},
 	{
-		id: '7',
+		orgId: 7,
 		name: 'Center for Reproductive Rights',
 		causes: [
 			{
@@ -137,10 +134,11 @@ export const mockOrgs = [
 		userRating: '3',
 		orgImageUrl: '',
 		orgWebUrl: 'https://reproductiverights.org/',
+		status: 'active',
 	},
 	{
-		id: '8',
-		name: 'Eevrytown',
+		orgId: 8,
+		name: 'Everytown',
 		causes: [
 			{
 				id: '3',
@@ -155,5 +153,6 @@ export const mockOrgs = [
 		userRating: '3',
 		orgImageUrl: '',
 		orgWebUrl: 'https://www.everytown.org/',
+		status: 'closed',
 	},
 ];
