@@ -49,7 +49,7 @@ const Appbar = () => {
 	function handleLogoClick() {
 		setValue('home');
 	}
-	const [value, setValue] = useState<string>('disabled');
+	const [value, setValue] = useState<string>('catalog');
 
 	function handleChange(event: React.SyntheticEvent, newValue: string) {
 		setValue(newValue);
@@ -57,7 +57,7 @@ const Appbar = () => {
 
 	const navigate = useNavigate();
 	const routeChange = () => {
-		const path = '/login';
+		const path = '/auth';
 		navigate(path);
 	};
 
@@ -124,7 +124,6 @@ const Appbar = () => {
 													to='/cause'
 													component={NavLink}
 												/>
-
 											</Tabs>
 										</Box>
 									</Grid>

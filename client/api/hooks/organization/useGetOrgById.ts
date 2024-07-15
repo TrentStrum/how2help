@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getResource } from '../../utils';
-import { Organization } from '../../organization.types';
-import { orgKeys } from '../../queryKeys';
+import { getResource } from '../../utils/Resources/getResource';
+import { Organization } from './organization.types';
+import { orgKeys } from '../../utils/queryKeys';
 
 const useGetOrgById = (orgId: number) => {
 	const query = useQuery<Organization>({

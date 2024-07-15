@@ -3,7 +3,7 @@ import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import App from '../../App';
 import { About } from '../pages/About';
 import { LandingPage } from '../pages/Landing';
-import { SignIn } from '../components/Login';
+import { LoginForm } from '../components/Login';
 
 
 import OrgList from '../components/OrgList';
@@ -12,6 +12,7 @@ import { OrgDetail } from '../components/OrgDetail';
 import { UserDetail } from '../components/UserDetail';
 import { CauseDetail } from '../components/CauseDetail';
 import CauseList from '../components/CauseList';
+import { UserProfile } from '../pages/UserProfile';
 
 export const routes: RouteObject[] = [
 	{
@@ -51,9 +52,13 @@ export const routes: RouteObject[] = [
 				element: <About />,
 			},
 			{
-				path: '/login',
-				element: <SignIn />,
+				path: '/auth',
+				element: <LoginForm />,
 			},
+			{
+				path: '/userProfile',
+				element: <UserProfile />
+			}
 		],
 	},
 ];

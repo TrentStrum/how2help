@@ -1,8 +1,8 @@
-import { Button, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Box, Container, Grid, Typography } from '@mui/material';
 
-import { Organization } from '../../../api/organization.types';
+import { Organization } from '../../../api/hooks/organization/organization.types';
 import { useGetOrgsAll } from '../../../api/hooks/organization/useGetOrgs';
+import { OrgCard } from '../pages/Catalog/OrgCard';
 
 export default function OrgList() {
 	const { data: orgs, isLoading, isError } = useGetOrgsAll();
@@ -11,16 +11,28 @@ export default function OrgList() {
 	if (isError) return <Typography variant='body2'>Error...</Typography>;
 
 	return (
-		<ul>
-			{orgs?.map((org: Organization) => (
-				<li key={org.orgId}>
-					<Button>
-						<Link to={`/org/${org.orgId}`}>
-							<Typography variant='body2'>{org.name}</Typography>
-						</Link>
-					</Button>
-				</li>
-			))}
-		</ul>
+		<Container>
+			<Box sx={{ flexGrow: 1 }}>
+				<Grid
+					container
+					spacing={{ xs: 2, md: 3 }}
+					columns={{ xs: 4, sm: 8, md: 12 }}
+				>
+					{orgs?.map((org: Organization) => (
+						<Grid
+							item
+							xs={2}
+							sm={4}
+							md={4}
+							key={org.orgId}
+						>
+							<OrgCard
+								org={org}
+							/>
+						</Grid>
+					))}
+				</Grid>
+			</Box>
+		</Container>
 	);
 }

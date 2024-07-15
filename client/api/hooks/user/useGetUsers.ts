@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { userKeys } from '../../queryKeys';
-import { getResource } from '../../utils';
+import { userKeys } from '../../utils/queryKeys';
+import { getResource } from '../../utils/Resources/getResource';
 
 const useGetUsers = () => {
 	const query = useQuery({

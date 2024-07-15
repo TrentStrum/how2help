@@ -1,5 +1,5 @@
-import { Cause } from './cause.types';
-import { Organization } from './organization.types';
+import { Cause } from '../cause/cause.types';
+import { Organization } from '../organization/organization.types';
 
 export type User = {
 	userId: number;
@@ -18,4 +18,9 @@ export type User = {
 	favoriteOrgs?: Organization[];
 	favoriteCauses?: Cause[];
 	profileImageUrl?: string;
+};
+
+export type LoginData = {
+	userId: number;
+	userToken: string;
 };

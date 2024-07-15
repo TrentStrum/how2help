@@ -7,6 +7,7 @@ export const orgKeys = {
 	details: () => [...orgKeys.all, 'detail'] as const,
 	detail: (orgId: number) => [...orgKeys.details(), orgId] as const,
 };
+
 export const userKeys = {
 	all: ['user'] as const,
 	lists: () => [...userKeys.all, 'list'] as const,
@@ -14,6 +15,7 @@ export const userKeys = {
 	details: () => [...userKeys.all, 'detail'] as const,
 	detail: (userId: number) => [...userKeys.details(), userId] as const,
 };
+
 export const causeKeys = {
 	all: ['cause'] as const,
 	lists: () => [...causeKeys.all, 'list'] as const,

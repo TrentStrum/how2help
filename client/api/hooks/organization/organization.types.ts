@@ -1,4 +1,4 @@
-import { Cause } from './cause.types';
+import { Cause } from '../cause/cause.types';
 
 export type Organization = {
 	orgId: number;

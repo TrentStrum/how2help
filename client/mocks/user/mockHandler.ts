@@ -17,4 +17,10 @@ export const handlers = [
 		}
 		return HttpResponse.json(mockUsers.find((u) => u.userId === numId));
 	}),
+
+	http.post('/auth/user', () =>{
+		return HttpResponse.json(mockUsers.find(u => u.firstName === 'trent'));
+	})
+
+
 ];

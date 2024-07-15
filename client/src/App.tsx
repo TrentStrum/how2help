@@ -5,16 +5,14 @@ import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 
-import { queryClient } from '../api/queryClient';
+import { queryClient } from '../api/utils/queryClient';
 import { ThemeContextProvider } from './app/Themes/ThemeContext';
 import { Appbar } from './app/components/AppBar';
 import { MobileMenu } from './app/components/AppBar/MobileMenu';
-
-// const queryClient = new QueryClient();
+import AuthProvider from './auth/AuthProvider';
 
 function App() {
 	const [isMobile, setIsMobile] = useState(false);
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	//const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 	useEffect(() => {
@@ -30,11 +28,8 @@ function App() {
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
+	const isAuthenticated = false;
 	let page;
-
-	function handleAuthentication() {
-		setIsAuthenticated(!isAuthenticated);
-	}
 
 	if (isMobile) {
 		page = (
@@ -52,16 +47,17 @@ function App() {
 		);
 	}
 
-	
 	return (
 		<>
-			<ThemeContextProvider>
-				<QueryClientProvider client={queryClient}>
-					<ReactQueryDevtools initialIsOpen={true} />
-					<ToastContainer />
-					<Container sx={{ maxWidth: 'xl' }}>{page}</Container>
-				</QueryClientProvider>
-			</ThemeContextProvider>
+			<QueryClientProvider client={queryClient}>
+				<ThemeContextProvider>
+					<AuthProvider>
+						<ReactQueryDevtools initialIsOpen={true} />
+						<ToastContainer />
+						<Container sx={{ maxWidth: 'xl' }}>{page}</Container>
+					</AuthProvider>
+				</ThemeContextProvider>
+			</QueryClientProvider>
 		</>
 	);
 }

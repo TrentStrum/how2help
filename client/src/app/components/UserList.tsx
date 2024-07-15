@@ -1,9 +1,8 @@
 import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { User } from '../../../api/user.types';
+import { User } from '../../../api/hooks/user/user.types';
 import { useGetUsers } from '../../../api/hooks/user/useGetUsers';
-
 
 export default function UserList() {
 	const { data: users, isLoading, isError } = useGetUsers();

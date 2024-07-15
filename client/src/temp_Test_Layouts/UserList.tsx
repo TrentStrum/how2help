@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import agent from '../../api/handlers/agent';
-import { User } from '../../api/user.types';
+import { User } from '../../api/hooks/user/user.types';
 
 export default function UserList() {
 	const {

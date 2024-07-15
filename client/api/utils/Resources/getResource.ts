@@ -1,7 +1,7 @@
-import { apiClient } from "./apiClient";
+import { apiClient } from '../apiClient';
 
 export const getResource = async <TResource>(
-	url: string,
+	url: string
 	// signal: AbortSignal | undefined
 ): Promise<TResource> => {
 	const { data } = await apiClient.get<TResource>(url);

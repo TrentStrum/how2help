@@ -1,4 +1,4 @@
-import { User } from '../../api/user.types';
+import { User } from '../../api/hooks/user/user.types';
 
 export const mockUsers: User[] = [
 	{
@@ -6,7 +6,7 @@ export const mockUsers: User[] = [
 		firstName: 'Trent',
 		lastName: 'Strum',
 		username: 'tstrum',
-		password: 'Pa$$w0rd',
+		password: 'asd',
 		email: 'trent@test.com',
 		phone: '',
 		streetAddress: '123 Some St',

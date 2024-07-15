@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { getResource } from '../../utils';
-import { Cause } from '../../cause.types';
-import { causeKeys } from '../../queryKeys';
-
+import { getResource } from '../../utils/Resources/getResource';
+import { Cause } from './cause.types';
+import { causeKeys } from '../../utils/queryKeys';
 
 const useGetCauseAll = () => {
 	const query = useQuery<Cause[]>({
@@ -12,4 +11,4 @@ const useGetCauseAll = () => {
 	return query;
 };
 
-export { useGetCauseAll }; 
+export { useGetCauseAll };

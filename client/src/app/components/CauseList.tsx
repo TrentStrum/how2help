@@ -1,9 +1,8 @@
 import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { Cause } from '../../../api/cause.types';
-import { useGetCauseAll } from '../../../api/hooks/user/useGetCauses';
-
+import { Cause } from '../../../api/hooks/cause/cause.types';
+import { useGetCauseAll } from '../../../api/hooks/cause/useGetCauses';
 
 export default function CauseList() {
 	const { data: causes, isLoading, isError } = useGetCauseAll();
