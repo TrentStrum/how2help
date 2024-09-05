@@ -1,16 +1,15 @@
 import { RouteObject } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
-import { CauseDetail } from '../../features/utils/CauseDetail';
+import App from '../app/App';
+import { About } from '../app/routes/app/About';
+import { LandingPage } from '../app/routes/landing';
+import { CauseDetail } from '../features/cause/CauseDetail';
+import CauseList from '../features/cause/CauseList';
+import { OrgDetail } from '../features/organization/OrgDetail';
+import OrgList from '../features/organization/OrgList';
+import { UserDetail } from '../features/user/UserDetail';
+import UserList from '../features/user/UserList';
 
-
-import CauseList from '../../features/cause/CauseList';
-import { OrgDetail } from '../../features/organization/OrgDetail';
-import { UserDetail } from '../../features/user/UserDetail';
-import UserList from '../../features/user/UserList';
-import OrgList from '../../features/organization/OrgList';
-import { About } from '../routes/app/About';
-import { LandingPage } from '../routes/landing';
 
 export const routes: RouteObject[] = [
 	{

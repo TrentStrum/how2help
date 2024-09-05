@@ -9,6 +9,8 @@ export type Organization = {
 	stateServing?: string;
 	cityServicing?: string;
 	userRating?: string;
+	starRatings?: number[];
 	orgWebUrl?: string;
 	avatarImageUrl?: string;
+	images?: Array<{ id: number; image: string }>;
 };

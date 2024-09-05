@@ -4,11 +4,12 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { queryClient } from './api/utils/queryClient';
-import { Appbar } from './features/components/AppBar';
-import { MobileMenu } from './features/components/AppBar/MobileMenu';
-import { ThemeContextProvider } from './Themes/ThemeContext';
+
+import { ThemeContextProvider } from '../lib/Themes/ThemeContext';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { queryClient } from '../api/utils/queryClient';
+import { Appbar } from '../components/layouts/AppBar';
+import { MobileMenu } from '../components/layouts/AppBar/MobileMenu';
 
 
 

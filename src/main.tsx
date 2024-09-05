@@ -1,7 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router';
-import { router } from './app/router/Routes';
+import { router } from './router/Routes';
+
 
 async function enableMocking() {
 	if (process.env.NODE_ENV !== 'development') {

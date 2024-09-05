@@ -1,5 +1,3 @@
-
-
 export const mockOrgs = [
 	{
 		orgId: 1,
@@ -17,6 +15,7 @@ export const mockOrgs = [
 		stateServing: 'Many',
 		cityServicing: 'Many',
 		userRating: '5',
+		starRatings: [10, 6, 2, 1, 0],
 		avatarImageUrl: '../../src/images/standInPride.jpg',
 		orgWebUrl: 'https://standinpride.org/',
 		status: 'active',
