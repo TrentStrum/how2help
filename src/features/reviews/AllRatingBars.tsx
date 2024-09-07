@@ -1,25 +1,22 @@
 import { List, ListItem, Box, Typography } from '@mui/material';
 import { LinearProgressSlim } from './ProgressBar.style';
 
-
 type Props = {
-	rating: number[];
+	rating: number[] | undefined;
 };
 
 const AllRatingBars = ({ rating }: Props) => {
-let i = 0;
-console.log(rating)
+	let i = 0;
+
 	return (
 		<List>
-			{rating.map((star: number) => (
+			{rating!.map((star: number) => (
 				<ListItem
 					disableGutters
 					key={star}
 				>
 					<Box sx={{ minWidth: 40, textAlign: 'right' }}>
-						<Typography variant='h5'>
-						{rating.length - i++} stars
-						</Typography>
+						<Typography variant='h5'>{rating!.length - i++} stars</Typography>
 					</Box>
 					<Box
 						px={2}

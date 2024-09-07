@@ -2,10 +2,10 @@ import { HttpResponse, http } from 'msw';
 import { mockCause } from './mocks';
 
 export const handlers = [
-	http.get('/cause', () => {
+	http.get('/catalog/cause', () => {
 		return HttpResponse.json(mockCause);
 	}),
-	http.get('/cause/:causeId', ({ params }) => {
+	http.get('/catalog/cause/:causeId', ({ params }) => {
 		const { causeId } = params;
 
 		const stringId: string = causeId.toString();

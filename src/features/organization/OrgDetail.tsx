@@ -1,15 +1,15 @@
 import { Box, Card, Container, Divider, Tab, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
-import { TabsShadow } from '../utils/TabsStyle';
-
 import { useState } from 'react';
 import { HeroImage } from '../utils/HeroImage';
-import { Reviews } from '@mui/icons-material';
 import { useGetOrgById } from '../../api/hooks/organization/useGetOrgById';
 import { SideBySideLayout } from '../../app/layouts/SideBySideLayout';
 import { OrgAvailableActions } from './OrgAvailableActions';
 import { OrgProfileDescription } from './OrgProfileDescription';
+import { TabStyle } from '../utils/TabsStyle';
+import { OrgReviewsLayout } from '../reviews/OrgReviewsLayout';
+
 
 
 
@@ -37,18 +37,18 @@ const OrgDetail = () => {
 					/>
 					<Divider />
 					<Box p={2}>
-						<TabsShadow
+						<TabStyle
 							value={Number(tabValue)}
 							onChange={handleTabChange}
 							centered
 						>
 							<Tab label='Reviews' />
 							<Tab label='Additional Info' />
-						</TabsShadow>
+						</TabStyle>
 					</Box>
 					<Divider />
 					<Container maxWidth='lg'>
-						{tabValue === '0' && <Reviews rating={org?.starRatings} />}
+						{tabValue === '0' && org ? <OrgReviewsLayout org={org} /> : <p>Error...</p>}
 						{tabValue === '1' && <OrgAvailableActions />}
 					</Container>
 				</Card>

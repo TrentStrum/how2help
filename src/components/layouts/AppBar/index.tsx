@@ -15,8 +15,9 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { ReactElement, cloneElement, useState } from 'react';
+import { UserMenu } from './userMenu';
 
-import { UserMenu } from './UserMenu';
+
 
 interface AppbarProps {
 	children: ReactElement;
@@ -109,7 +110,7 @@ const Appbar = () => {
 												<Tab
 													label='Catalog'
 													value='catalog'
-													to='/catalog'
+													to='/org'
 													component={NavLink}
 												/>
 												<Tab

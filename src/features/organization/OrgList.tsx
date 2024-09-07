@@ -1,11 +1,7 @@
-import { Typography, Container, Box, Grid } from "@mui/material";
-import { useGetOrgsAll } from "../../api/hooks/organization/useGetOrgs";
-import { Organization } from "../../types/organization.types";
-import { OrgCard } from "./OrgCard";
-
-
-
-
+import { Typography, Container, Box, Grid } from '@mui/material';
+import { useGetOrgsAll } from '../../api/hooks/organization/useGetOrgs';
+import { Organization } from '../../types/organization.types';
+import { OrgCard } from './OrgCard';
 
 export default function OrgList() {
 	const { data: orgs, isLoading, isError } = useGetOrgsAll();
@@ -29,9 +25,7 @@ export default function OrgList() {
 							md={4}
 							key={org.orgId}
 						>
-							<OrgCard
-								org={org}
-							/>
+							<OrgCard org={org} />
 						</Grid>
 					))}
 				</Grid>

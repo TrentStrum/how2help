@@ -1,4 +1,4 @@
-import LandingMain from '../../../../images/LandingMain2.png';
+import LandingMain from '../../../assets/images/LandingMain2.png';
 import { HeroImage } from '../../../features/utils/HeroImage';
 
 

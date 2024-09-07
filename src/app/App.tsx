@@ -9,7 +9,7 @@ import { ThemeContextProvider } from '../lib/Themes/ThemeContext';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { queryClient } from '../api/utils/queryClient';
 import { Appbar } from '../components/layouts/AppBar';
-import { MobileMenu } from '../components/layouts/AppBar/MobileMenu';
+import { MobileMenu } from '../components/layouts/AppBar/mobileMenu';
 
 
 

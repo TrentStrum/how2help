@@ -3,14 +3,14 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import { CauseDetail } from '../../features/utils/CauseDetail';
 
-
 import CauseList from '../../features/cause/CauseList';
 import { OrgDetail } from '../../features/organization/OrgDetail';
 import { UserDetail } from '../../features/user/UserDetail';
-import UserList from '../../features/user/UserList';
 import OrgList from '../../features/organization/OrgList';
-import { About } from '../routes/app/About';
+import { About } from '../routes/app/about';
 import { LandingPage } from '../routes/landing';
+
+
 
 export const routes: RouteObject[] = [
 	{
@@ -22,27 +22,23 @@ export const routes: RouteObject[] = [
 				element: <LandingPage />,
 			},
 			{
-				path: '/catalog',
-				element: <OrgList />,
+				path: '/catalog/org',
+				element: <OrgList />
 			},
 			{
-				path: '/org/:orgId',
+				path: '/catalog/org/:orgId',
 				element: <OrgDetail />,
-			},
-			{
-				path: '/user',
-				element: <UserList />,
 			},
 			{
 				path: '/user/:userId',
 				element: <UserDetail />,
 			},
 			{
-				path: '/cause',
+				path: '/catalog/cause',
 				element: <CauseList />,
 			},
 			{
-				path: '/cause/:causeId',
+				path: '/catalog/cause/:causeId',
 				element: <CauseDetail />,
 			},
 			{
