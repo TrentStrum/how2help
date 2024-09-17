@@ -9,7 +9,7 @@ export type Organization = {
 	countryServing: string[];
 	stateServing?: string;
 	cityServicing?: string;
-	userRating?: string;
+	userRating?: number;
 	starRatings?: number[];
 	orgWebUrl?: string;
 	avatarImageUrl?: string;

@@ -11,12 +11,10 @@ import { TabStyle } from '../utils/TabsStyle';
 import { OrgReviewsLayout } from '../reviews/OrgReviewsLayout';
 
 
-
-
 const OrgDetail = () => {
 	const { orgId } = useParams();
 	const { data: org, isLoading, isError } = useGetOrgById(Number(orgId));
-	const OrgLeftContent = <HeroImage imageSource={org?.avatarImageUrl} />;
+	const OrgLeftContent = <HeroImage  height={600} imageSource={org?.avatarImageUrl} />;
 	const OrgRightContent = <OrgProfileDescription org={org} />;
 	    const [tabValue, setTabValue] = useState('0');
 

@@ -5,7 +5,7 @@ import { HeroImage } from '../../../features/utils/HeroImage';
 const HeroContentRight = () => {
 	return (
 		<>
-			<HeroImage imageSource={LandingMain} />
+			<HeroImage imageSource={LandingMain} height={600}/>
 		</>
 	);
 };

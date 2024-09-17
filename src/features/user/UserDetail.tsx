@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { useGetUserById } from '../../api/hooks/user/useGetUserById';
+import { UserProfileLayout } from './UserProfileLayout';
 
 
 
@@ -14,7 +15,7 @@ const UserDetail = () => {
 
 	return (
 		<>
-			<Typography variant='body2'>{user?.firstName}</Typography>
+			<UserProfileLayout user={user}/>
 		</>
 	);
 };

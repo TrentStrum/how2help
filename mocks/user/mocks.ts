@@ -27,6 +27,7 @@ export const mockUsers: User[] = [
 				userRating: '5',
 				orgWebUrl: 'https://www.unrwa.org/',
 				avatarImageUrl: '../../src/assets/images/palestinianFreedom.jpg',
+				reviews: [],
 			},
 			{
 				orgId: 6,
@@ -44,8 +45,9 @@ export const mockUsers: User[] = [
 				stateServing: '',
 				cityServicing: '',
 				userRating: '5',
-				avatarImageUrl: '../../src/assets/images/womensMarch.jpg',
 				orgWebUrl: 'https://www.womensmarch.com/',
+				avatarImageUrl: '../../src/assets/images/womensMarch.jpg',
+				reviews: [],
 			},
 		],
 		favoriteCauses: [
@@ -63,7 +65,8 @@ export const mockUsers: User[] = [
 				avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 			},
 		],
-		avatarImageUrl: '../../src/assets/images/trent.jpg',
+		avatarImageUrl: '../../src/assets/avatars/1.png',
+		coverImageUrl: '../../src/assets/images/trent.jpg',
 	},
 	{
 		userId: 2,
@@ -96,8 +99,9 @@ export const mockUsers: User[] = [
 				stateServing: 'Many',
 				cityServicing: 'Many',
 				userRating: '5',
-				avatarImageUrl: '../../src/assets/images/standInPride.jpg',
 				orgWebUrl: 'https://standinpride.org/',
+				avatarImageUrl: '../../src/assets/images/standInPride.jpg',
+				reviews: [],
 			},
 			{
 				orgId: 4,
@@ -122,8 +126,9 @@ export const mockUsers: User[] = [
 				stateServing: '',
 				cityServicing: '',
 				userRating: '5',
-				avatarImageUrl: '../../src/assets/images/The_Trevor_Project_Logo.jpg',
 				orgWebUrl: 'https://www.thetrevorproject.org/',
+				avatarImageUrl: '../../src/assets/images/The_Trevor_Project_Logo.jpg',
+				reviews: [],
 			},
 		],
 		favoriteCauses: [

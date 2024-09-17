@@ -1,14 +1,16 @@
 import { RouteObject } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../app/App';
-import { About } from '../app/routes/app/about';
+// import { About } from '../app/routes/app/about';
 import { LandingPage } from '../app/routes/landing';
 import { CauseDetail } from '../features/cause/CauseDetail';
 import CauseList from '../features/cause/CauseList';
 import { OrgDetail } from '../features/organization/OrgDetail';
 import { UserDetail } from '../features/user/UserDetail';
-import UserList from '../features/user/UserList';
+import { UserCatalog } from '../features/user/UserCatalog';
 import OrgList from '../features/organization/OrgList';
+import { LoginCover } from '../features/login-cover/LoginCover';
+import { NewCauseList } from '../features/cause/NewCauseList';
 
 export const routes: RouteObject[] = [
 	{
@@ -29,7 +31,7 @@ export const routes: RouteObject[] = [
 			},
 			{
 				path: '/user',
-				element: <UserList />,
+				element: <UserCatalog />,
 			},
 			{
 				path: '/user/:userId',
@@ -37,16 +39,20 @@ export const routes: RouteObject[] = [
 			},
 			{
 				path: '/cause',
-				element: <CauseList />,
+				element: <NewCauseList />,
 			},
 			{
 				path: '/cause/:causeId',
 				element: <CauseDetail />,
 			},
 			{
-				path: '/about',
-				element: <About />,
+				path: '/login',
+				element: <LoginCover />,
 			},
+			// {
+			// 	path: '/about',
+			// 	element: ,
+			// },
 			// {
 			// 	path: '/userProfile',
 			// 	element: <UserProfile />

@@ -8,7 +8,6 @@ import {
 	Tabs,
 	Toolbar,
 	Typography,
-	styled,
 	useTheme,
 } from '@mui/material';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
@@ -16,8 +15,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { ReactElement, cloneElement, useState } from 'react';
 import { UserMenu } from './userMenu';
-
-
+import { generateThemeColors } from '../../../lib/Themes/colors';
 
 interface AppbarProps {
 	children: ReactElement;
@@ -36,15 +34,13 @@ function ElevationScroll(props: AppbarProps) {
 		style: {
 			backgroundColor: trigger ? theme.palette.primary.main : 'transparent',
 			transition: trigger ? '0.3s' : '0.5s',
+			color: trigger ? generateThemeColors().light.peach.main : theme.palette.primary.main,
 		},
 	});
 }
 
 const Appbar = () => {
 	// const [ isloggedIn, setIsLoggedIn ] = useState<boolean>(false);
-
-	const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
-
 	const isloggedIn = false;
 
 	function handleLogoClick() {
@@ -58,7 +54,7 @@ const Appbar = () => {
 
 	const navigate = useNavigate();
 	const routeChange = () => {
-		const path = '/auth';
+		const path = '/login';
 		navigate(path);
 	};
 
@@ -82,9 +78,9 @@ const Appbar = () => {
 											style={{ textDecoration: 'none' }}
 										>
 											<Typography
-												variant='h6'
+												variant='h2'
 												sx={{ flexGrow: 1 }}
-												color='secondary'
+												color='primary'
 												onClick={handleLogoClick}
 												textAlign='center'
 											>
@@ -102,7 +98,7 @@ const Appbar = () => {
 											<Tabs
 												value={value}
 												onChange={handleChange}
-												textColor='secondary'
+												textColor='primary'
 												indicatorColor='secondary'
 												aria-label='secondary tabs example'
 												centered
@@ -117,6 +113,12 @@ const Appbar = () => {
 													label='Users'
 													value='user'
 													to='/user'
+													component={NavLink}
+												/>
+												<Tab
+													label='About'
+													value='about'
+													to='/about'
 													component={NavLink}
 												/>
 												<Tab
@@ -153,7 +155,7 @@ const Appbar = () => {
 					</Box>
 				</AppBar>
 			</ElevationScroll>
-			<Offset />
+			<Box sx={{ mb: 1 }} />
 		</>
 	);
 };

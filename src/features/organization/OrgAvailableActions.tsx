@@ -1,10 +1,10 @@
-import { Typography } from "@mui/material"
+import { OrgEvents } from "./OrgEvents";
 
 const OrgAvailableActions = () => {
 
     return (
         <>
-            <Typography>Org actions placeholder</Typography>
+            <OrgEvents />
         </>
     )
 };

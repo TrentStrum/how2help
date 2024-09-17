@@ -1,21 +1,18 @@
-import { Container } from '@mui/material';
-
+import { Container, CssBaseline, styled, ThemeProvider } from '@mui/material';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
-
-import { ThemeContextProvider } from '../lib/Themes/ThemeContext';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { queryClient } from '../api/utils/queryClient';
 import { Appbar } from '../components/layouts/AppBar';
 import { MobileMenu } from '../components/layouts/AppBar/mobileMenu';
-
-
+import { CustomizationConsumer, CustomizationProvider } from '../lib/Themes/customization';
+import { createTheme } from '../lib/Themes';
 
 function App() {
 	const [isMobile, setIsMobile] = useState(false);
-	//const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+	const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 	useEffect(() => {
 		function handleResize() {
@@ -44,6 +41,7 @@ function App() {
 		page = (
 			<>
 				{isAuthenticated ? null : <Appbar />}
+				<Offset />
 				<Outlet />
 			</>
 		);
@@ -52,11 +50,29 @@ function App() {
 	return (
 		<>
 			<QueryClientProvider client={queryClient}>
-				<ThemeContextProvider>
-					<ReactQueryDevtools initialIsOpen={true} />
-					<ToastContainer />
-					<Container sx={{ maxWidth: 'xl' }}>{page}</Container>
-				</ThemeContextProvider>
+				<CustomizationProvider>
+					<CustomizationConsumer>
+						{(settings) => {
+							if (!settings.isInitialized) {
+								// return null
+							}
+							const theme = createTheme({
+								colorPreset: settings.colorPreset,
+								direction: settings.direction,
+								paletteMode: settings.paletteMode,
+							});
+
+							return (
+								<ThemeProvider theme={theme}>
+									<CssBaseline />
+									<ReactQueryDevtools initialIsOpen={true} />
+									<Container sx={{ maxWidth: 'xl' }}>{page}</Container>
+									<ToastContainer />
+								</ThemeProvider>
+							);
+						}}
+					</CustomizationConsumer>
+				</CustomizationProvider>
 			</QueryClientProvider>
 		</>
 	);

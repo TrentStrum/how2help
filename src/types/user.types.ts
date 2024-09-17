@@ -18,7 +18,9 @@ export type User = {
 	role?: string;
 	favoriteOrgs?: Organization[];
 	favoriteCauses?: Cause[];
+	coverImageUrl?: string;
 	avatarImageUrl?: string;
+
 };
 
 export type LoginData = {

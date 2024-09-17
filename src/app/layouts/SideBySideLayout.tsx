@@ -13,7 +13,7 @@ const SideBySideLayout = ({ leftSideContent, rightSideContent }: Props) => {
 			<Grid
 				container
 				direction='row'
-				spacing={2}
+				spacing={8}
 			>
 				<Grid
 					item

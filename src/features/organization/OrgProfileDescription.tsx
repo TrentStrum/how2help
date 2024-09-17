@@ -1,5 +1,6 @@
 import { Typography, Box, Divider, Rating, Stack } from '@mui/material';
 import { Organization } from '../../types/organization.types';
+import { Link } from 'react-router-dom';
 
 
 type Props = {
@@ -26,6 +27,7 @@ const OrgProfileDescription = ({ org }: Props) => {
 				>
 					{org?.name}
 				</Typography>
+				<Link to=''>#causes</Link> <Link to=''>#causes</Link> <Link to=''>#causes</Link>
 				<Typography
 					variant='h5'
 					fontWeight={500}
