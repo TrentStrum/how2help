@@ -10,9 +10,9 @@ type Props = {
 };
 
 const CauseOrgSearch = ({ causeId }: Props) => {
-	const { data: orgs, isLoading, isError } = useGetOrgByCause(causeId);
+	const { data: orgs, isPending, isError } = useGetOrgByCause(causeId);
 
-	if (isLoading) return <Typography variant='body2'>Loading...</Typography>;
+	if (isPending || !orgs) return <Typography variant='body2'>Loading...</Typography>;
 	if (isError) return <Typography variant='body2'>Error...</Typography>;
 
 	if (orgs === undefined) {

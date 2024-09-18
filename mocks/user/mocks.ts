@@ -1,5 +1,4 @@
-import { User } from "../../src/types/user.types";
-
+import { User } from '../../src/types/user.types';
 
 export const mockUsers: User[] = [
 	{
@@ -24,8 +23,9 @@ export const mockUsers: User[] = [
 				countryServing: ['Palestine'],
 				stateServing: '',
 				cityServicing: '',
-				userRating: '5',
+				userRating: 5,
 				orgWebUrl: 'https://www.unrwa.org/',
+				status: 'active',
 				avatarImageUrl: '../../src/assets/images/palestinianFreedom.jpg',
 				reviews: [],
 			},
@@ -39,13 +39,15 @@ export const mockUsers: User[] = [
 						description:
 							'Fighting to protect womens reproductive rights, voting rights and humen rights in general. ',
 						avatarImageUrl: '../../src/assets/images/womensRights.jpg',
+						userRating: 5,
 					},
 				],
 				countryServing: ['USA'],
 				stateServing: '',
 				cityServicing: '',
-				userRating: '5',
+				userRating: 5,
 				orgWebUrl: 'https://www.womensmarch.com/',
+				status: 'active',
 				avatarImageUrl: '../../src/assets/images/womensMarch.jpg',
 				reviews: [],
 			},
@@ -56,6 +58,7 @@ export const mockUsers: User[] = [
 				name: 'Palestinian Freedom',
 				description: 'End the apartheid, colonization and genocide in Palestine.',
 				avatarImageUrl: '../../src/assets/images/palestinianFreedom.jpg',
+				userRating: 5,
 			},
 			{
 				causeId: 1,
@@ -63,6 +66,7 @@ export const mockUsers: User[] = [
 				description:
 					'Supporting the LGTBQ+ community by providing services, advocating for the safety and rights of the members of this community.',
 				avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
+				userRating: 5,
 			},
 		],
 		avatarImageUrl: '../../src/assets/avatars/1.png',
@@ -93,13 +97,15 @@ export const mockUsers: User[] = [
 						description:
 							'Supporting the LGTBQ+ community by providing services, advocating for the safety and rights of the members of this community.',
 						avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
+						userRating: 3,
 					},
 				],
 				countryServing: ['USA', 'Canada', 'Germany', 'France', 'UK', 'Mexico', 'Argentina'],
 				stateServing: 'Many',
 				cityServicing: 'Many',
-				userRating: '5',
+				userRating: 5,
 				orgWebUrl: 'https://standinpride.org/',
+				status: 'active',
 				avatarImageUrl: '../../src/assets/images/standInPride.jpg',
 				reviews: [],
 			},
@@ -113,6 +119,7 @@ export const mockUsers: User[] = [
 						description:
 							'Supporting the LGTBQ+ community by providing services, advocating for the safety and rights of the members of this community.',
 						avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
+						userRating: 3,
 					},
 					{
 						causeId: 2,
@@ -120,13 +127,15 @@ export const mockUsers: User[] = [
 						description:
 							'Organizations working to provide mental health assistance as well as aware to various mental health issues.',
 						avatarImageUrl: '../../src/assets/images/mentalHealth.jpg',
+						userRating: 4,
 					},
 				],
 				countryServing: ['USA'],
 				stateServing: '',
 				cityServicing: '',
-				userRating: '5',
+				userRating: 5,
 				orgWebUrl: 'https://www.thetrevorproject.org/',
+				status: 'active',
 				avatarImageUrl: '../../src/assets/images/The_Trevor_Project_Logo.jpg',
 				reviews: [],
 			},
@@ -138,6 +147,7 @@ export const mockUsers: User[] = [
 				description:
 					'Supporting the LGTBQ+ community by providing services, advocating for the safety and rights of the members of this community.',
 				avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
+				userRating: 5,
 			},
 		],
 		avatarImageUrl: '../../src/assets/images/charlie.jpg',

@@ -12,6 +12,7 @@ export type Organization = {
 	userRating?: number;
 	starRatings?: number[];
 	orgWebUrl?: string;
+	status: string;
 	avatarImageUrl?: string;
 	images?: Array<{ id: number; image: string }>;
 	reviews: Reviews[];

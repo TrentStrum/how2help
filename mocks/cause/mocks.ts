@@ -1,4 +1,6 @@
-export const mockCause = [
+import { Cause } from "../../src/types/cause.types";
+
+export const mockCause: Cause[] = [
 	{
 		causeId: 1,
 		name: 'LGBTQ+',

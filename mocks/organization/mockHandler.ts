@@ -1,6 +1,8 @@
 import { HttpResponse, http } from 'msw';
 import { mockOrgs } from './mocks';
 
+
+
 export const handlers = [
 	http.get('/org', () => {
 		return HttpResponse.json(mockOrgs);
@@ -26,11 +28,12 @@ export const handlers = [
 			return new HttpResponse(null, { status: 404 });
 		}
 
-
-		return HttpResponse.json(mockOrgs.filter((u) =>{
-			return u.causes.filter((i) => {
-			 	return i.causeId === numId;
-			 })
-		}))
+		return HttpResponse.json(
+			mockOrgs.filter((u) => {
+				return u.causes.some((i) => {
+					return i.causeId === numId;
+				});
+			})
+		);
 	}),
 ];
