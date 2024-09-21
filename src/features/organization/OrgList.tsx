@@ -1,9 +1,11 @@
 import { Typography, Container, Box, Grid, InputAdornment, TextField } from '@mui/material';
-import { useGetOrgsAll } from '../../api/hooks/organization/useGetOrgs';
-import { Organization } from '../../types/organization.types';
+
+import { Organization } from '../../app/api/entities/organization/types/organization.types';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
-import { CatalogContainer } from '../../components/layouts/Catalog/CatalogContainer';
-import { CatalogCard } from '../../components/layouts/Catalog/CatalogCard';
+import { CatalogCard } from '../../app/components/layouts/Catalog/CatalogCard';
+import { CatalogContainer } from '../../app/components/layouts/Catalog/CatalogContainer';
+import { useGetOrgsAll } from '../../app/api/entities/organization';
+
 
 export default function OrgList() {
 	const { data: orgs, isLoading, isError } = useGetOrgsAll();
@@ -12,7 +14,6 @@ export default function OrgList() {
 	if (isError) return <Typography variant='body2'>Error...</Typography>;
 
 	return (
-		
 		<CatalogContainer>
 			<Container>
 				<Box sx={{ flexGrow: 1 }}>
@@ -21,7 +22,7 @@ export default function OrgList() {
 						spacing={{ xs: 2, md: 3 }}
 						columns={{ xs: 4, sm: 8, md: 12 }}
 					>
-						<Grid xs={12}>
+						<Grid item xs={12}>
 							<TextField
 								fullWidth
 								// onChange={handleQueryChange}

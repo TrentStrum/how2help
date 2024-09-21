@@ -8,30 +8,20 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { TextField } from '@mui/material';
 import { Box } from '@mui/material';
-import { User } from '../../types/user.types';
-
-
+import { User } from '../../app/api/entities/user/types/user.types';
 
 type LoginFormsInputs = {
-  email: string;
-  password: string;
+	email: string;
+	password: string;
 };
-
 
 const LoginForm = () => {
 	const { loginUser } = useAuth();
 	const { register, control, handleSubmit } = useForm<User>();
 
-
-
-
-
-
-
-const handleLogin = (form: LoginFormsInputs) => {
-	loginUser(form.email, form.password);
-}
-
+	const handleLogin = (form: LoginFormsInputs) => {
+		loginUser(form.email, form.password);
+	};
 
 	const handleLogin: SubmitHandler<User> = (e: HTMLAnchorElement, data: User) => {
 		e.preventDefault();
@@ -39,8 +29,7 @@ const handleLogin = (form: LoginFormsInputs) => {
 			auth.loginAction(input);
 			return;
 		}
-			alert('please provide credentials');
-		
+		alert('please provide credentials');
 	};
 
 	return (

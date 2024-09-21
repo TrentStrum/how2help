@@ -1,17 +1,36 @@
-import { Box, CardMedia, Typography, Button, Avatar, IconButton, Chip, Divider, Stack, Theme, useMediaQuery } from '@mui/material';
-import { User } from '../../types/user.types';
+import {
+	Box,
+	CardMedia,
+	Typography,
+	Button,
+	Avatar,
+	IconButton,
+	Chip,
+	Divider,
+	Stack,
+	Theme,
+	useMediaQuery,
+} from '@mui/material';
+import { User } from '../../app/api/entities/user/types/user.types';
 import UploadTwoToneIcon from '@mui/icons-material/UploadTwoTone';
 import ArrowForwardTwoToneIcon from '@mui/icons-material/ArrowForwardTwoTone';
 import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
-import { CardCover, CardCoverAction, VisuallyHiddenInputNative, AvatarWrapper, ButtonUploadWrapper, ButtonIcon } from './styledComponents';
+import {
+	CardCover,
+	CardCoverAction,
+	VisuallyHiddenInputNative,
+	AvatarWrapper,
+	ButtonUploadWrapper,
+	ButtonIcon,
+} from './styledComponents';
 
 type Props = {
 	user: User;
 };
 
 const ProfileCover = ({ user }: Props) => {
-    const smUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
-    
+	const smUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
+
 	return (
 		<>
 			<Box
@@ -109,16 +128,12 @@ const ProfileCover = ({ user }: Props) => {
 					<Chip
 						variant='outlined'
 						color='info'
-						label={user.city + ','+ ' '+ user.State}
+						label={user.city + ',' + ' ' + user.State}
 					/>
 					<Chip
 						variant='outlined'
 						color='info'
-						label={
-							<>
-								Pending followers
-							</>
-						}
+						label={<>Pending followers</>}
 					/>
 					<Button
 						size='small'

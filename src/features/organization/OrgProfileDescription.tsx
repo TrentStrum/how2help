@@ -1,7 +1,6 @@
 import { Typography, Box, Divider, Rating, Stack } from '@mui/material';
-import { Organization } from '../../types/organization.types';
+import { Organization } from '../../app/api/entities/organization';
 import { Link } from 'react-router-dom';
-
 
 type Props = {
 	org?: Organization;

@@ -1,9 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import { useGetUserById } from '../../api/hooks/user/useGetUserById';
+import { useGetUserById } from '../../app/api/entities/user';
 import { UserProfileLayout } from './UserProfileLayout';
-
-
 
 
 const UserDetail = () => {
@@ -15,7 +13,7 @@ const UserDetail = () => {
 
 	return (
 		<>
-			<UserProfileLayout user={user}/>
+			<UserProfileLayout user={user!}/>
 		</>
 	);
 };

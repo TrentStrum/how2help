@@ -4,11 +4,13 @@ import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { queryClient } from '../api/utils/queryClient';
-import { Appbar } from '../components/layouts/AppBar';
-import { MobileMenu } from '../components/layouts/AppBar/mobileMenu';
+
 import { CustomizationConsumer, CustomizationProvider } from '../lib/Themes/customization';
 import { createTheme } from '../lib/Themes';
+import { queryClient } from './api/utils/queryClient';
+import { Appbar } from './components/layouts/AppBar';
+import { MobileMenu } from './components/layouts/AppBar/mobileMenu';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
 	const [isMobile, setIsMobile] = useState(false);
@@ -47,33 +49,37 @@ function App() {
 		);
 	}
 
+	const helmetContext = {};
+
 	return (
 		<>
-			<QueryClientProvider client={queryClient}>
-				<CustomizationProvider>
-					<CustomizationConsumer>
-						{(settings) => {
-							if (!settings.isInitialized) {
-								// return null
-							}
-							const theme = createTheme({
-								colorPreset: settings.colorPreset,
-								direction: settings.direction,
-								paletteMode: settings.paletteMode,
-							});
+			<HelmetProvider context={helmetContext}>
+				<QueryClientProvider client={queryClient}>
+					<CustomizationProvider>
+						<CustomizationConsumer>
+							{(settings) => {
+								if (!settings.isInitialized) {
+									// return null
+								}
+								const theme = createTheme({
+									colorPreset: settings.colorPreset,
+									direction: settings.direction,
+									paletteMode: settings.paletteMode,
+								});
 
-							return (
-								<ThemeProvider theme={theme}>
-									<CssBaseline />
-									<ReactQueryDevtools initialIsOpen={true} />
-									<Container sx={{ maxWidth: 'xl' }}>{page}</Container>
-									<ToastContainer />
-								</ThemeProvider>
-							);
-						}}
-					</CustomizationConsumer>
-				</CustomizationProvider>
-			</QueryClientProvider>
+								return (
+									<ThemeProvider theme={theme}>
+										<CssBaseline />
+										<ReactQueryDevtools initialIsOpen={true} />
+										<Container sx={{ maxWidth: 'xl' }}>{page}</Container>
+										<ToastContainer />
+									</ThemeProvider>
+								);
+							}}
+						</CustomizationConsumer>
+					</CustomizationProvider>
+				</QueryClientProvider>
+			</HelmetProvider>
 		</>
 	);
 }

@@ -3,7 +3,7 @@ import { Divider, Grid } from '@mui/material';
 import { OrgRatingBarsContainer } from './OrgRatingBarsContainer';
 import { WriteOrgReview } from './WriteOrgReview';
 import { OrgReviewList } from './OrgReviewList';
-import { Organization } from '../../types/organization.types';
+import { Organization } from '../../app/api/entities/organization';
 
 type Props = {
 	org: Organization;

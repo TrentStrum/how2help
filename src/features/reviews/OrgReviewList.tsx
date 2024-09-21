@@ -1,14 +1,13 @@
 import { List, ListItem, Box, Avatar, Typography, Stack, Divider } from '@mui/material';
 import ReactCountryFlag from 'react-country-flag';
-import { AvatarState } from '../../components/ui/avatar';
-import { ButtonSoft } from '../../components/ui/button-soft';
-
 import ClearTwoToneIcon from '@mui/icons-material/ClearTwoTone';
 import DoneAllTwoToneIcon from '@mui/icons-material/DoneAllTwoTone';
 import ThumbDownTwoToneIcon from '@mui/icons-material/ThumbDownTwoTone';
 import ThumbUpTwoToneIcon from '@mui/icons-material/ThumbUpTwoTone';
-import { Organization } from '../../types/organization.types';
-import { Reviews } from '../../types/review.types';
+import { Organization } from '../../app/api/entities/organization';
+import { Reviews } from '../../app/api/entities/reviews';
+import { AvatarState } from '../../app/components/ui/avatar';
+import { ButtonSoft } from '../../app/components/ui/button-soft';
 
 type Props = {
 	org: Organization;
@@ -23,6 +22,7 @@ const OrgReviewList = ({ org }: Props) => {
 						display: { xs: 'block', sm: 'flex' },
 						p: { xs: 2, sm: 3 },
 					}}
+					key={review.reviewId}
 				>
 					<Box
 						sx={{

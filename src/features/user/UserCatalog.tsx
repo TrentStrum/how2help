@@ -1,10 +1,9 @@
 import { Box, Container, Grid, InputAdornment, TextField, Typography } from '@mui/material';
 
-import { useGetUsersAll } from '../../api/hooks/user/useGetUsers';
-import { User } from '../../types/user.types';
-import { UserList } from '../../components/layouts/Catalog/UserList';
-import { CatalogContainer } from '../../components/layouts/Catalog/CatalogContainer';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
+import { useGetUsersAll, User } from '../../app/api/entities/user';
+import { CatalogContainer } from '../../app/components/layouts/Catalog/CatalogContainer';
+import { UserList } from '../../app/components/layouts/Catalog/UserList';
 
 const UserCatalog = () => {
 	const { data: users, isLoading, isError } = useGetUsersAll();

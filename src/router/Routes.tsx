@@ -1,16 +1,16 @@
 import { RouteObject } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../app/App';
-// import { About } from '../app/routes/app/about';
-import { LandingPage } from '../app/routes/landing';
-import { CauseDetail } from '../features/cause/CauseDetail';
-import CauseList from '../features/cause/CauseList';
+import { LandingPage } from '../app/pages/Landing';
+import { CauseProfile } from '../features/cause/components/CauseProfile';
 import { OrgDetail } from '../features/organization/OrgDetail';
 import { UserDetail } from '../features/user/UserDetail';
 import { UserCatalog } from '../features/user/UserCatalog';
 import OrgList from '../features/organization/OrgList';
 import { LoginCover } from '../features/login-cover/LoginCover';
-import { NewCauseList } from '../features/cause/NewCauseList';
+import { CauseList } from '../features/cause/components/CauseList';
+import { Error404Page } from '../app/pages/Error404Page';
+
 
 export const routes: RouteObject[] = [
 	{
@@ -39,24 +39,24 @@ export const routes: RouteObject[] = [
 			},
 			{
 				path: '/cause',
-				element: <NewCauseList />,
+				element: <CauseList />,
 			},
 			{
 				path: '/cause/:causeId',
-				element: <CauseDetail />,
+				element: <CauseProfile />,
 			},
 			{
 				path: '/login',
 				element: <LoginCover />,
 			},
+			{
+				path: '/about',
+				element: <Error404Page />,
+			},
 			// {
-			// 	path: '/about',
-			// 	element: ,
+			// 	path: '/test',
+			// 	element: <EventList />,
 			// },
-			// {
-			// 	path: '/userProfile',
-			// 	element: <UserProfile />
-			// }
 		],
 	},
 ];

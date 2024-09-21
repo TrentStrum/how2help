@@ -1,8 +1,9 @@
 import { Card, CardHeader, Divider, Box, Typography } from "@mui/material";
-import { AvatarState } from "../../components/ui/avatar";
+
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import ShoppingBagTwoToneIcon from '@mui/icons-material/ShoppingBagTwoTone';
 import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
+import { AvatarState } from "../../app/components/ui/avatar";
 
 
 const RecentActivity = () => {

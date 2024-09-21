@@ -1,5 +1,5 @@
 import { Box, Container, Grid } from '@mui/material';
-import { User } from '../../types/user.types';
+import { User } from '../../app/api/entities/user/types/user.types';
 import { ProfileCover } from './ProfileCover';
 import { RecentActivity } from './RecentActivity';
 import { Feed } from './Feed';

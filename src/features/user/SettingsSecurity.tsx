@@ -14,8 +14,9 @@ import {
 	Typography,
 	useTheme,
 } from '@mui/material';
-import { AvatarState } from '../../components/ui/avatar';
-import { ButtonSoft } from '../../components/ui/button-soft';
+import { AvatarState } from '../../app/components/ui/avatar';
+import { ButtonSoft } from '../../app/components/ui/button-soft';
+
 
 const SettingsSecurity = () => {
 	const theme = useTheme();

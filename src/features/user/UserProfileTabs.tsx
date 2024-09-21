@@ -12,7 +12,7 @@ import { useState, ChangeEvent } from 'react';
 import { EditProfileDetails } from './EditProfileDetails';
 import { SettingsSecurity } from './SettingsSecurity';
 import { SettingsNotifications } from './SettingsNotifications';
-import { User } from '../../types/user.types';
+import { User } from '../../app/api/entities/user/types/user.types';
 import { ActivityTab } from './ActivityTab';
 
 type Props = {
@@ -42,7 +42,10 @@ const UserProfileTabs = ({ user }: Props) => {
 
 	return (
 		<Grid container>
-			<Grid item xs={12}>
+			<Grid
+				item
+				xs={12}
+			>
 				{smUp ? (
 					<TabsPills
 						onChange={handleTabsChange}
