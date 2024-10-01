@@ -1,5 +1,13 @@
 import { HttpResponse, http } from 'msw';
 import { mockUsers } from '..';
+import { LoginInput } from '../../../../../features/login-cover/LoginForm';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = 'mock_secret_key';
+
+const generateToken = (email: string) => {
+	return jwt.sign({ email }, JWT_SECRET, { expiresIn: '1h' });
+};
 
 export const handlers = [
 	http.get('/user', () => {
@@ -18,7 +26,49 @@ export const handlers = [
 		return HttpResponse.json(mockUsers.find((u) => u.userId === numId));
 	}),
 
-	http.post('/auth/user', () => {
-		return HttpResponse.json(mockUsers.find((u) => u.firstName === 'trent'));
+	http.post('/auth/login', async ({ request }) => {
+		const loginInput = (await request.json()) as LoginInput;
+
+
+		const foundUser = mockUsers.find(
+			(u) => u.email === loginInput.email && u.password === loginInput.password
+		);
+
+		
+		if (!foundUser) return HttpResponse.json({ message: 'Invalid credentials' }, { status: 404 });
+		
+		return HttpResponse.json({
+			userId: foundUser.userId,
+			email: foundUser.email,
+			username: foundUser.username,
+			token: generateToken(foundUser.email),
+		}, { status: 200 });
 	}),
+
+	http.get('/user/profile', ({ request }) => {
+		const authHeader = request.headers.get('Authorization');
+
+		if (!authHeader || !authHeader.startsWith('Bearer ')) {
+			return HttpResponse.json({ message: 'Unauthorized'}, { status: 401 });
+		}
+
+		const token = authHeader.split(' ')[1];
+
+		try {
+			const userEmail = token.split('-for-')[1];
+			const user = mockUsers.find((u) => u.email === userEmail);
+
+			if (!user) {
+				return HttpResponse.json({ message: 'User not found'}, { status: 404 });
+			}
+
+			return HttpResponse.json({
+				email: user.email,
+				username: user.username,
+			}, { status: 200 });
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		} catch (error) {
+			return HttpResponse.json({ message: 'Invaluid or expired token'}, { status: 401})
+		}
+	})
 ];

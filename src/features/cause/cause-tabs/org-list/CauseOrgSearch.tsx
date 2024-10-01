@@ -6,7 +6,7 @@ import { Organization, useGetOrgByCause } from '../../../../app/api/entities/org
 
 type Props = {
 	causeId?: string;
-}
+};
 
 const CauseOrgSearch = ({ causeId }: Props) => {
 	const { data: orgs, isPending, isError } = useGetOrgByCause(causeId!);
@@ -24,16 +24,19 @@ const CauseOrgSearch = ({ causeId }: Props) => {
 		<>
 			<SearchContained />
 			<Searchbar />
+
 			<Grid
 				container
-				spacing={{ xs: 2, sm: 3 }}
+				spacing={{ xs: 2 }}
+				m={2}
 			>
 				{orgs.map((org: Organization) => (
 					<Grid
-						xs={12}
-						lg={4}
-						md={6}
+						xs={10}
+						lg={2}
+						md={4}
 						key={org.orgId}
+						m={1}
 					>
 						<CauseOrgSearchCard org={org} />
 					</Grid>

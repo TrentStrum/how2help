@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import 'react-toastify/dist/ReactToastify.css';
 import { CustomizationConsumer, CustomizationProvider } from '../lib/Themes/customization';
 import { createTheme } from '../lib/Themes';
 import { queryClient } from './api/utils/queryClient';

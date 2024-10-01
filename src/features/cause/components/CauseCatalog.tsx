@@ -40,7 +40,7 @@ const CardActionAreaWrapper = styled(CardActionArea)(({ theme }) => ({
 	},
 }));
 
-const CauseList = () => {
+const CauseCatalog = () => {
 	const { data: causes, isLoading, isError } = useGetCauseAll();
 
 	if (isLoading) return <Typography variant='body2'>Loading...</Typography>;
@@ -151,4 +151,4 @@ const CauseList = () => {
 	);
 };
 
-export { CauseList };
+export { CauseCatalog };

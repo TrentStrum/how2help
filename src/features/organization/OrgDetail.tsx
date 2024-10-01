@@ -1,7 +1,7 @@
 import { Box, Card, Container, Divider, Tab, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { HeroImage } from '../../app/components/ui/HeroImage';
 
 import { SideBySideLayout } from '../../app/layouts/SideBySideLayout';
@@ -10,6 +10,7 @@ import { TabStyle } from '../../app/components/ui/TabsStyle';
 import { OrgReviewsLayout } from '../reviews/OrgReviewsLayout';
 import { useGetOrgById } from '../../app/api/entities/organization';
 import { EventContainer } from '../events/EventContainer';
+import { ActivityContainer } from '../activity/ActivityContainer';
 
 const OrgDetail = () => {
 	const { orgId } = useParams();
@@ -31,10 +32,10 @@ const OrgDetail = () => {
 	if (isLoading) return <Typography variant='body2'>Loading...</Typography>;
 	if (isError) return <Typography variant='body2'>Error...</Typography>;
 
-	let displayTab;
+	let displayTab: ReactNode;
 
 	if (tabValue === '0' && org) {
-		displayTab = <p>Pending help opportunities</p>;
+		displayTab = <ActivityContainer />
 	} else if (tabValue === '1' && org) {
 		displayTab = (
 			<EventContainer

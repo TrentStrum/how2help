@@ -1,4 +1,4 @@
-import { Typography, Chip, useTheme, Divider, ListItem, ListSubheader } from '@mui/material';
+import { Typography, Chip, useTheme, Divider, ListItem, ListSubheader, Box } from '@mui/material';
 import { Event, useGetPastEventsByEntityId } from '../../app/api/entities/events';
 import { PastEventCard } from './PastEventCard';
 
@@ -48,6 +48,10 @@ const PastEventList = ({ entityId }: Props) => {
 					<PastEventCard event={event} />
 				</ListItem>
 			))}
+			<Box
+				component='div'
+				mt={1}
+			/>
 		</>
 	);
 };

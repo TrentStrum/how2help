@@ -1,6 +1,10 @@
-import { apiClient } from "../apiClient";
+import { apiClient } from '../apiClient';
 
-export const postResource = async <TResource>(url: string, config?: object): Promise<TResource> => {
-	const { data } = await apiClient.post<TResource>(url, config);
-	return data;
+export const postResource = async <TPayload, TResponse>(
+	url: string,
+	results?: TPayload,
+	config?: object
+): Promise<TResponse> => {
+	const res = await apiClient.post<TPayload, TResponse>(url, results, config);
+	return res;
 };

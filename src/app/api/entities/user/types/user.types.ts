@@ -1,3 +1,4 @@
+import { H2HResponse } from '../../../types';
 import { Cause } from '../../cause/types/cause.types';
 import { Organization } from '../../organization/types/organization.types';
 
@@ -25,3 +26,5 @@ export type LoginData = {
 	userId: number;
 	userToken: string;
 };
+
+export type GetUserResponse = H2HResponse<User>;

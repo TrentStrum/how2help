@@ -8,14 +8,14 @@ type Props = {
 
 const LinkButton = ({ url, buttonText }: Props) => {
 	return (
-		<Button variant='contained' >
-			<Link
+		<Link
 				to={url}
 				style={{ textDecoration: 'none' }}
 			>
+		<Button variant='contained' >
 				<Typography variant='body2' color='white'>{buttonText}</Typography>
-			</Link>
 		</Button>
+			</Link>
 	);
 };
 

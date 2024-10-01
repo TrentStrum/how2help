@@ -1,4 +1,4 @@
-import { Typography, Chip, useTheme, Divider, ListItem, ListSubheader } from '@mui/material';
+import { Typography, Chip, useTheme, Divider, ListItem, ListSubheader, Box } from '@mui/material';
 import { Event, useGetActiveEventsByEntityId } from '../../app/api/entities/events';
 import { ActiveEventCard } from './ActiveEventCard';
 
@@ -9,7 +9,9 @@ type Props = {
 const ActiveEventList = ({ entityId }: Props) => {
 	const theme = useTheme();
 
-	const { data: events, isPending, isError } = useGetActiveEventsByEntityId(entityId);
+	const entityIdActive = entityId;
+
+	const { data: events, isPending, isError } = useGetActiveEventsByEntityId(entityIdActive);
 
 	if (isPending) return <Typography variant='body2'>Loading active events...</Typography>;
 	if (isError) return <Typography variant='body2'>Error active events...</Typography>;
@@ -49,6 +51,7 @@ const ActiveEventList = ({ entityId }: Props) => {
 					<ActiveEventCard event={event} />
 				</ListItem>
 			))}
+			<Box component='div' mt={1}/>
 		</>
 	);
 };

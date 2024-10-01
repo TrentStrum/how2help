@@ -1,4 +1,5 @@
-import { User } from '..';
+import { GetUserResponse, User } from '..';
+import { mockResponseBase } from '../../../mocks/types';
 
 export const mockUsers: User[] = [
 	{
@@ -6,7 +7,7 @@ export const mockUsers: User[] = [
 		firstName: 'Trent',
 		lastName: 'Strum',
 		username: 'tstrum',
-		password: 'asd',
+		password: 'Pa$$w0rd',
 		email: 'trent@test.com',
 		phone: '',
 		streetAddress: '123 Some St',
@@ -28,6 +29,7 @@ export const mockUsers: User[] = [
 				status: 'active',
 				avatarImageUrl: '../../src/assets/images/palestinianFreedom.jpg',
 				reviews: [],
+				events: [],
 			},
 			{
 				orgId: 6,
@@ -50,6 +52,7 @@ export const mockUsers: User[] = [
 				status: 'active',
 				avatarImageUrl: '../../src/assets/images/womensMarch.jpg',
 				reviews: [],
+				events: [],
 			},
 		],
 		favoriteCauses: [
@@ -108,6 +111,7 @@ export const mockUsers: User[] = [
 				status: 'active',
 				avatarImageUrl: '../../src/assets/images/standInPride.jpg',
 				reviews: [],
+				events: [],
 			},
 			{
 				orgId: 4,
@@ -138,6 +142,7 @@ export const mockUsers: User[] = [
 				status: 'active',
 				avatarImageUrl: '../../src/assets/images/The_Trevor_Project_Logo.jpg',
 				reviews: [],
+				events: [],
 			},
 		],
 		favoriteCauses: [
@@ -153,3 +158,8 @@ export const mockUsers: User[] = [
 		avatarImageUrl: '../../src/assets/images/charlie.jpg',
 	},
 ];
+
+export const mockGetUserResponse: (user: User) => GetUserResponse = (user: User) => ({
+	...mockResponseBase,
+	results: user,
+});

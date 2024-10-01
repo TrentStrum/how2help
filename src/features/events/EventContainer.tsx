@@ -22,7 +22,7 @@ const EventContainer = ({ entityId, entityName }: Props) => {
 				// 		'All patients
 				// 	</Button>
 				// }
-				title={entityName + ' Events'}
+				title={entityName + ' Events (TRY UIFORT EVENT LIST COMPONENT)'}
 			/>
 			<Divider />
 			<List

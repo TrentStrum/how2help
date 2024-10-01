@@ -17,7 +17,6 @@ import { ReactElement, cloneElement, useState } from 'react';
 import { UserMenu } from './userMenu';
 import { generateThemeColors } from '../../../../lib/Themes/colors';
 
-
 interface AppbarProps {
 	children: ReactElement;
 }
@@ -117,15 +116,21 @@ const Appbar = () => {
 													component={NavLink}
 												/>
 												<Tab
-													label='About'
-													value='about'
-													to='/about'
-													component={NavLink}
-												/>
-												<Tab
 													label='Causes'
 													value='cause'
 													to='/cause'
+													component={NavLink}
+												/>
+												<Tab
+													label='Events'
+													value='events'
+													to='/events'
+													component={NavLink}
+												/>
+												<Tab
+													label='404'
+													value='error'
+													to='/notFound'
 													component={NavLink}
 												/>
 												<Tab

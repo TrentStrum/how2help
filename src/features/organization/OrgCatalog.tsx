@@ -6,8 +6,8 @@ import { CatalogCard } from '../../app/components/layouts/Catalog/CatalogCard';
 import { CatalogContainer } from '../../app/components/layouts/Catalog/CatalogContainer';
 import { useGetOrgsAll } from '../../app/api/entities/organization';
 
+const OrgCatalog = () => {
 
-export default function OrgList() {
 	const { data: orgs, isLoading, isError } = useGetOrgsAll();
 
 	if (isLoading) return <Typography variant='body2'>Loading...</Typography>;
@@ -22,7 +22,10 @@ export default function OrgList() {
 						spacing={{ xs: 2, md: 3 }}
 						columns={{ xs: 4, sm: 8, md: 12 }}
 					>
-						<Grid item xs={12}>
+						<Grid
+							item
+							xs={12}
+						>
 							<TextField
 								fullWidth
 								// onChange={handleQueryChange}
@@ -59,4 +62,6 @@ export default function OrgList() {
 			</Container>
 		</CatalogContainer>
 	);
-}
+};
+
+export { OrgCatalog };

@@ -80,7 +80,7 @@ const Error404Page = () => {
 								/>
 							</Divider>
 							<Box>
-								<Link to={'LandingPage'}>
+								<Link to={'/'}>
 									<Button
 										variant='outlined'
 										color='secondary'

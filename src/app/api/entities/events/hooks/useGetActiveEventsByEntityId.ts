@@ -4,10 +4,10 @@ import { orgKeys } from '../../../utils/queryKeys';
 import { Event } from '../types/event.types';
 
 
-const useGetActiveEventsByEntityId = (orgId: string) => {
+const useGetActiveEventsByEntityId = (entityIdActive: string) => {
 	const query = useQuery<Event[]>({
-		queryKey: orgKeys.list(orgId),
-		queryFn: () => getResource(`/org/activeEvents/by-org/${orgId}`),
+		queryKey: orgKeys.list(`active-${entityIdActive}`),
+		queryFn: () => getResource(`/org/activeEvents/by-org/${entityIdActive}`),
 	});
 
 	return query;

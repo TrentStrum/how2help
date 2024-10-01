@@ -8,4 +8,5 @@ export type Activity = {
 	causeIds: number[];
 	organizationIds?: number[];
 	avatarImageUrl?: string;
+	status: string;
 };

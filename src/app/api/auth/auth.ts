@@ -1,21 +1,21 @@
+import axios from '../utils/apiClient';
+
+interface LoginResponse {
+	token: string;
+	refreshToken: string;
+}
 
 
-const JWThandler = (req: Request, res: Response) => {
-    const jwtSecretKey = import.meta.env.VITE_JWT_SECRET;
-    const { email, password } = req.body
-
-    if (!password) {
-        return res.json();
-    }
-
-    const data: object = {
-        signInTime: Date.now(),
-        email,
-    }
-
-    const token = jwt.sign(data, jwtSecretKey)
-    return token
-    
+export const login = async (email: string, password: string): Promise<LoginResponse> => {
+	const response = await axios.post<LoginResponse>('/auth/login', { email, password });
+	const { token, refreshToken } = response.data;
+	localStorage.setItem('jwtToken', token);
+	localStorage.setItem('refreshToken', refreshToken);
+	return response.data;
 };
 
-export { JWThandler };
+export const logout = () => {
+	localStorage.removeItem('jwtToken');
+	localStorage.removeItem('refreshToken');
+};
+

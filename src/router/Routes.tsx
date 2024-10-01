@@ -6,10 +6,10 @@ import { CauseProfile } from '../features/cause/components/CauseProfile';
 import { OrgDetail } from '../features/organization/OrgDetail';
 import { UserDetail } from '../features/user/UserDetail';
 import { UserCatalog } from '../features/user/UserCatalog';
-import OrgList from '../features/organization/OrgList';
 import { LoginCover } from '../features/login-cover/LoginCover';
-import { CauseList } from '../features/cause/components/CauseList';
+import { CauseCatalog } from '../features/cause/components/CauseCatalog';
 import { Error404Page } from '../app/pages/Error404Page';
+import { OrgCatalog } from '../features/organization/OrgCatalog';
 
 
 export const routes: RouteObject[] = [
@@ -23,7 +23,7 @@ export const routes: RouteObject[] = [
 			},
 			{
 				path: '/org',
-				element: <OrgList />,
+				element: <OrgCatalog />,
 			},
 			{
 				path: '/org/:orgId',
@@ -39,7 +39,7 @@ export const routes: RouteObject[] = [
 			},
 			{
 				path: '/cause',
-				element: <CauseList />,
+				element: <CauseCatalog />,
 			},
 			{
 				path: '/cause/:causeId',
@@ -50,7 +50,7 @@ export const routes: RouteObject[] = [
 				element: <LoginCover />,
 			},
 			{
-				path: '/about',
+				path: '/notFound',
 				element: <Error404Page />,
 			},
 			// {
