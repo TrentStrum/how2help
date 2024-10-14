@@ -3,8 +3,8 @@ import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';
 import type { ReactNode } from 'react';
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
-import { ColorPreset } from '.';
 
+import { ColorPreset } from '.';
 
 export interface Customization {
 	colorPreset?: ColorPreset;
@@ -78,13 +78,12 @@ export const CustomizationContext = createContext<CustomizationContextType>({
 
 interface CustomizationProviderProps {
 	children?: ReactNode;
-	onReset?: () => void;
-	onUpdate?: (settings: Customization) => void;
-	settings?: Customization;
+	// onReset?: () => void;
+	// onUpdate?: (settings: Customization) => void;
+	// settings?: Customization;
 }
 
-export const CustomizationProvider = (props: CustomizationProviderProps) => {
-	const { children } = props;
+export const CustomizationProvider = ({ children }: CustomizationProviderProps) => {
 	const [state, setState] = useState<State>(initialState);
 
 	useEffect(() => {
@@ -143,4 +142,3 @@ CustomizationProvider.propTypes = {
 };
 
 export const CustomizationConsumer = CustomizationContext.Consumer;
-

@@ -4,4 +4,3 @@ export const getResource = async <TResource>(url: string, options?: object): Pro
 	const { data } = await apiClient.get<TResource>(url, options);
 	return data;
 };
-

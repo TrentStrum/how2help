@@ -1,7 +1,8 @@
 import { HttpResponse, http } from 'msw';
+
+import { Event } from '..';
 import { mockEvent } from './mocks';
 import { mockOrgs } from '../../organization';
-import { Event } from '..';
 
 const currentDate = new Date().toJSON();
 
@@ -21,10 +22,8 @@ export const handlers = [
 				return org.events
 					.map((eventId) =>
 						mockEvent.find(
-							(u) =>
-								u.eventId === eventId &&
-								new Date(u.eventDate).toJSON() < currentDate
-						)
+							(u) => u.eventId === eventId && new Date(u.eventDate).toJSON() < currentDate,
+						),
 					)
 					.filter((event): event is Event => event !== undefined);
 			}
@@ -48,9 +47,9 @@ export const handlers = [
 			if (org && org.events.length > 0) {
 				return org.events
 					.map((eventId) =>
-						mockEvent.find((u) => u.eventId === eventId && (
-							new Date(u.eventDate).toJSON() >= currentDate)
-						)
+						mockEvent.find(
+							(u) => u.eventId === eventId && new Date(u.eventDate).toJSON() >= currentDate,
+						),
 					)
 					.filter((event): event is Event => event !== undefined);
 			}
@@ -60,4 +59,3 @@ export const handlers = [
 		return HttpResponse.json(getActiveEventsByOrgId(numId));
 	}),
 ];
-

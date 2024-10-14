@@ -15,7 +15,7 @@ export const useSidebarDrawer = () => {
 
 	useEffect(() => {
 		screenResize();
-	}, [lgUp]);
+	}, [screenResize, lgUp]);
 
 	const handleToggle = useCallback((): void => {
 		setOpen((prevState) => !prevState);

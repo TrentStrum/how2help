@@ -1,4 +1,5 @@
 import type { Direction, ThemeOptions } from '@mui/material';
+
 import { BORDER_RADIUS } from '../utils';
 import { createComponents } from './create-components';
 import { createTypography } from './create-typography';

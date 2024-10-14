@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { getResource } from '../../../utils/Resources/getResource';
-import { orgKeys } from '../../../utils/queryKeys';
+
+import { orgKeys } from '@api-utils/queryKeys';
+import { getResource } from '@api-utils/Resources/getResource';
+
 import { Event } from '../types/event.types';
 
 const useGetPastEventsByEntityId = (entityIdPast: string) => {

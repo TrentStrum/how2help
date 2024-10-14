@@ -1,16 +1,20 @@
 import { RouteObject } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
-import App from '../app/App';
-import { LandingPage } from '../app/pages/Landing';
-import { CauseProfile } from '../features/cause/components/CauseProfile';
-import { OrgDetail } from '../features/organization/OrgDetail';
-import { UserDetail } from '../features/user/UserDetail';
-import { UserCatalog } from '../features/user/UserCatalog';
-import { LoginCover } from '../features/login-cover/LoginCover';
-import { CauseCatalog } from '../features/cause/components/CauseCatalog';
-import { Error404Page } from '../app/pages/Error404Page';
-import { OrgCatalog } from '../features/organization/OrgCatalog';
 
+import App from '@app/App';
+import { OrganizationProfilePage } from '@app/pages/OrganizationProfilePage';
+import { AboutPage } from '@pages/AboutPage';
+import { CauseCatalogPage } from '@pages/CauseCatalogPage';
+import { CauseProfilePage } from '@pages/CauseProfilePage';
+import { Error404Page } from '@pages/Error404Page';
+import { EventCatalogPage } from '@pages/EventCatalogPage';
+import { EventProfilePage } from '@pages/EventProfilePage';
+import { LandingPage } from '@pages/LandingPage';
+import { LoginPage } from '@pages/LoginPage';
+import { OrganizationCatalogPage } from '@pages/OrganizationCatalogPage';
+import { RegisterPage } from '@pages/RegisterPage';
+import { UserCatalogPage } from '@pages/UserCatalogPage';
+import { UserProfilePage } from '@pages/UserProfilePage';
 
 export const routes: RouteObject[] = [
 	{
@@ -22,41 +26,53 @@ export const routes: RouteObject[] = [
 				element: <LandingPage />,
 			},
 			{
-				path: '/org',
-				element: <OrgCatalog />,
-			},
-			{
-				path: '/org/:orgId',
-				element: <OrgDetail />,
-			},
-			{
-				path: '/user',
-				element: <UserCatalog />,
-			},
-			{
-				path: '/user/:userId',
-				element: <UserDetail />,
+				path: '/about',
+				element: <AboutPage />,
 			},
 			{
 				path: '/cause',
-				element: <CauseCatalog />,
+				element: <CauseCatalogPage />,
 			},
 			{
 				path: '/cause/:causeId',
-				element: <CauseProfile />,
-			},
-			{
-				path: '/login',
-				element: <LoginCover />,
+				element: <CauseProfilePage />,
 			},
 			{
 				path: '/notFound',
 				element: <Error404Page />,
 			},
-			// {
-			// 	path: '/test',
-			// 	element: <EventList />,
-			// },
+			{
+				path: '/event',
+				element: <EventCatalogPage />,
+			},
+			{
+				path: '/event/:eventId',
+				element: <EventProfilePage />,
+			},
+			{
+				path: '/login',
+				element: <LoginPage />,
+			},
+			{
+				path: '/org',
+				element: <OrganizationCatalogPage />,
+			},
+			{
+				path: '/org/:orgId',
+				element: <OrganizationProfilePage />,
+			},
+			{
+				path: '/register',
+				element: <RegisterPage />,
+			},
+			{
+				path: '/user',
+				element: <UserCatalogPage />,
+			},
+			{
+				path: '/user/:userId',
+				element: <UserProfilePage />,
+			},
 		],
 	},
 ];

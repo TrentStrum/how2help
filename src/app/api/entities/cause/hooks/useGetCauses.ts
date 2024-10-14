@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { getResource } from '../../../utils/Resources/getResource';
-import { causeKeys } from '../../../utils/queryKeys';
+
+import { causeKeys } from '@api-utils/queryKeys';
+import { getResource } from '@api-utils/Resources/getResource';
+
 import { Cause } from '..';
 
 const useGetCauseAll = () => {

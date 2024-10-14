@@ -4,15 +4,15 @@ import { common } from '@mui/material/colors';
 import { alpha, darken, lighten } from '@mui/material/styles';
 import type { Components } from '@mui/material/styles/components';
 import type { PaletteColor, PaletteOptions } from '@mui/material/styles/createPalette';
+
 import { neutral } from '../colors';
 
-
 interface ComponentsConfig {
-  palette: PaletteOptions;
+	palette: PaletteOptions;
 }
 
 export const createComponents = ({ palette }: ComponentsConfig): Components => {
-  return {
+	return {
 		MuiAppBar: {
 			styleOverrides: {
 				colorDefault: {
@@ -102,10 +102,7 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 						backgroundColor: alpha((palette.primary as PaletteColor).main, 0.12),
 					},
 					'&:hover  > span': {
-						boxShadow: `0 0 0 3px ${alpha(
-							(palette.primary as PaletteColor).main,
-							0.12
-						)} inset`,
+						boxShadow: `0 0 0 3px ${alpha((palette.primary as PaletteColor).main, 0.12)} inset`,
 					},
 				},
 			},
@@ -165,7 +162,7 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 					'& .MuiChartsTooltip-table': {
 						boxShadow: `0px 4px 3px ${alpha(
 							darken(palette.neutral![900], 0.5),
-							0.1
+							0.1,
 						)}, 0px 2px 5px ${alpha(darken(palette.neutral![900], 0.1), 0.1)}`,
 					},
 				},
@@ -173,7 +170,7 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 					borderRadius: 4,
 					boxShadow: `0px 4px 3px ${alpha(
 						darken(palette.neutral![900], 0.5),
-						0.1
+						0.1,
 					)}, 0px 2px 5px ${alpha(darken(palette.neutral![900], 0.1), 0.1)}`,
 
 					'& .MuiChartsTooltip-valueCell .MuiTypography-root': {
@@ -281,7 +278,7 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 						backgroundColor: palette.neutral![900],
 						boxShadow: `${alpha(palette.neutral![900], 0.3)} 0 1px 3px, ${alpha(
 							palette.neutral![800],
-							0.3
+							0.3,
 						)} 0 1px 3px inset`,
 
 						'.MuiOutlinedInput-notchedOutline': {
@@ -333,7 +330,7 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 						'&:before': {
 							boxShadow: `0px 3px 3px ${alpha(
 								common.black,
-								0.18
+								0.18,
 							)}, 0px 2px 4px ${alpha(common.black, 0.18)}`,
 						},
 
@@ -398,9 +395,7 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 
 						'&:focus': {
 							borderColor: (palette.primary as PaletteColor).main,
-							boxShadow: `${
-								(palette.primary as PaletteColor).main
-							} 0 0px 0 1px inset`,
+							boxShadow: `${(palette.primary as PaletteColor).main} 0 0px 0 1px inset`,
 						},
 					},
 				},
@@ -704,10 +699,7 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 					borderColor: palette.neutral![800],
 					color: palette.neutral![300],
 					backgroundColor: lighten(palette.background!.paper!, 0.025),
-					boxShadow: `${alpha(
-						(palette.secondary as PaletteColor).main,
-						0.08
-					)} 0px 1px 2px 0px`,
+					boxShadow: `${alpha((palette.secondary as PaletteColor).main, 0.08)} 0px 1px 2px 0px`,
 
 					'&:hover': {
 						borderColor: alpha(palette.neutral![700], 0.7),
@@ -717,10 +709,7 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 
 					'&.MuiChip-clickable:hover': {
 						borderColor: palette.neutral![500],
-						boxShadow: `${alpha(
-							(palette.secondary as PaletteColor).main,
-							0.12
-						)} 0px 1px 2px 0px`,
+						boxShadow: `${alpha((palette.secondary as PaletteColor).main, 0.12)} 0px 1px 2px 0px`,
 					},
 					'&:active': {
 						boxShadow: 'none',
@@ -733,15 +722,9 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 					},
 				},
 				outlinedPrimary: {
-					boxShadow: `${alpha(
-						(palette.primary as PaletteColor).main,
-						0.12
-					)} 0px 1px 2px 0px`,
+					boxShadow: `${alpha((palette.primary as PaletteColor).main, 0.12)} 0px 1px 2px 0px`,
 					'&.MuiChip-clickable:hover': {
-						boxShadow: `${alpha(
-							(palette.primary as PaletteColor).main,
-							0.12
-						)} 0px 1px 2px 0px`,
+						boxShadow: `${alpha((palette.primary as PaletteColor).main, 0.12)} 0px 1px 2px 0px`,
 					},
 					'&:active': {
 						boxShadow: 'none',
@@ -783,5 +766,5 @@ export const createComponents = ({ palette }: ComponentsConfig): Components => {
 				},
 			},
 		},
-  };
+	};
 };

@@ -1,18 +1,16 @@
-import { useMutation } from "@tanstack/react-query";
-import { omit } from "lodash";
-import { Schema } from "zod";
-import { putResource } from "../../../utils/Resources/putResource";
-import { queryClient } from "../../../utils/queryClient";
+import { useMutation } from '@tanstack/react-query';
+import { omit } from 'lodash';
+import { Schema } from 'zod';
+
+import { queryClient } from '@api-utils/queryClient';
+
+import { putResource } from '../../../utils/Resources/putResource';
 
 const useUpdateUser = () => {
-
 	return useMutation({
-		mutationFn: (data: Schema) => {
+		mutationFn: async (data: { id: string; variant: string } & Schema) => {
 			if (data.variant === 'update') {
-				putResource(
-					`/users/${data.id}`,
-					omit(mapData(data), ['variant'])
-				);
+				await putResource(`/users/${data.id}`, omit(data, ['variant']));
 				alert('User updated successfully');
 			}
 		},

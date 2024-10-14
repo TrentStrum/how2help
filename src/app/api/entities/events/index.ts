@@ -4,12 +4,9 @@ export * from './hooks/useGetActiveEventsByEntityId';
 
 // Update
 
-
 // Create
 
-
 // Delete
-
 
 // Types
 export * from './types/event.types';

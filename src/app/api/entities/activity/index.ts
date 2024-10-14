@@ -1,2 +1,2 @@
 // Types
-export * from './types/activity.types'
+export * from './types/activity.types';

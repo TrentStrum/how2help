@@ -1,5 +1,6 @@
-import { SPACING_UNIT } from "../utils";
 import type { Components } from '@mui/material/styles/components';
+
+import { SPACING_UNIT } from '../utils';
 
 // defines specific components that are being modified for this app. Modifications set here are then called into the overarching createOptions file
 

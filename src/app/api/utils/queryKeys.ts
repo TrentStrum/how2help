@@ -1,5 +1,3 @@
-
-
 export const orgKeys = {
 	all: ['org'] as const,
 	lists: () => [...orgKeys.all, 'list'] as const,

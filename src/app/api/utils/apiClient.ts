@@ -14,7 +14,7 @@ axios.interceptors.request.use(
 		}
 		return config;
 	},
-	(error) => Promise.reject(error)
+	(error) => Promise.reject(error),
 );
 
 axios.interceptors.response.use(
@@ -30,7 +30,7 @@ axios.interceptors.response.use(
 			return axios(originalRequest);
 		}
 		return Promise.reject(error);
-	}
+	},
 );
 
 const refreshAccessTokenFn = async (): Promise<string> => {
@@ -45,7 +45,7 @@ export const apiClient = {
 	post: <TPayload = unknown, TResponse = AxiosResponse<TPayload>>(
 		url: string,
 		results?: TPayload,
-		config?: object
+		config?: object,
 	) => axios.post<TPayload, TResponse>(url, results, config),
 	put: <T>(url: string, results?: object, config?: object) => axios.put<T>(url, results, config),
 	patch: <T>(url: string, results?: object, config?: object) =>

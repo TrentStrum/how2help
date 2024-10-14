@@ -5,7 +5,7 @@ export const handleError = (error: Error) => {
 	if (axios.isAxiosError(error)) {
 		const err = error.response;
 		if (Array.isArray(err?.data.errors)) {
-			for (const val of err?.data.errors) {
+			for (const val of err.data.errors) {
 				toast.warning(val.description);
 			}
 		} else if (typeof err?.data.errors === 'object') {
@@ -14,7 +14,7 @@ export const handleError = (error: Error) => {
 			}
 		} else if (err?.data) {
 			toast.warning(err.data);
-		} else if (err?.status == 401) {
+		} else if (err?.status === 401) {
 			toast.warning('Please login');
 			window.history.pushState({}, 'LoginPage', '/login');
 		} else if (err) {

@@ -1,6 +1,7 @@
 import type { PaletteColor } from '@mui/material/styles/createPalette';
 
 import { darkTheme, lightTheme } from './colors';
+
 import { ColorPreset } from '.';
 
 export const getPrimaryDark = (preset?: ColorPreset): PaletteColor => {

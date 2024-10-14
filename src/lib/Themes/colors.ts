@@ -1,11 +1,11 @@
 import { darken, getContrastRatio, lighten, type NeutralColors } from '@mui/material/styles';
 
 export type ThemeColor = {
-  main: string;
-  light: string;
-  dark: string;
-  darkest: string;
-  contrastText: string;
+	main: string;
+	light: string;
+	dark: string;
+	darkest: string;
+	contrastText: string;
 };
 
 export type ThemeColors = {
@@ -28,9 +28,9 @@ export type ThemeColors = {
 };
 
 const common = {
-  white: '#ffffff',
-  black: '#151821',
-  neutral: '#14191e',
+	white: '#ffffff',
+	black: '#151821',
+	neutral: '#14191e',
 };
 
 const baseColors = [
@@ -55,50 +55,50 @@ export const adjustColorForLightTheme = (color: string) => color;
 export const adjustColorForDarkTheme = (color: string) => lighten(color, 0.26);
 
 export const generateColorScale = (mainColor: string, theme: 'light' | 'dark') => {
-  const adjustedMainColor =
-    theme === 'light' ? adjustColorForLightTheme(mainColor) : adjustColorForDarkTheme(mainColor);
+	const adjustedMainColor =
+		theme === 'light' ? adjustColorForLightTheme(mainColor) : adjustColorForDarkTheme(mainColor);
 
-  const contrastRatioWithWhite = getContrastRatio(adjustedMainColor, common.white);
-  const contrastText = contrastRatioWithWhite >= 4.4 ? common.white : common.black;
+	const contrastRatioWithWhite = getContrastRatio(adjustedMainColor, common.white);
+	const contrastText = contrastRatioWithWhite >= 4.4 ? common.white : common.black;
 
-  return {
-    light: lighten(adjustedMainColor, 0.3),
-    main: adjustedMainColor,
-    dark: darken(adjustedMainColor, 0.1),
-    darkest: darken(adjustedMainColor, 0.4),
-    contrastText,
-  };
+	return {
+		light: lighten(adjustedMainColor, 0.3),
+		main: adjustedMainColor,
+		dark: darken(adjustedMainColor, 0.1),
+		darkest: darken(adjustedMainColor, 0.4),
+		contrastText,
+	};
 };
 
 export const generateThemeColors = (): {
-  light: ThemeColors;
-  dark: ThemeColors;
+	light: ThemeColors;
+	dark: ThemeColors;
 } => {
-  const themeColors: { light: ThemeColors; dark: ThemeColors } = {
-    light: {} as ThemeColors,
-    dark: {} as ThemeColors,
-  };
+	const themeColors: { light: ThemeColors; dark: ThemeColors } = {
+		light: {} as ThemeColors,
+		dark: {} as ThemeColors,
+	};
 
-  baseColors.forEach((color) => {
-    themeColors.light[color.name] = generateColorScale(color.value, 'light');
-    themeColors.dark[color.name] = generateColorScale(color.value, 'dark');
-  });
+	baseColors.forEach((color) => {
+		themeColors.light[color.name] = generateColorScale(color.value, 'light');
+		themeColors.dark[color.name] = generateColorScale(color.value, 'dark');
+	});
 
-  return themeColors;
+	return themeColors;
 };
 
 export const neutral: NeutralColors = {
-  25: lighten(common.neutral, 0.98),
-  50: lighten(common.neutral, 0.96),
-  100: lighten(common.neutral, 0.93),
-  200: lighten(common.neutral, 0.9),
-  300: lighten(common.neutral, 0.85),
-  400: lighten(common.neutral, 0.77),
-  500: lighten(common.neutral, 0.68),
-  600: lighten(common.neutral, 0.5),
-  700: lighten(common.neutral, 0.4),
-  800: lighten(common.neutral, 0.2),
-  900: common.neutral,
+	25: lighten(common.neutral, 0.98),
+	50: lighten(common.neutral, 0.96),
+	100: lighten(common.neutral, 0.93),
+	200: lighten(common.neutral, 0.9),
+	300: lighten(common.neutral, 0.85),
+	400: lighten(common.neutral, 0.77),
+	500: lighten(common.neutral, 0.68),
+	600: lighten(common.neutral, 0.5),
+	700: lighten(common.neutral, 0.4),
+	800: lighten(common.neutral, 0.2),
+	900: common.neutral,
 };
 
 const { light: lightThemeColors, dark: darkThemeColors } = generateThemeColors();

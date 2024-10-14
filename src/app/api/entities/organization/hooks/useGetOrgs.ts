@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { getResource } from '../../../utils/Resources/getResource';
+
+import { getResource } from '@api-utils/Resources/getResource';
+
 import { Organization } from '..';
 
 const useGetOrgsAll = () => {

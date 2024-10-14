@@ -1,7 +1,6 @@
 import { HttpResponse, http } from 'msw';
+
 import { mockOrgs } from './mocks';
-
-
 
 export const handlers = [
 	http.get('/org', () => {
@@ -31,7 +30,7 @@ export const handlers = [
 				return u.causes.some((i) => {
 					return i.causeId === numId;
 				});
-			})
+			}),
 		);
 	}),
 ];

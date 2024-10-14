@@ -1,7 +1,6 @@
-import { Cause } from "../../cause";
+import { Cause } from '../../cause';
 // import { Event } from "../../events";
-import { Reviews } from "../../reviews";
-
+import { Reviews } from '../../reviews';
 
 export type Organization = {
 	orgId: number;

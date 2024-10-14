@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { CustomizationContext } from '../lib/Themes/customization';
 
+import { CustomizationContext } from '@themes/customization';
 
 export const useCustomization = () => {
 	const context = useContext(CustomizationContext);

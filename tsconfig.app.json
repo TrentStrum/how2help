@@ -1,10 +1,47 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
+    "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+
+    /*
+    TODO: These paths aren't all correct
+      these aliases also have to be added/updated in `vite.config.ts`
+      and (if you have one--you currently don't) `jest.config.ts`
+      This is to show you how to set them up for your project so you can write
+      something like: 
+        import { LoginInput } from '@features/login-cover/LoginForm'
+
+      instead of: 
+        import { LoginInput } from '../../../../../features/login-cover/LoginForm'  OMG! @_@
+      */
+    "paths": {
+      "@api/*": ["./src/app/api/*"],
+			"@app": ["./src/app"],
+			"@app/*": ["./src/app/*"],
+			"@assets": ["./src/assets"],
+			"@assets/*": ["./src/assets/*"],
+			"@components": ["./src/app/components"],
+			"@components/*": ["./src/app/components/*"],
+			"@features": ["./src/app/features"],
+			"@features/*": ["./src/app/features/*"],
+			"@hooks/*": ["./src/hooks/*"], 
+			"@layouts": ["./src/app/layouts"], 
+			"@layouts/*": ["./src/app/layouts/*"], 
+			"@lib": ["./src/lib"],
+			"@lib/*": ["./src/lib/*"],
+			"@mocks": ["./mocks"],
+			"@mocks/*": ["./mocks/*"],
+			"@pages/*": ["./src/app/pages/*"],
+			"@styles": ["./src/styles"],
+			"@styles/*": ["./src/styles/*"],
+			"@themes/*": ["./src/lib/Themes/*"],
+			"@utils": ["./src/lib/utils"],
+			"@utils/*": ["./src/lib/utils/*"],
+		},
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -20,5 +57,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": [
+      "./src",
+      "./vite.config.ts",
+      "./@types", // @types: Global types should be here
+      "./mocks"   // Should hold your mock settings
+	],
+  "exclude": []
 }
