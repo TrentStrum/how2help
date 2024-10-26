@@ -12,6 +12,7 @@ export const mockActivity: Activity[] = [
 		organizationIds: [1, 4],
 		avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 		status: 'Active',
+		type: 'Activity',
 	},
 	{
 		activityId: 2,
@@ -25,6 +26,7 @@ export const mockActivity: Activity[] = [
 		organizationIds: [6],
 		avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 		status: 'Active',
+		type: 'Activity',
 	},
 	{
 		activityId: 3,
@@ -37,6 +39,7 @@ export const mockActivity: Activity[] = [
 		organizationIds: [5],
 		avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 		status: 'Active',
+		type: 'Activity',
 	},
 	{
 		activityId: 4,
@@ -49,5 +52,6 @@ export const mockActivity: Activity[] = [
 		organizationIds: [5],
 		avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 		status: 'Closed',
+		type: 'Activity',
 	},
 ];

@@ -1,8 +1,9 @@
-import { H2HResponse } from '../../../types';
+import { H2hPaginatedResponse } from '../../../utils/types';
 import { Cause } from '../../cause/types/cause.types';
 import { Organization } from '../../organization/types/organization.types';
 
 export type User = {
+	// includes(queryLower: string): unknown;
 	userId: number;
 	firstName: string;
 	lastName: string;
@@ -20,6 +21,7 @@ export type User = {
 	favoriteCauses?: Cause[];
 	coverImageUrl?: string;
 	avatarImageUrl?: string;
+	type: string;
 };
 
 export type LoginData = {
@@ -27,4 +29,4 @@ export type LoginData = {
 	userToken: string;
 };
 
-export type GetUserResponse = H2HResponse<User>;
+export type GetUserResponse = H2hPaginatedResponse<User>;

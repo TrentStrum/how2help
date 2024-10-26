@@ -45,7 +45,7 @@ const Appbar = () => {
 	// const [ isloggedIn, setIsLoggedIn ] = useState<boolean>(false);
 	const isloggedIn = false;
 
-	const [value, setValue] = useState<string>('catalog');
+	const [value, setValue] = useState<string>('organizations');
 
 	function handleChange(event: React.SyntheticEvent, newValue: string) {
 		setValue(newValue);
@@ -89,7 +89,12 @@ const Appbar = () => {
 												textColor="primary"
 												value={value}
 											>
-												<Tab component={NavLink} label="Catalog" to="/org" value="catalog" />
+												<Tab
+													component={NavLink}
+													label="Organizations"
+													to="/org"
+													value="organizations"
+												/>
 												<Tab component={NavLink} label="Users" to="/user" value="user" />
 												<Tab component={NavLink} label="Causes" to="/cause" value="cause" />
 												<Tab component={NavLink} label="Events" to="/event" value="event" />

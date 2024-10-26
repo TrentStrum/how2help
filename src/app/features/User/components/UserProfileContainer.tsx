@@ -12,10 +12,6 @@ type Props = {
 };
 
 const UserProfileContainer = ({ user }: Props) => {
-	//   const isMountedRef = useRefMounted();
-
-	// const customization = useCustomization();
-
 	return (
 		<Box minWidth="100%">
 			<Container maxWidth="xl">

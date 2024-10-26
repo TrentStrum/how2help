@@ -1,7 +1,12 @@
-import { Typography } from '@mui/material';
+import { EventCatalog } from '@app/features/Event/components/EventCatalog';
+import { CatalogContainer } from '@app/layouts';
 
 const EventCatalogPage = () => {
-	return <Typography variant="h1">Event Catalog Pending</Typography>;
+	return (
+		<CatalogContainer>
+			<EventCatalog />
+		</CatalogContainer>
+	);
 };
 
 export { EventCatalogPage };

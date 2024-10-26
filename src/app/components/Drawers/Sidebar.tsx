@@ -1,7 +1,8 @@
 import { alpha, Drawer, SwipeableDrawer, useMediaQuery, Theme, useTheme } from '@mui/material';
 
-import FiltersContentAlternate from '@components/Filter/FiltersContentAlternate';
-import { Scrollbar } from '@components/Scrollbar/Scrollbar';
+import { Scrollbar } from '@app/components/Scrollbar/ScrollbarWrapper-Style';
+
+import { FilterContent } from '../Filter/FilterContent';
 
 type SidebarProps = {
 	parentContainer?: HTMLDivElement | null;
@@ -14,7 +15,7 @@ const Sidebar = ({ parentContainer, onClose, onOpen, open, ...other }: SidebarPr
 	const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 	const theme = useTheme();
 
-	const sidebarContent = <FiltersContentAlternate />;
+	const sidebarContent = <FilterContent />;
 
 	if (lgUp) {
 		return (

@@ -9,4 +9,5 @@ export type Reviews = {
 	verified: boolean;
 	userId: number;
 	avatar?: string;
+	type: string;
 };

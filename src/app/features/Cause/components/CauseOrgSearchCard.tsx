@@ -12,8 +12,8 @@ import {
 	Typography,
 } from '@mui/material';
 
-import { AvatarGroupTooltips } from '../../../components/Avatar/AvatarGroupTooltips';
 import { Organization } from '../../../api/entities/organization';
+import { AvatarGroupTooltips } from '../../../components/Avatar/AvatarGroupTooltips';
 
 const IconButtonFav = styled(IconButton)(({ theme }) => ({
 	position: 'absolute',
@@ -45,8 +45,6 @@ type Props = {
 };
 
 const CauseOrgSearchCard = ({ org }: Props) => {
-	// const theme = useTheme();
-
 	return (
 		<Card
 			sx={{

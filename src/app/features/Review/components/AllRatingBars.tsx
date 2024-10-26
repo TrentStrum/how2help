@@ -1,6 +1,6 @@
 import { List, ListItem, Box, Typography } from '@mui/material';
 
-import { LinearProgressSlim } from './ProgressBar.style';
+import { LinearProgressSlim } from '../../../components/ProgressBar/ProgressBar.style';
 
 type Props = {
 	rating: number[] | undefined;

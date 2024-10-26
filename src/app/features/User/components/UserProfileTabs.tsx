@@ -77,7 +77,7 @@ const UserProfileTabs = ({ user }: Props) => {
 					</Select>
 				)}
 			</Grid>
-			<Grid xs={12}>
+			<Grid item xs={12}>
 				{currentTab === 0 ? <ActivityTab /> : null}
 				{currentTab === 1 ? <EditProfileDetails /> : null}
 				{currentTab === 2 ? <SettingsNotifications /> : null}

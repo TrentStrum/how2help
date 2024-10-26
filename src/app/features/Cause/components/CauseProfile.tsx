@@ -18,7 +18,7 @@ import {
 import { useParams } from 'react-router-dom';
 
 import { useGetCauseById } from '@api/entities/cause';
-import { CauseTabs } from '@app/components/Tabs/CauseTabs';
+import { CauseTabs } from '@app/features/Cause/components/CauseTabs';
 
 const CauseProfile = () => {
 	const { causeId } = useParams();

@@ -1,6 +1,8 @@
 import { HttpResponse, http } from 'msw';
 
-import { mockUsers } from '..';
+import { H2hPaginatedResponse } from '@api/utils/types';
+
+import { mockUsers, User } from '..';
 
 interface LoginInput {
 	email: string;
@@ -9,7 +11,24 @@ interface LoginInput {
 
 export const handlers = [
 	http.get('/user', () => {
-		return HttpResponse.json(mockUsers);
+		const urlParams = new URLSearchParams(document.location.search);
+
+		const pageNumber = parseInt(urlParams.get('page') || '1', 10);
+		const pageSize = parseInt(urlParams.get('limit') || '8', 10);
+		const status = 200;
+		const statusText = 'Success';
+		const start = (pageNumber - 1) * pageSize;
+		const paginatedUsers = mockUsers.slice(start, start + pageSize);
+		const total = mockUsers.length;
+		const responseBody = {
+			results: paginatedUsers,
+			total,
+			pageNumber,
+			pageSize,
+			status,
+			statusText,
+		};
+		return HttpResponse.json<H2hPaginatedResponse<User>>(responseBody, { status: 200 });
 	}),
 
 	http.get('/user/:userId', ({ params }) => {

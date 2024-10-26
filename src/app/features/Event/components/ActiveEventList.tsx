@@ -1,4 +1,5 @@
 import { Typography, Chip, useTheme, Divider, ListItem, ListSubheader, Box } from '@mui/material';
+import { useState } from 'react';
 
 import { Event, useGetActiveEventsByEntityId } from '@api/entities/events';
 
@@ -10,15 +11,20 @@ type Props = {
 
 const ActiveEventList = ({ entityId }: Props) => {
 	const theme = useTheme();
+	const [currentPage, setCurrentPage] = useState(0);
+	const [limit, setLimit] = useState<number>(10);
 
-	const entityIdActive = entityId;
+	const { data, isPending, isError, error } = useGetActiveEventsByEntityId(
+		'Organization',
+		entityId,
+		currentPage,
+		limit,
+	);
 
-	const { data: events, isPending, isError } = useGetActiveEventsByEntityId(entityIdActive);
+	if (isPending) return <Typography variant="body2">Loading...</Typography>;
+	if (isError) return <Typography variant="body2">{error.message}</Typography>;
 
-	if (isPending) return <Typography variant="body2">Loading active events...</Typography>;
-	if (isError) return <Typography variant="body2">Error active events...</Typography>;
-
-	console.log(events);
+	let events = data.results;
 
 	return (
 		<>

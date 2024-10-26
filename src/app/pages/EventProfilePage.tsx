@@ -1,7 +1,7 @@
-import { Typography } from '@mui/material';
+import { EventProfile } from '@app/features/Event';
 
 const EventProfilePage = () => {
-	return <Typography variant="h1">EventProfilePage</Typography>;
+	return <EventProfile />;
 };
 
 export { EventProfilePage };

@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+import { Activity } from '@api/entities/activity';
 import { LinkButton } from '@components/Buttons/LinkButton';
 import { SoftButton } from '@components/Buttons/SoftButton';
 import { CardImage } from '@components/Cards/CardImage';
@@ -23,9 +24,12 @@ type Props = {
 	avatarImageUrl?: string;
 	rating?: number;
 	entity: string;
+	activities?: Activity[];
 };
 
-const CatalogCard = ({ id, name, avatarImageUrl, rating, entity }: Props) => {
+const OrgCard = ({ id, name, avatarImageUrl, rating, entity, activities }: Props) => {
+	const openOpportunities = activities?.filter((activity) => activity.status === 'active').length;
+
 	return (
 		<Stack
 			direction={{ xs: 'column', sm: 'row' }}
@@ -81,7 +85,7 @@ const CatalogCard = ({ id, name, avatarImageUrl, rating, entity }: Props) => {
 						<Typography sx={{ display: 'flex', alignItems: 'center' }} variant="subtitle2">
 							Open opportunities:
 							<Typography color="text.primary" component="span" sx={{ pl: 0.5 }} variant="h4">
-								4
+								{openOpportunities ? openOpportunities : 0}
 							</Typography>
 						</Typography>
 					</Grid>
@@ -91,4 +95,4 @@ const CatalogCard = ({ id, name, avatarImageUrl, rating, entity }: Props) => {
 	);
 };
 
-export { CatalogCard };
+export { OrgCard };

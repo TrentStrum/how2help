@@ -3,42 +3,20 @@ import {
 	Avatar,
 	Box,
 	Card,
-	CardActionArea,
 	CardMedia,
 	Container,
 	Divider,
 	Grid,
 	InputAdornment,
-	styled,
 	TextField,
 	Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { useGetCauseAll } from '@api/entities/cause';
+import { CardActionAreaWrapper } from '@app/components/Cards/CardActionAreaWrapper';
 
 import { LinkButton } from '../../../components/Buttons/LinkButton';
-
-const CardActionAreaWrapper = styled(CardActionArea)(({ theme }) => ({
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'space-between',
-	position: 'relative',
-
-	'.MuiTouchRipple-root': {
-		opacity: 0.3,
-	},
-
-	'.MuiCardActionArea-focusHighlight': {
-		background: theme.palette.common.white,
-	},
-
-	'&:hover': {
-		'.MuiCardActionArea-focusHighlight': {
-			opacity: 0.1,
-		},
-	},
-}));
 
 const CauseCatalog = () => {
 	const { data: causes, isLoading, isError } = useGetCauseAll();
@@ -50,7 +28,7 @@ const CauseCatalog = () => {
 		<Container>
 			<Box sx={{ flexGrow: 1 }}>
 				<Grid columns={{ xs: 4 }} container spacing={{ xs: 2, md: 3 }}>
-					<Grid xs={12}>
+					<Grid item xs={12}>
 						<TextField
 							fullWidth
 							// onChange={handleQueryChange}

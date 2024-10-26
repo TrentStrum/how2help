@@ -2,19 +2,21 @@ import { RouteObject } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '@app/App';
-import { OrganizationProfilePage } from '@app/pages/OrganizationProfilePage';
-import { AboutPage } from '@pages/AboutPage';
-import { CauseCatalogPage } from '@pages/CauseCatalogPage';
-import { CauseProfilePage } from '@pages/CauseProfilePage';
-import { Error404Page } from '@pages/Error404Page';
-import { EventCatalogPage } from '@pages/EventCatalogPage';
-import { EventProfilePage } from '@pages/EventProfilePage';
-import { LandingPage } from '@pages/LandingPage';
-import { LoginPage } from '@pages/LoginPage';
-import { OrganizationCatalogPage } from '@pages/OrganizationCatalogPage';
-import { RegisterPage } from '@pages/RegisterPage';
-import { UserCatalogPage } from '@pages/UserCatalogPage';
-import { UserProfilePage } from '@pages/UserProfilePage';
+import {
+	AboutPage,
+	CauseCatalogPage,
+	CauseProfilePage,
+	Error404Page,
+	EventCatalogPage,
+	EventProfilePage,
+	LandingPage,
+	LoginPage,
+	OrganizationCatalogPage,
+	OrganizationProfilePage,
+	RegisterPage,
+	UserCatalogPage,
+	UserProfilePage,
+} from '@app/pages';
 
 export const routes: RouteObject[] = [
 	{

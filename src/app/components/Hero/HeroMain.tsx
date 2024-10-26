@@ -1,12 +1,8 @@
 import { Button, Grid, Typography } from '@mui/material';
 
-import LandingMain from '../../../../assets/images/LandingMain2.png';
+import LandingMain from '@assets/images/LandingMain2.png';
 
-// interface HeroProps {
-// 	handleAuthentication: () => void;
-// }
-
-const Hero = () => {
+const HeroMain = () => {
 	function handleClick() {
 		return <div>test</div>;
 	}
@@ -42,17 +38,11 @@ const Hero = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<Grid
-				item
-				md={8}
-				xs={12}
-				order={{ xs: 1, md: 2 }}
-				// sx={{ marginLeft: '3rem'}}
-			>
-				<img src={LandingMain} width="100%" />
+			<Grid item md={8} order={{ xs: 1, md: 2 }} xs={12}>
+				<img alt="Landing" src={LandingMain} width="100%" />
 			</Grid>
 		</Grid>
 	);
 };
 
-export { Hero };
+export { HeroMain };

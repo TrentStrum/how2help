@@ -10,7 +10,7 @@ type Props = {
 const HeroImage = ({ imageSource, height }: Props) => {
 	return (
 		<Paper elevation={0} sx={{ backgroundColor: neutral[50] }}>
-			<img height={height} src={imageSource} width="100%" />
+			<img alt="hero" height={height} src={imageSource} width="100%" />
 		</Paper>
 	);
 };

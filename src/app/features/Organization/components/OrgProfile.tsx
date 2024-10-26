@@ -3,19 +3,22 @@ import { ReactNode, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useGetOrgById } from '@api/entities/organization';
-import { ActivityContainer } from '@app/features/Activity';
-import { EventContainer } from '@app/features/Event/components/EventContainer';
+import { ProfileCalendar } from '@app/features/Event/components/ProfileCalendar';
 import { OrgReviewsContainer } from '@app/features/Review/components/OrgReviewsContainer';
 
+import { OrgActivitySearch } from './OrgActivitySearch';
 import { OrgProfileDescription } from './OrgProfileDescription';
 import { HeroImage } from '../../../components/Hero/HeroImage';
-import { TabStyle } from '../../../components/Tabs/TabsStyle';
+import { TabStyle } from '../../../components/Tabs/Tabs-Style';
 import { SideBySideLayout } from '../../../layouts/SideBySideLayout';
 
 const OrgProfile = () => {
 	const { orgId } = useParams();
-	const { data: org, isLoading, isError } = useGetOrgById(Number(orgId));
+	const { data: org, isPending, isError, error } = useGetOrgById(Number(orgId));
 	const [tabValue, setTabValue] = useState('0');
+
+	if (isPending) return <Typography variant="body2">Loading...</Typography>;
+	if (isError) return <Typography variant="body2">{error.message}</Typography>;
 
 	const OrgLeftContent = <HeroImage height={600} imageSource={org?.avatarImageUrl} />;
 	const OrgRightContent = <OrgProfileDescription org={org} />;
@@ -24,15 +27,14 @@ const OrgProfile = () => {
 		setTabValue(String(newValue));
 	};
 
-	if (isLoading) return <Typography variant="body2">Loading...</Typography>;
-	if (isError) return <Typography variant="body2">Error...</Typography>;
-
 	let displayTab: ReactNode;
 
 	if (tabValue === '0' && org) {
-		displayTab = <ActivityContainer />;
+		displayTab = <OrgActivitySearch activities={org.Activities!} />;
 	} else if (tabValue === '1' && org) {
-		displayTab = <EventContainer entityId={org.orgId.toString()} entityName={org.name} />;
+		displayTab = (
+			<ProfileCalendar entity={org} entityId={org.orgId.toString()} entityType="Organization" />
+		);
 	} else if (tabValue === '2' && org) {
 		displayTab = <OrgReviewsContainer org={org} />;
 	} else {
@@ -44,7 +46,7 @@ const OrgProfile = () => {
 			<Card>
 				<SideBySideLayout leftSideContent={OrgLeftContent} rightSideContent={OrgRightContent} />
 				<Divider />
-				<Box p={2}>
+				<Box p={1}>
 					<TabStyle centered onChange={handleTabChange} value={Number(tabValue)}>
 						<Tab label="Get Involved" />
 						<Tab label="Events" />
@@ -53,7 +55,9 @@ const OrgProfile = () => {
 					</TabStyle>
 				</Box>
 				<Divider />
-				<Container maxWidth="lg">{displayTab}</Container>
+				<Container maxWidth="lg" sx={{ pt: 1 }}>
+					{displayTab}
+				</Container>
 			</Card>
 		</Container>
 	);

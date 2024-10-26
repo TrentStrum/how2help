@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 import { SearchWithButton } from '@components/Buttons/SearchWithButton';
 
-import { AvatarState } from '../components/Avatar/Avatar';
-import { Helmet } from '../components/Helmet';
+import { AvatarState } from '../components/Avatar/Avatar-Style';
+import { Helmet } from '../components/utils/Helmet';
 
 const Error404Page = () => {
 	return (

@@ -11,10 +11,9 @@ const CardImage = <T extends AvatarProps>({ avatarImageUrl, imageAltDesc, height
 		<CardMedia
 			alt={imageAltDesc}
 			component="img"
-			sx={{ p: '1em 1em 0 1em', objectFit: 'contain' }}
 			height={height}
-			// width={maxWidth}
 			image={avatarImageUrl}
+			sx={{ p: '1em 1em 0 1em', objectFit: 'contain' }}
 		/>
 	);
 };

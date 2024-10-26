@@ -29,3 +29,11 @@ export const imageKeys = {
 	details: () => [...imageKeys.all, 'detail'] as const,
 	detail: (imageId: number) => [...imageKeys.details(), imageId] as const,
 };
+
+export const eventKeys = {
+	all: ['event'] as const,
+	lists: () => [...eventKeys.all, 'list'] as const,
+	list: (filters: string) => [...eventKeys.lists(), { filters }] as const,
+	details: () => [...imageKeys.all, 'detail'] as const,
+	detail: (imageId: number) => [...eventKeys.details(), imageId] as const,
+};

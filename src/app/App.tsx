@@ -11,7 +11,7 @@ import { queryClient } from '@api-utils/queryClient';
 import { CustomizationConsumer, CustomizationProvider } from '@themes/customization';
 
 import { createTheme } from '../lib/Themes';
-import { Appbar } from './features/AppBar';
+import { Appbar } from './features/AppBar/AppBar';
 import { MobileMenu } from './features/AppBar/mobileMenu';
 
 const App = () => {

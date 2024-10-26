@@ -1,3 +1,5 @@
+import { Activity } from '@api/entities/activity';
+
 import { Cause } from '../../cause';
 // import { Event } from "../../events";
 import { Reviews } from '../../reviews';
@@ -17,4 +19,6 @@ export type Organization = {
 	images?: Array<{ id: number; image: string }>;
 	reviews: Reviews[];
 	events: number[];
+	Activities?: Activity[];
+	type: string;
 };

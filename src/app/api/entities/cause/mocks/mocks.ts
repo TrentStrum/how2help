@@ -8,6 +8,7 @@ export const mockCause: Cause[] = [
 			'Supporting the LGTBQ+ community by providing services, advocating for the safety and rights of the members of this community.',
 		avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 		userRating: 5,
+		type: 'Cause',
 	},
 	{
 		causeId: 2,
@@ -16,6 +17,7 @@ export const mockCause: Cause[] = [
 			'Organizations working to provide mental health assistance as well as aware to various mental health issues.',
 		avatarImageUrl: '../../src/assets/images/mentalHealth.jpg',
 		userRating: 5,
+		type: 'Cause',
 	},
 	{
 		causeId: 3,
@@ -23,6 +25,7 @@ export const mockCause: Cause[] = [
 		description: 'Reduce gun violence by a variety of methods.',
 		avatarImageUrl: '../../src/assets/images/gunReform.jpg',
 		userRating: 5,
+		type: 'Cause',
 	},
 	{
 		causeId: 4,
@@ -30,6 +33,7 @@ export const mockCause: Cause[] = [
 		description: 'End the apartheid, colonization and genocide in Palestine.',
 		avatarImageUrl: '../../src/assets/images/palestinianFreedom.jpg',
 		userRating: 5,
+		type: 'Cause',
 	},
 	{
 		causeId: 5,
@@ -38,6 +42,7 @@ export const mockCause: Cause[] = [
 			'Fighting to protect womens reproductive rights, voting rights and humen rights in general. ',
 		avatarImageUrl: '../../src/assets/images/womensRights.jpg',
 		userRating: 5,
+		type: 'Cause',
 	},
 	{
 		causeId: 6,
@@ -45,6 +50,7 @@ export const mockCause: Cause[] = [
 		description: 'Fighting and advocating for the rights of indigenous peoples',
 		avatarImageUrl: '../../src/assets/images/indigenousRights.jpg',
 		userRating: 5,
+		type: 'Cause',
 	},
 	{
 		causeId: 7,
@@ -52,5 +58,6 @@ export const mockCause: Cause[] = [
 		description: 'Protect and expand voting rights in the USA',
 		avatarImageUrl: '../../src/assets/images/votingRights.jpg',
 		userRating: 5,
+		type: 'Cause',
 	},
 ];

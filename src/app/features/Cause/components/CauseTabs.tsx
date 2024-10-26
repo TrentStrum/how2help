@@ -2,10 +2,10 @@ import { Box, MenuItem, Select, Stack, Tab, useMediaQuery, useTheme } from '@mui
 import React, { useState } from 'react';
 
 import { Cause } from '@api/entities/cause';
-import { EventContainer } from '@app/features/Event';
+import { ProfileCalendar } from '@app/features/Event/components/ProfileCalendar';
 
-import { TabsShadow } from './TabsShadow';
-import { CauseOrgSearch } from '../../features/Cause/components/CauseOrgSearch';
+import { CauseOrgSearch } from './CauseOrgSearch';
+import { TabsShadow } from '../../../components/Tabs/TabsShadow-Style';
 
 type Props = {
 	cause: Cause;
@@ -32,7 +32,7 @@ const CauseTabs = ({ cause }: Props) => {
 			break;
 		}
 		case '1': {
-			displayTab = <EventContainer entityId={cause?.causeId.toString()} entityName={cause?.name} />;
+			displayTab = <ProfileCalendar entity={cause} entityType="Cause" />;
 			break;
 		}
 		// case '2': {

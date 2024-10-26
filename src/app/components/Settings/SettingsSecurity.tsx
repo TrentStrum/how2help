@@ -15,7 +15,7 @@ import {
 	useTheme,
 } from '@mui/material';
 
-import { AvatarState } from '@app/components/Avatar/Avatar';
+import { AvatarState } from '@app/components/Avatar/Avatar-Style';
 import { SoftButton } from '@app/components/Buttons/SoftButton';
 
 const SettingsSecurity = () => {

@@ -1,5 +1,4 @@
-import { GetUserResponse, User } from '..';
-import { mockResponseBase } from '../../../mocks/types';
+import { User } from '..';
 
 export const mockUsers: User[] = [
 	{
@@ -30,6 +29,7 @@ export const mockUsers: User[] = [
 				avatarImageUrl: '../../src/assets/images/palestinianFreedom.jpg',
 				reviews: [],
 				events: [],
+				type: 'Organizaiton',
 			},
 			{
 				orgId: 6,
@@ -42,6 +42,7 @@ export const mockUsers: User[] = [
 							'Fighting to protect womens reproductive rights, voting rights and humen rights in general. ',
 						avatarImageUrl: '../../src/assets/images/womensRights.jpg',
 						userRating: 5,
+						type: 'Cause',
 					},
 				],
 				countryServing: ['USA'],
@@ -53,6 +54,7 @@ export const mockUsers: User[] = [
 				avatarImageUrl: '../../src/assets/images/womensMarch.jpg',
 				reviews: [],
 				events: [],
+				type: 'Organizaiton',
 			},
 		],
 		favoriteCauses: [
@@ -62,6 +64,7 @@ export const mockUsers: User[] = [
 				description: 'End the apartheid, colonization and genocide in Palestine.',
 				avatarImageUrl: '../../src/assets/images/palestinianFreedom.jpg',
 				userRating: 5,
+				type: 'Cause',
 			},
 			{
 				causeId: 1,
@@ -70,10 +73,12 @@ export const mockUsers: User[] = [
 					'Supporting the LGTBQ+ community by providing services, advocating for the safety and rights of the members of this community.',
 				avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 				userRating: 5,
+				type: 'cause',
 			},
 		],
 		avatarImageUrl: '../../src/assets/avatars/1.png',
 		coverImageUrl: '../../src/assets/images/trent.jpg',
+		type: 'User',
 	},
 	{
 		userId: 2,
@@ -101,6 +106,7 @@ export const mockUsers: User[] = [
 							'Supporting the LGTBQ+ community by providing services, advocating for the safety and rights of the members of this community.',
 						avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 						userRating: 3,
+						type: 'Cause',
 					},
 				],
 				countryServing: ['USA', 'Canada', 'Germany', 'France', 'UK', 'Mexico', 'Argentina'],
@@ -112,6 +118,7 @@ export const mockUsers: User[] = [
 				avatarImageUrl: '../../src/assets/images/standInPride.jpg',
 				reviews: [],
 				events: [],
+				type: 'Organizaiton',
 			},
 			{
 				orgId: 4,
@@ -124,6 +131,7 @@ export const mockUsers: User[] = [
 							'Supporting the LGTBQ+ community by providing services, advocating for the safety and rights of the members of this community.',
 						avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 						userRating: 3,
+						type: 'Cause',
 					},
 					{
 						causeId: 2,
@@ -132,6 +140,7 @@ export const mockUsers: User[] = [
 							'Organizations working to provide mental health assistance as well as aware to various mental health issues.',
 						avatarImageUrl: '../../src/assets/images/mentalHealth.jpg',
 						userRating: 4,
+						type: 'Cause',
 					},
 				],
 				countryServing: ['USA'],
@@ -143,6 +152,7 @@ export const mockUsers: User[] = [
 				avatarImageUrl: '../../src/assets/images/The_Trevor_Project_Logo.jpg',
 				reviews: [],
 				events: [],
+				type: 'Organizaiton',
 			},
 		],
 		favoriteCauses: [
@@ -153,13 +163,10 @@ export const mockUsers: User[] = [
 					'Supporting the LGTBQ+ community by providing services, advocating for the safety and rights of the members of this community.',
 				avatarImageUrl: '../../src/assets/images/lgtbq.jpg',
 				userRating: 5,
+				type: 'Cause',
 			},
 		],
 		avatarImageUrl: '../../src/assets/images/charlie.jpg',
+		type: 'User',
 	},
 ];
-
-export const mockGetUserResponse: (user: User) => GetUserResponse = (user: User) => ({
-	...mockResponseBase,
-	results: user,
-});

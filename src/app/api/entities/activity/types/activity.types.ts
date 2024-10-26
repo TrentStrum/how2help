@@ -4,9 +4,10 @@ export type Activity = {
 	description: string;
 	postedDate: string;
 	startDate: string;
-	endDate?: string;
+	endDate: string;
 	causeIds: number[];
 	organizationIds?: number[];
 	avatarImageUrl?: string;
 	status: string;
+	type: string;
 };

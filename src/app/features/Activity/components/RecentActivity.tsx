@@ -3,7 +3,7 @@ import ShoppingBagTwoToneIcon from '@mui/icons-material/ShoppingBagTwoTone';
 import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
 import { Card, CardHeader, Divider, Box, Typography } from '@mui/material';
 
-import { AvatarState } from '@app/components/Avatar/Avatar';
+import { AvatarState } from '@app/components/Avatar/Avatar-Style';
 
 const RecentActivity = () => {
 	return (

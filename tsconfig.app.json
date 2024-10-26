@@ -20,6 +20,7 @@
       */
     "paths": {
       "@api/*": ["./src/app/api/*"],
+      "@api-utils/*": ["./src/app/api/utils/*"],
 			"@app": ["./src/app"],
 			"@app/*": ["./src/app/*"],
 			"@assets": ["./src/assets"],

@@ -28,7 +28,7 @@ const CauseOrgSearch = ({ causeId }: Props) => {
 
 			<Grid container m={2} spacing={{ xs: 2 }}>
 				{orgs.map((org: Organization) => (
-					<Grid key={org.orgId} lg={2} m={1} md={4} xs={10}>
+					<Grid item key={org.orgId} lg={2} m={1} md={4} xs={10}>
 						<CauseOrgSearchCard org={org} />
 					</Grid>
 				))}

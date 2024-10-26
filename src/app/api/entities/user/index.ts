@@ -1,15 +1,5 @@
-// Get
-export * from './hooks/useGetUserById';
-export * from './hooks/useGetUsers';
-
-// Update
-export * from './hooks/useUpdateUser';
-
-// Create
-export * from './hooks/useCreateUser';
-
-// Delete
-export * from './hooks/useDeleteUser';
+// Hooks
+export * from './hooks';
 
 // Types
 export * from './types/user.types';

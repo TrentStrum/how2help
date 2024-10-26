@@ -4,4 +4,5 @@ export type Cause = {
 	description: string;
 	avatarImageUrl?: string;
 	userRating: number;
+	type: string;
 };

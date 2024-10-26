@@ -7,7 +7,7 @@ import ReactCountryFlag from 'react-country-flag';
 
 import { Organization } from '@api/entities/organization';
 import { Reviews } from '@api/entities/reviews';
-import { AvatarState } from '@app/components/Avatar/Avatar';
+import { AvatarState } from '@app/components/Avatar/Avatar-Style';
 import { SoftButton } from '@app/components/Buttons/SoftButton';
 
 type Props = {

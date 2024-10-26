@@ -1,17 +1,29 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, QueryOptions, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { ErrorResponse } from 'react-router';
 
-import { orgKeys } from '@api-utils/queryKeys';
 import { getResource } from '@api-utils/Resources/getResource';
 
-import { Event } from '../types/event.types';
+import { GetEventResponse } from '../types/event.types';
 
-const useGetActiveEventsByEntityId = (entityIdActive: string) => {
-	const query = useQuery<Event[]>({
-		queryKey: orgKeys.list(`active-${entityIdActive}`),
-		queryFn: () => getResource(`/org/activeEvents/by-org/${entityIdActive}`),
+const useGetActiveEventsByEntityId = (
+	entityId: string,
+	entitytype: string,
+	currentPage: number,
+	limitCount: number,
+	options?: QueryOptions<GetEventResponse, AxiosError<ErrorResponse>>,
+) => {
+	return useQuery({
+		queryKey: [entityId, entitytype, { page: currentPage, limit: limitCount }],
+		queryFn: async () => {
+			return getResource<GetEventResponse>(
+				`/events/org?_hostId=${entityId}&_hostType=${entitytype}&_limit=${limitCount}&_page=${currentPage}`,
+			);
+		},
+		...options,
+		placeholderData: keepPreviousData,
+		staleTime: 1000 * 60 * 5,
 	});
-
-	return query;
 };
 
 export { useGetActiveEventsByEntityId };

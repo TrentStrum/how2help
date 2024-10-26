@@ -1,19 +1,10 @@
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
-import {
-	Box,
-	Card,
-	Grid,
-	ListItemButton,
-	Radio,
-	Stack,
-	Tooltip,
-	Typography,
-	useTheme,
-} from '@mui/material';
+import { Box, Card, Grid, Radio, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { ButtonIcon } from '../../features/User/services/styledComponents';
+import { ListItemButtonMod } from '../Buttons/ListItemButtton';
 
 interface Item {
 	id: number;
@@ -64,30 +55,9 @@ const MyCardsSelect = () => {
 							position: 'relative',
 						}}
 					>
-						<ListItemButton
+						<ListItemButtonMod
 							onClick={() => setSelectedValue(item.id)}
 							selected={selectedValue === item.id}
-							sx={{
-								p: '1px',
-								flexDirection: 'column',
-								borderRadius: 'inherit',
-								boxShadow: `0 0 0 1px ${theme.palette.divider} inset`,
-								background: theme.palette.mode === 'dark' ? 'black' : 'gray',
-
-								'&:hover': {
-									backgroundColor: 'background.paper',
-									boxShadow: `0 0 0 1px ${theme.palette.primary.main} inset`,
-								},
-
-								'&.Mui-selected': {
-									backgroundColor: 'background.paper',
-									boxShadow: `0 0 0 2px ${theme.palette.primary.main} inset`,
-
-									'&:hover': {
-										backgroundColor: 'background.paper',
-									},
-								},
-							}}
 						>
 							<Box alignItems="center" display="flex" pb={1} pt={2} px={2} width="100%">
 								<Card
@@ -110,7 +80,7 @@ const MyCardsSelect = () => {
 										•••• {item.cc}
 									</Typography>
 									<Typography color="text.secondary" fontWeight={500} variant="h6">
-										{'Expires' + ' '}
+										Expires{' '}
 										<Typography color="text.primary" component="span" variant="h6">
 											Expires date
 										</Typography>
@@ -149,7 +119,7 @@ const MyCardsSelect = () => {
 									<DeleteTwoToneIcon fontSize="small" />
 								</ButtonIcon>
 							</Tooltip>
-						</ListItemButton>
+						</ListItemButtonMod>
 					</Card>
 				</Grid>
 			))}

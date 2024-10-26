@@ -18,7 +18,7 @@ import { useState } from 'react';
 
 import { AccordionMinimal } from '@themes/styles/accordion';
 
-const Component = () => {
+const FilterContent = () => {
 	const categories = [
 		{
 			id: 1,
@@ -132,7 +132,6 @@ const Component = () => {
 						sx={{
 							px: 2,
 							pb: 2,
-
 							'& .MuiListItemButton-root': {
 								borderRadius: (theme) => theme.shape.borderRadius + 'px',
 								pl: 1.5,
@@ -185,7 +184,6 @@ const Component = () => {
 						sx={{
 							px: 2,
 							pb: 2,
-
 							'& .MuiListItemButton-root': {
 								borderRadius: (theme) => theme.shape.borderRadius + 'px',
 								px: 1.5,
@@ -221,4 +219,4 @@ const Component = () => {
 	);
 };
 
-export default Component;
+export { FilterContent };

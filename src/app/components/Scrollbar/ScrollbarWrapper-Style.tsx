@@ -18,7 +18,6 @@ export const Scrollbar = ({ dark, children, ...rest }: ScrollbarProps) => {
 			autoHide
 			sx={{
 				height: '100%',
-
 				'.simplebar-scrollbar': {
 					'&::before': {
 						background: dark
@@ -28,7 +27,6 @@ export const Scrollbar = ({ dark, children, ...rest }: ScrollbarProps) => {
 							: theme.palette.mode === 'dark'
 								? alpha(theme.palette.neutral[800], 0.3)
 								: alpha(theme.palette.neutral[300], 0.7),
-
 						borderRadius: theme.shape.borderRadius,
 					},
 					'&.simplebar-hover': {

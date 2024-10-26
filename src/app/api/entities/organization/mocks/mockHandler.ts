@@ -1,11 +1,23 @@
-import { HttpResponse, http } from 'msw';
+import { HttpResponse, http, PathParams } from 'msw';
+
+import { creatPaginatedResponse, getPaginationParams } from '@api/helpers/PaginationHelper';
 
 import { mockOrgs } from './mocks';
 
 export const handlers = [
-	http.get('/org', () => {
-		return HttpResponse.json(mockOrgs);
+	http.get<PathParams>('/org', ({ request }) => {
+		try {
+			const url = new URL(request.url);
+			const paginationParams = getPaginationParams(url);
+
+			const paginatedResponse = creatPaginatedResponse(mockOrgs, paginationParams);
+
+			return HttpResponse.json(paginatedResponse, { status: 200 });
+		} catch (error) {
+			return HttpResponse.json({ error: 'Internal server error', status: 500 });
+		}
 	}),
+
 	http.get('/org/:orgId', ({ params }) => {
 		const { orgId } = params;
 

@@ -8,7 +8,7 @@ import {
 	CardContent,
 	Chip,
 	Divider,
-	Unstable_Grid2 as Grid,
+	Grid,
 	Stack,
 	Typography,
 } from '@mui/material';
@@ -16,7 +16,7 @@ import {
 const EditProfileDetails = () => {
 	return (
 		<Grid container spacing={{ xs: 2, sm: 3 }}>
-			<Grid xs={12}>
+			<Grid item xs={12}>
 				<Card>
 					<Box
 						alignItems={{ xs: 'flex-start', sm: 'center' }}
@@ -43,26 +43,26 @@ const EditProfileDetails = () => {
 					<CardContent>
 						<Typography variant="subtitle2">
 							<Grid container spacing={1}>
-								<Grid md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
+								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
 									<Box pr={{ xs: 2, sm: 3 }}>Name:</Box>
 								</Grid>
-								<Grid md={9} sm={8} xs={12}>
+								<Grid item md={9} sm={8} xs={12}>
 									<Typography fontWeight={500} variant="h6">
 										Craig Donin
 									</Typography>
 								</Grid>
-								<Grid md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
+								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
 									<Box pr={{ xs: 2, sm: 3 }}>Date of birth:</Box>
 								</Grid>
-								<Grid md={9} sm={8} xs={12}>
+								<Grid item md={9} sm={8} xs={12}>
 									<Typography fontWeight={500} variant="h6">
 										15 March 1977
 									</Typography>
 								</Grid>
-								<Grid md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
+								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
 									<Box pr={{ xs: 2, sm: 3 }}>Address:</Box>
 								</Grid>
-								<Grid md={9} sm={8} xs={12}>
+								<Grid item md={9} sm={8} xs={12}>
 									<Box
 										sx={{
 											maxWidth: { xs: 'auto', sm: 340 },
@@ -78,7 +78,7 @@ const EditProfileDetails = () => {
 					</CardContent>
 				</Card>
 			</Grid>
-			<Grid xs={12}>
+			<Grid item xs={12}>
 				<Card>
 					<Box
 						alignItems={{ xs: 'flex-start', sm: 'center' }}
@@ -103,26 +103,26 @@ const EditProfileDetails = () => {
 					<CardContent>
 						<Typography variant="subtitle2">
 							<Grid container spacing={1}>
-								<Grid md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
+								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
 									<Box pr={{ xs: 2, sm: 3 }}>Language:</Box>
 								</Grid>
-								<Grid md={9} sm={8} xs={12}>
+								<Grid item md={9} sm={8} xs={12}>
 									<Typography fontWeight={500} variant="h6">
 										English (US)
 									</Typography>
 								</Grid>
-								<Grid md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
+								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
 									<Box pr={{ xs: 2, sm: 3 }}>Timezone:</Box>
 								</Grid>
-								<Grid md={9} sm={8} xs={12}>
+								<Grid item md={9} sm={8} xs={12}>
 									<Typography fontWeight={500} variant="h6">
 										GMT +2
 									</Typography>
 								</Grid>
-								<Grid md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
+								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
 									<Box pr={{ xs: 2, sm: 3 }}>Account status:</Box>
 								</Grid>
-								<Grid md={9} sm={8} xs={12}>
+								<Grid item md={9} sm={8} xs={12}>
 									<Chip
 										color="success"
 										label={
@@ -139,7 +139,7 @@ const EditProfileDetails = () => {
 					</CardContent>
 				</Card>
 			</Grid>
-			<Grid xs={12}>
+			<Grid item xs={12}>
 				<Card>
 					<Box
 						alignItems={{ xs: 'flex-start', sm: 'center' }}
@@ -166,10 +166,10 @@ const EditProfileDetails = () => {
 					<CardContent>
 						<Typography variant="subtitle2">
 							<Grid container spacing={1}>
-								<Grid md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
+								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
 									<Box pr={{ xs: 2, sm: 3 }}>Primary email address:</Box>
 								</Grid>
-								<Grid md={9} sm={8} xs={12}>
+								<Grid item md={9} sm={8} xs={12}>
 									<Stack alignItems="center" direction="row" spacing={1}>
 										<Typography fontWeight={500} lineHeight={1} variant="h6">
 											example@demo.com
@@ -186,10 +186,10 @@ const EditProfileDetails = () => {
 										/>
 									</Stack>
 								</Grid>
-								<Grid md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
+								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
 									<Box pr={{ xs: 2, sm: 3 }}>Secondary email address:</Box>
 								</Grid>
-								<Grid md={9} sm={8} xs={12}>
+								<Grid item md={9} sm={8} xs={12}>
 									<Typography fontWeight={500} variant="h6">
 										demo@example.com
 									</Typography>
