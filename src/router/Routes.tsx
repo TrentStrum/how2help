@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router';
+import { Outlet, RouteObject } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '@app/App';
@@ -16,7 +16,11 @@ import {
 	RegisterPage,
 	UserCatalogPage,
 	UserProfilePage,
+	ActivityProfilePage,
+	ActivityCatalogPage,
 } from '@app/pages';
+
+import { ProtectedRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
 	{
@@ -32,48 +36,66 @@ export const routes: RouteObject[] = [
 				element: <AboutPage />,
 			},
 			{
-				path: '/cause',
-				element: <CauseCatalogPage />,
-			},
-			{
-				path: '/cause/:causeId',
-				element: <CauseProfilePage />,
-			},
-			{
 				path: '/notFound',
 				element: <Error404Page />,
-			},
-			{
-				path: '/event',
-				element: <EventCatalogPage />,
-			},
-			{
-				path: '/event/:eventId',
-				element: <EventProfilePage />,
-			},
-			{
-				path: '/login',
-				element: <LoginPage />,
-			},
-			{
-				path: '/org',
-				element: <OrganizationCatalogPage />,
-			},
-			{
-				path: '/org/:orgId',
-				element: <OrganizationProfilePage />,
 			},
 			{
 				path: '/register',
 				element: <RegisterPage />,
 			},
 			{
-				path: '/user',
-				element: <UserCatalogPage />,
+				path: '/login',
+				element: <LoginPage />,
 			},
+			// Protected routes
 			{
-				path: '/user/:userId',
-				element: <UserProfilePage />,
+				element: (
+					<ProtectedRoute>
+						<Outlet />
+					</ProtectedRoute>
+				),
+				children: [
+					{
+						path: '/cause',
+						element: <CauseCatalogPage />,
+					},
+					{
+						path: '/cause/:causeId',
+						element: <CauseProfilePage />,
+					},
+					{
+						path: '/event',
+						element: <EventCatalogPage />,
+					},
+					{
+						path: '/event/:eventId',
+						element: <EventProfilePage />,
+					},
+					{
+						path: '/activity',
+						element: <ActivityCatalogPage />,
+					},
+					{
+						path: '/activity/:activityId',
+						element: <ActivityProfilePage />,
+					},
+					{
+						path: '/org',
+						element: <OrganizationCatalogPage />,
+					},
+					{
+						path: '/org/:orgId',
+						element: <OrganizationProfilePage />,
+					},
+					{
+						path: '/user',
+						element: <UserCatalogPage />,
+					},
+					{
+						path: '/user/:userId',
+						element: <UserProfilePage />,
+					},
+				],
 			},
 		],
 	},

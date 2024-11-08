@@ -15,40 +15,73 @@ import {
 	Box,
 	FormControlLabel,
 	Checkbox,
+	Link,
 } from '@mui/material';
 import { useState } from 'react';
-// import { Link } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { z } from 'zod';
 
-// import { useLogin } from '../../app/api/entities/user/hooks/usePostUserAuth';
-import AmplifyLogo from '@assets/placeholders/logo/amplify.svg';
+import { apiClient } from '@api/utils/apiClient';
+import { useAuth } from '@app/context/AuthContext';
 import GoogleLogo from '@assets/placeholders/logo/google-icon.svg';
-import { schema } from '@lib/schema';
 
 export interface LoginInput {
 	email: string;
 	password: string;
 }
 
+const loginSchema = z.object({
+	email: z.string().min(1, 'Email is required'),
+	password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
+type LoginFormData = z.infer<typeof loginSchema>;
+
 const LoginForm = () => {
+	const navigate = useNavigate();
+	const { login } = useAuth();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+	} = useForm<LoginFormData>({
+		resolver: zodResolver(loginSchema),
+	});
 	const [showPassword, setShowPassword] = useState(false);
 
 	const handlePasswordVisibility = () => {
 		setShowPassword(!showPassword);
 	};
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm<LoginInput>({
-		resolver: zodResolver(schema),
-	});
 
-	// const { mutate: login, isPending, isError, error } = useLogin();
+	const onSubmit = async (data: LoginFormData) => {
+		try {
+			const response = await apiClient.post<
+				LoginInput,
+				{
+					data: {
+						userId: number;
+						email: string;
+						username: string;
+						token: string;
+						firstName: string;
+						lastName: string;
+						type: string;
+					};
+				}
+			>('/auth/login', data);
 
-	const onSubmit: SubmitHandler<LoginInput> = (data) => {
-		// login(data);
-		console.log(data);
+			if (!response.data) {
+				console.error('Login response missing data:', response);
+				return;
+			}
+
+			const { token, ...user } = response.data;
+			login(token, { ...user, password: '' });
+			navigate(`/user/${user.userId}`);
+		} catch (error) {
+			console.error('Login failed:', error);
+		}
 	};
 
 	return (
@@ -68,16 +101,7 @@ const LoginForm = () => {
 							sx={{ whiteSpace: 'nowrap' }}
 							variant="outlined"
 						>
-							Sign in with Google
-						</Button>
-						<Button
-							color="secondary"
-							fullWidth
-							startIcon={<img alt="Amplify" src={AmplifyLogo} style={{ height: 24, width: 24 }} />}
-							sx={{ whiteSpace: 'nowrap' }}
-							variant="outlined"
-						>
-							Sign in with Amplify
+							Sign in with Google (COMING SOON)
 						</Button>
 					</Stack>
 				</Container>
@@ -158,8 +182,14 @@ const LoginForm = () => {
 							</Box>
 						</Grid>
 						<Grid item xs={12}>
-							<Button fullWidth size="large" type="submit" variant="contained">
-								Coming soon...
+							<Button
+								disabled={isSubmitting}
+								fullWidth
+								size="large"
+								type="submit"
+								variant="contained"
+							>
+								{isSubmitting ? 'Logging in...' : 'Login'}
 							</Button>
 						</Grid>
 						{/* {isError ? (
@@ -173,14 +203,9 @@ const LoginForm = () => {
 							<Typography color="text.secondary" component="span">
 								Not a Member yet?
 							</Typography>{' '}
-							{/* <Link
-								href='#'
-								onClick={(e) => e.preventDefault()}
-								underline='hover'
-								fontWeight={500}
-							>
+							<Link href="/register" underline="hover" fontWeight={500}>
 								Sign up
-							</Link> */}
+							</Link>
 						</Grid>
 					</Grid>
 				</Container>

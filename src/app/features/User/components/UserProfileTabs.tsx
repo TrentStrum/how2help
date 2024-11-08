@@ -12,9 +12,9 @@ import { useState, ChangeEvent } from 'react';
 import { User } from '@api/entities/user/types/user.types';
 import { SettingsNotifications } from '@app/components/Settings/SettingsNotifications';
 import { SettingsSecurity } from '@app/components/Settings/SettingsSecurity';
-import { ActivityTab } from '@app/features/Activity';
 
 import { EditProfileDetails } from './EditProfileDetails';
+import { UserProfileActivityTab } from './UserProfileActivityTab';
 import { TabsPills } from '../services/styledComponents';
 
 type Props = {
@@ -78,7 +78,7 @@ const UserProfileTabs = ({ user }: Props) => {
 				)}
 			</Grid>
 			<Grid item xs={12}>
-				{currentTab === 0 ? <ActivityTab /> : null}
+				{currentTab === 0 ? <UserProfileActivityTab /> : null}
 				{currentTab === 1 ? <EditProfileDetails /> : null}
 				{currentTab === 2 ? <SettingsNotifications /> : null}
 				{currentTab === 3 ? <SettingsSecurity /> : null}

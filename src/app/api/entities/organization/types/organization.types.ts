@@ -1,13 +1,7 @@
-import { Activity } from '@api/entities/activity';
-
-import { Cause } from '../../cause';
-// import { Event } from "../../events";
-import { Reviews } from '../../reviews';
-
 export type Organization = {
 	orgId: number;
 	name: string;
-	causes: Cause[];
+	causes: number[];
 	countryServing: string[];
 	stateServing?: string;
 	cityServicing?: string;
@@ -17,8 +11,12 @@ export type Organization = {
 	status: string;
 	avatarImageUrl?: string;
 	images?: Array<{ id: number; image: string }>;
-	reviews: Reviews[];
+	reviews: number[];
 	events: number[];
-	Activities?: Activity[];
+	activities?: number[];
 	type: string;
+};
+
+export type OrgFilters = {
+	search: string;
 };

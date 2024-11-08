@@ -18,15 +18,26 @@ import { useCustomization } from '@hooks/useCustomization';
 import { useSidebarDrawer } from '@hooks/useSidebarDrawer';
 
 type Props = {
+	entity: string;
 	children: ReactNode;
 };
 
-const CatalogContainer = ({ children }: Props) => {
+const CatalogContainer = ({ entity, children }: Props) => {
 	const customization = useCustomization();
 	const parentRef = useRef<HTMLDivElement | null>(null);
 	const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 	const sidebarDrawer = useSidebarDrawer();
 	const theme = useTheme();
+
+	let callToAction = '';
+
+	if (entity === 'organizations') {
+		callToAction = 'Find organizations that meet you passions';
+	} else if (entity === 'cause') {
+		callToAction = 'Find the causes you care about';
+	} else if (entity === 'activity') {
+		callToAction = 'Find ways to take action doing what you love';
+	}
 
 	return (
 		<>
@@ -54,10 +65,7 @@ const CatalogContainer = ({ children }: Props) => {
 					</ButtonIcon>
 					<Box>
 						<Typography component="h2" noWrap sx={{ pb: 0.3 }} variant="h3">
-							Organization Catalog
-						</Typography>
-						<Typography color="text.secondary" fontWeight={400} noWrap variant="h5">
-							Browse organizations to get involved in.
+							{callToAction}
 						</Typography>
 					</Box>
 				</Stack>

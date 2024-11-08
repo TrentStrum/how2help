@@ -7,6 +7,7 @@ import ReactCountryFlag from 'react-country-flag';
 
 import { Organization } from '@api/entities/organization';
 import { Reviews } from '@api/entities/reviews';
+import { useGetReviewByOrgId } from '@api/entities/reviews/hooks/useGetReviewByOrgId';
 import { AvatarState } from '@app/components/Avatar/Avatar-Style';
 import { SoftButton } from '@app/components/Buttons/SoftButton';
 
@@ -15,9 +16,14 @@ type Props = {
 };
 
 const OrgReviewList = ({ org }: Props) => {
+	const { data: reviews, isPending, isError, error } = useGetReviewByOrgId(org.orgId.toString());
+
+	if (isPending) return <Typography variant="body2">Loading...</Typography>;
+	if (isError) return <Typography variant="body2">{error.message}</Typography>;
+
 	return (
 		<List>
-			{org.reviews.map((review: Reviews) => (
+			{reviews.map((review: Reviews) => (
 				<ListItem
 					key={review.reviewId}
 					sx={{

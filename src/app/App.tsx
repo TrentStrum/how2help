@@ -11,6 +11,7 @@ import { queryClient } from '@api-utils/queryClient';
 import { CustomizationConsumer, CustomizationProvider } from '@themes/customization';
 
 import { createTheme } from '../lib/Themes';
+import { AuthProvider } from './context/AuthContext';
 import { Appbar } from './features/AppBar/AppBar';
 import { MobileMenu } from './features/AppBar/mobileMenu';
 
@@ -56,29 +57,31 @@ const App = () => {
 	return (
 		<HelmetProvider context={helmetContext}>
 			<QueryClientProvider client={queryClient}>
-				<CustomizationProvider>
-					<CustomizationConsumer>
-						{(settings) => {
-							if (!settings.isInitialized) {
-								// return null
-							}
-							const theme = createTheme({
-								colorPreset: settings.colorPreset,
-								direction: settings.direction,
-								paletteMode: settings.paletteMode,
-							});
+				<AuthProvider>
+					<CustomizationProvider>
+						<CustomizationConsumer>
+							{(settings) => {
+								if (!settings.isInitialized) {
+									// return null
+								}
+								const theme = createTheme({
+									colorPreset: settings.colorPreset,
+									direction: settings.direction,
+									paletteMode: settings.paletteMode,
+								});
 
-							return (
-								<ThemeProvider theme={theme}>
-									<CssBaseline />
-									<ReactQueryDevtools initialIsOpen={true} />
-									<Container sx={{ maxWidth: 'xl' }}>{page}</Container>
-									<ToastContainer />
-								</ThemeProvider>
-							);
-						}}
-					</CustomizationConsumer>
-				</CustomizationProvider>
+								return (
+									<ThemeProvider theme={theme}>
+										<CssBaseline />
+										<ReactQueryDevtools initialIsOpen={true} />
+										<Container sx={{ maxWidth: 'xl' }}>{page}</Container>
+										<ToastContainer />
+									</ThemeProvider>
+								);
+							}}
+						</CustomizationConsumer>
+					</CustomizationProvider>
+				</AuthProvider>
 			</QueryClientProvider>
 		</HelmetProvider>
 	);

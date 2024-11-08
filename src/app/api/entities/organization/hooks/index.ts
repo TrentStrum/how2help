@@ -5,6 +5,7 @@ export * from './useGetOrgs';
 
 // Update
 export * from './useUpdateOrg';
+export * from './useToggleFavoriteOrgs';
 
 // Create
 export * from './useCreateOrg';

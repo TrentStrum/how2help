@@ -30,7 +30,7 @@ const OrgProfile = () => {
 	let displayTab: ReactNode;
 
 	if (tabValue === '0' && org) {
-		displayTab = <OrgActivitySearch activities={org.Activities!} />;
+		displayTab = <OrgActivitySearch orgId={org.orgId.toString()} />;
 	} else if (tabValue === '1' && org) {
 		displayTab = (
 			<ProfileCalendar entity={org} entityId={org.orgId.toString()} entityType="Organization" />

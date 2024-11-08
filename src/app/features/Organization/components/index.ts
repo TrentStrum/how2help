@@ -6,3 +6,4 @@ export * from './OrgCard';
 export * from './OrgCatalog';
 export * from './OrgProfile';
 export * from './OrgProfileDescription';
+export * from './OrgProfileActivityTab';

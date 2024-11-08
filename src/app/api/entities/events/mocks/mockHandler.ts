@@ -1,28 +1,28 @@
 import { HttpResponse, PathParams, http } from 'msw';
 
-import { getPaginationParams, creatPaginatedResponse } from '@api/helpers/PaginationHelper';
+import { getPaginationParams, createPaginatedResponse } from '@api/helpers/PaginationHelper';
 import { H2hPaginatedResponse } from '@api/utils/types';
 
-import { Event, mockEvents } from '..';
-import { mockAttendee } from './attendeeMocks';
+import { Event, mockEventAttendees, mockEvents } from '..';
 import { mockOrgs } from '../../organization';
 
 const currentDate = new Date().toJSON();
 
 export const handlers = [
+	// useGetAllEvents
 	http.get('/event', ({ request }) => {
 		try {
 			const url = new URL(request.url);
 			const paginationParams = getPaginationParams(url);
 
-			const paginatedResponse = creatPaginatedResponse(mockEvents, paginationParams);
-			console.log('i am handler');
+			const paginatedResponse = createPaginatedResponse(mockEvents, paginationParams);
 			return HttpResponse.json(paginatedResponse, { status: 200 });
 		} catch (error) {
 			return HttpResponse.json({ error: 'Internal server error', status: 500 });
 		}
 	}),
 
+	// useGetEventById
 	http.get('/event/:eventId', ({ params }) => {
 		const { eventId } = params;
 
@@ -34,6 +34,7 @@ export const handlers = [
 		return HttpResponse.json(mockEvents.find((u) => u.eventId === numId));
 	}),
 
+	// useGet
 	http.get<PathParams>('/events/org', ({ request }) => {
 		const url = new URL(request.url);
 
@@ -43,18 +44,17 @@ export const handlers = [
 		const hostedEvents = mockEvents.filter(
 			(event) => event.hostType === hostType && event.hostId === hostId,
 		);
-		console.log(hostedEvents.length);
 
 		try {
 			const paginationParams = getPaginationParams(url);
-
-			const paginatedResponse = creatPaginatedResponse(hostedEvents, paginationParams);
-			console.log(paginatedResponse);
+			const paginatedResponse = createPaginatedResponse(hostedEvents, paginationParams);
 			return HttpResponse.json(paginatedResponse, { status: 200 });
 		} catch (error) {
 			return HttpResponse.json({ error: 'Internal server error', status: 500 });
 		}
 	}),
+
+	// useGet
 	http.get('/events/user', () => {
 		const urlParams = new URLSearchParams(document.location.search);
 
@@ -62,7 +62,7 @@ export const handlers = [
 		const pageNumber = parseInt(urlParams.get('page') || '1', 10);
 		const pageSize = parseInt(urlParams.get('limit') || '8', 10);
 
-		const userAttendingEvents = mockAttendee
+		const userAttendingEvents = mockEventAttendees
 			.filter((attendee) => attendee.userId === userId)
 			.flatMap((attendee) => {
 				const event = mockEvents.find((event) => event.eventId === attendee.eventId);
@@ -91,6 +91,7 @@ export const handlers = [
 		});
 	}),
 
+	// useGet
 	http.get('/org/pastEvents/by-org/:orgId', ({ params }) => {
 		const { orgId } = params;
 
@@ -116,6 +117,8 @@ export const handlers = [
 
 		return HttpResponse.json(getPastEventsByOrgId(numId));
 	}),
+
+	// useGet
 	http.get('/org/activeEvents/by-org/:orgId', ({ params }) => {
 		const { orgId } = params;
 
@@ -143,33 +146,3 @@ export const handlers = [
 		return HttpResponse.json(getActiveEventsByOrgId(numId));
 	}),
 ];
-
-// let host;
-// switch (event?.hostType) {
-// 	case 'User':
-// 		host = mockUsers.find((u) => u.userId === event.hostId);
-// 		break;
-// 	case 'Organization':
-// 		host = mockOrgs.find((o) => o.orgId === event.hostId);
-// 		break;
-// 	case 'Cause':
-// 		host = mockCause.find((c) => c.causeId === event.hostId);
-// 		break;
-// 	default:
-// 		return HttpResponse.json('Error: Invalid host type', { status: 400 });
-// }
-
-// if (!host) {
-// 	return HttpResponse.json('Error: Host not found', { status: 404 });
-// }
-
-// const responseBody = {
-// 	results: paginatedEvents,
-// 	total,
-// 	pageNumber,
-// 	pageSize,
-// 	status,
-// 	statusText,
-// };
-
-// return HttpResponse.json<H2hPaginatedResponse<Event>>(responseBody, { status: 200 });

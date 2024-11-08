@@ -3,7 +3,7 @@ import { Box, Container, Grid } from '@mui/material';
 
 import { User } from '@api/entities/user';
 import { MyCards } from '@app/components/Cards/MyCards';
-import { RecentActivity } from '@app/features/Activity/components/RecentActivity';
+import { UserProfileRecentActivity } from '@app/features/User/components/UserProfileRecentActivity';
 
 import { PopularTags, ProfileCover, UserAddresses, UserProfileTabs } from '.';
 
@@ -21,7 +21,7 @@ const UserProfileContainer = ({ user }: Props) => {
 							<ProfileCover user={user} />
 						</Grid>
 						<Grid item md={4} xs={12}>
-							<RecentActivity />
+							<UserProfileRecentActivity />
 						</Grid>
 						<Grid item md={8} xs={12}>
 							<Feed />

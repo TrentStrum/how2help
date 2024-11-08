@@ -24,15 +24,26 @@ import { formatDistance, subDays } from 'date-fns';
 import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { Activity } from '@api/entities/activity';
+import { useGetActivitiesByEntityId } from '@api/entities/activity/hooks/useGetActivitiesByEntityId';
 import { SearchContained } from '@app/components/Searchbar/SearchContained';
 
 type Props = {
-	activities?: Activity[];
+	orgId: string;
 };
 
-const OrgActivitySearch = ({ activities }: Props) => {
+const OrgActivitySearch = ({ orgId }: Props) => {
 	const theme = useTheme();
+	const [currentPage, setCurrentPage] = useState(1);
+	const [limit, setLimit] = useState<number>(10);
+	const { data, isPending, isError, error } = useGetActivitiesByEntityId(
+		orgId,
+		'Organization',
+		currentPage,
+		limit,
+	);
+
+	const actionRef1 = useRef<any>(null);
+	const [openPeriod, setOpenMenuPeriod] = useState<boolean>(false);
 
 	const handleDelete = () => {
 		toast.error('You clicked on delete!');
@@ -60,10 +71,12 @@ const OrgActivitySearch = ({ activities }: Props) => {
 			text: 'Oldest activities first',
 		},
 	];
-
-	const actionRef1 = useRef<any>(null);
-	const [openPeriod, setOpenMenuPeriod] = useState<boolean>(false);
 	const [period, setPeriod] = useState<string>(periods[0].text);
+
+	if (isPending) return <Typography variant="body2">Loading...</Typography>;
+	if (isError) return <Typography variant="body2">{error.message}</Typography>;
+
+	const activities = data?.results || [];
 
 	return (
 		<>
@@ -178,9 +191,11 @@ const OrgActivitySearch = ({ activities }: Props) => {
 							>
 								Ensure optimal performance and security by upgrading the hosting platform.
 							</Typography>
-							<Button size="small" variant="contained">
-								View task
-							</Button>
+							<Link href={`/activity/${activity.activityId}`}>
+								<Button size="small" variant="contained">
+									View task
+								</Button>
+							</Link>
 							<Divider
 								sx={{
 									my: 2,

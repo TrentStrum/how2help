@@ -11,7 +11,6 @@ const useGetAllActiveEvents = (
 	limitCount: number,
 	options?: QueryOptions<GetEventResponse, AxiosError<ErrorResponse>>,
 ) => {
-	console.log('i am hook');
 	return useQuery({
 		queryKey: ['event', { page: currentPage, limit: limitCount }],
 		queryFn: async () => {

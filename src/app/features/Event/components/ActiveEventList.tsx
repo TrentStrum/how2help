@@ -15,8 +15,8 @@ const ActiveEventList = ({ entityId }: Props) => {
 	const [limit, setLimit] = useState<number>(10);
 
 	const { data, isPending, isError, error } = useGetActiveEventsByEntityId(
-		'Organization',
 		entityId,
+		'Organization',
 		currentPage,
 		limit,
 	);

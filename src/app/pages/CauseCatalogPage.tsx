@@ -3,7 +3,7 @@ import { CatalogContainer } from '@app/layouts/CatalogContainer';
 
 const CauseCatalogPage = () => {
 	return (
-		<CatalogContainer>
+		<CatalogContainer entity="cause">
 			<CauseCatalog />
 		</CatalogContainer>
 	);

@@ -6,3 +6,5 @@ export * from './PopularTags';
 export * from './UserProfileTabs';
 export * from './UserCard';
 export * from '././UserCatalogDisplay';
+export * from './UserProfileActivityTab';
+export * from './UserProfileRecentActivity';

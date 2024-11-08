@@ -5,7 +5,7 @@ import { Card, CardHeader, Divider, Box, Typography } from '@mui/material';
 
 import { AvatarState } from '@app/components/Avatar/Avatar-Style';
 
-const RecentActivity = () => {
+const UserProfileRecentActivity = () => {
 	return (
 		<Card>
 			<CardHeader title="Recent Activity" />
@@ -112,4 +112,4 @@ const RecentActivity = () => {
 	);
 };
 
-export { RecentActivity };
+export { UserProfileRecentActivity };

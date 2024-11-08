@@ -1,7 +1,7 @@
 // Auth
 export * from './LandingPage';
 export * from './LoginPage';
-export * from './RegisterPage';
+export * from '../features/Auth/components/RegisterPage';
 
 // Cause
 export * from './CauseCatalogPage';
@@ -22,3 +22,7 @@ export * from './OrganizationProfilePage';
 // User
 export * from './UserCatalogPage';
 export * from './UserProfilePage';
+
+// Activity
+export * from './ActivityCatalogPage';
+export * from './ActivityProfilePage';

@@ -18,7 +18,7 @@ import {
 	Typography,
 } from '@mui/material';
 
-const ActivityTab = () => {
+const UserProfileActivityTab = () => {
 	return (
 		<Card>
 			<CardHeader
@@ -137,4 +137,4 @@ const ActivityTab = () => {
 	);
 };
 
-export { ActivityTab };
+export { UserProfileActivityTab };

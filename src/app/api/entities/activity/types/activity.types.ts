@@ -1,3 +1,5 @@
+import { H2hPaginatedResponse } from '@api/utils/types';
+
 export type Activity = {
 	activityId: number;
 	name: string;
@@ -5,9 +7,12 @@ export type Activity = {
 	postedDate: string;
 	startDate: string;
 	endDate: string;
-	causeIds: number[];
-	organizationIds?: number[];
+	hostId: number;
+	hostType: string;
+	causeIds?: number[];
 	avatarImageUrl?: string;
 	status: string;
 	type: string;
 };
+
+export type GetActivityResponse = H2hPaginatedResponse<Activity>;

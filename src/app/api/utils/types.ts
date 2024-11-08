@@ -14,6 +14,7 @@ export type H2hPaginatedResponse<TResultType> = {
 	statusText: string;
 };
 export type PaginationParams<> = {
+	searchParams?: string;
 	pageNumber: number;
 	pageSize: number;
 };

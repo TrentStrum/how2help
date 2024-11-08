@@ -1,6 +1,4 @@
 import { H2hPaginatedResponse } from '../../../utils/types';
-import { Cause } from '../../cause/types/cause.types';
-import { Organization } from '../../organization/types/organization.types';
 
 export type User = {
 	// includes(queryLower: string): unknown;
@@ -17,16 +15,35 @@ export type User = {
 	State?: string;
 	Country?: string;
 	role?: string;
-	favoriteOrgs?: Organization[];
-	favoriteCauses?: Cause[];
+	favoriteOrgs?: number[];
+	favoriteCauses?: number[];
 	coverImageUrl?: string;
 	avatarImageUrl?: string;
 	type: string;
 };
 
-export type LoginData = {
-	userId: number;
-	userToken: string;
+export type LoginCredentials = {
+	email: string;
+	password: string;
+};
+
+export type AuthResponse = {
+	user: User;
+	token: string;
+};
+
+export type RegisterCredentials = {
+	email: string;
+	password: string;
+	username: string;
+	firstName: string;
+	lastName: string;
+	phone?: string;
+	streetAddress?: string;
+	altAddress?: string;
+	city?: string;
+	state?: string;
+	country?: string;
 };
 
 export type GetUserResponse = H2hPaginatedResponse<User>;

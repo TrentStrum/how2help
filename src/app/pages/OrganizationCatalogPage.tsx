@@ -3,7 +3,7 @@ import { CatalogContainer } from '@app/layouts/CatalogContainer';
 
 const OrganizationCatalogPage = () => {
 	return (
-		<CatalogContainer>
+		<CatalogContainer entity="organizations">
 			<OrgCatalog />
 		</CatalogContainer>
 	);

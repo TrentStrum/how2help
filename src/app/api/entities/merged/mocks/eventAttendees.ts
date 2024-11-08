@@ -1,6 +1,6 @@
 import { Attendee } from '../types/attendee.types';
 
-export const mockAttendee: Attendee[] = [
+export const mockEventAttendees: Attendee[] = [
 	{
 		userId: 1,
 		eventId: 1,

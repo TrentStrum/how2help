@@ -37,3 +37,19 @@ export const eventKeys = {
 	details: () => [...imageKeys.all, 'detail'] as const,
 	detail: (imageId: number) => [...eventKeys.details(), imageId] as const,
 };
+
+export const reviewKeys = {
+	all: ['event'] as const,
+	lists: () => [...reviewKeys.all, 'list'] as const,
+	list: (filters: string) => [...reviewKeys.lists(), { filters }] as const,
+	details: () => [...reviewKeys.all, 'detail'] as const,
+	detail: (imageId: number) => [...reviewKeys.details(), imageId] as const,
+};
+
+export const activityKeys = {
+	all: ['activity'] as const,
+	lists: () => [...activityKeys.all, 'list'] as const,
+	list: (filters: string) => [...activityKeys.lists(), { filters }] as const,
+	details: () => [...activityKeys.all, 'detail'] as const,
+	detail: (imageId: number) => [...activityKeys.details(), imageId] as const,
+};
