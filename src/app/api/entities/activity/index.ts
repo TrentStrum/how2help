@@ -1,6 +1,9 @@
 // Hooks
-export * from './hooks/useGetActivityById';
-export * from './hooks/useGetActivitiesByEntityId';
+export * from './hooks';
+
+// Mocks
+export * from './mocks/mockHandler';
+export * from './mocks/mocks';
 
 // Types
 export * from './types/activity.types';

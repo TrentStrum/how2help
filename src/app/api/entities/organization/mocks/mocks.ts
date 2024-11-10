@@ -4,7 +4,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 1,
 		name: 'Stand In Pride',
-		causes: [1],
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+		causes: [1, 2],
 		countryServing: ['USA', 'Canada', 'Germany', 'France', 'UK', 'Mexico', 'Argentina'],
 		stateServing: 'Many',
 		cityServicing: 'Many',
@@ -22,6 +25,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 2,
 		name: 'UNRWA',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [],
 		countryServing: ['Palestine'],
 		stateServing: '',
@@ -40,6 +47,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 3,
 		name: "Palestine Children's Relief Fund",
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [4],
 		countryServing: ['Palestine'],
 		stateServing: '',
@@ -58,6 +69,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 4,
 		name: 'The Trevor Project',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [1, 2],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -76,6 +91,9 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 5,
 		name: 'Sandy Hook Promise',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -94,6 +112,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 6,
 		name: 'Womens March',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -112,6 +134,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 7,
 		name: 'Center for Reproductive Rights',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -130,6 +156,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 8,
 		name: 'Everytown',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -148,6 +178,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 9,
 		name: 'Org 9',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [1],
 		countryServing: ['USA', 'Canada', 'Germany', 'France', 'UK', 'Mexico', 'Argentina'],
 		stateServing: 'Many',
@@ -166,6 +200,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 10,
 		name: 'Org 10',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [],
 		countryServing: ['Palestine'],
 		stateServing: '',
@@ -184,6 +222,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 11,
 		name: 'Org 11',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [4],
 		countryServing: ['Palestine'],
 		stateServing: '',
@@ -202,6 +244,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 12,
 		name: 'Org 12',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [1, 2],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -220,6 +266,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 13,
 		name: 'Org 13',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -238,6 +288,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 14,
 		name: 'Org 14',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -256,6 +310,8 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 15,
 		name: 'Org 15',
+		description: 'Org 15',
+		longDescription: 'Org 15',
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -274,6 +330,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 16,
 		name: 'Org 16',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -292,6 +352,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 17,
 		name: 'Org 17',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -310,6 +374,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 18,
 		name: 'Org 18',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -328,6 +396,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 19,
 		name: 'Org 19',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -346,6 +418,10 @@ export const mockOrgs: Organization[] = [
 	{
 		orgId: 20,
 		name: 'Org 20',
+		description: 'Lorem ipsum dolor sit amet',
+		longDescription:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',

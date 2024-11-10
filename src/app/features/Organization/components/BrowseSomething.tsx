@@ -3,6 +3,11 @@ import { Box, Typography, Button } from '@mui/material';
 
 import { AvatarState } from '@app/components/Avatar/Avatar-Style';
 
+// Move these to a config file later
+const COURSE_COUNT = 500;
+const TITLE = 'Start learning today!';
+const SUBTITLE = `Browse over ${COURSE_COUNT} quality courses to start learning something useful today!`;
+
 const BrowseSomething = () => {
 	return (
 		<Box
@@ -23,7 +28,7 @@ const BrowseSomething = () => {
 			>
 				<NotificationsActiveTwoToneIcon />
 			</AvatarState>
-			<Typography variant="h4">Start learning today!</Typography>
+			<Typography variant="h4">{TITLE}</Typography>
 			<Typography
 				color="text.secondary"
 				fontWeight={400}
@@ -33,7 +38,7 @@ const BrowseSomething = () => {
 				}}
 				variant="h5"
 			>
-				Browse over 500 quality courses to start learning something useful today!
+				{SUBTITLE}
 			</Typography>
 			<Button
 				color="warning"

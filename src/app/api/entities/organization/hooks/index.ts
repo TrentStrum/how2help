@@ -2,13 +2,15 @@
 export * from './useGetOrgByCause';
 export * from './useGetOrgById';
 export * from './useGetOrgs';
+export * from './useGetOrgFavoriteStatus';
 
 // Update
 export * from './useUpdateOrg';
-export * from './useToggleFavoriteOrgs';
 
 // Create
 export * from './useCreateOrg';
 
 // Delete
 export * from './useDeleteOrg';
+// Toggle
+export * from './useToggleFavoriteOrgs';

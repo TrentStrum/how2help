@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { ButtonIcon } from '../../features/User/services/styledComponents';
-import { ListItemButtonMod } from '../Buttons/ListItemButtton';
+import { ListItemButtonMod } from '../Buttons/listItemButton-Style';
 
 interface Item {
 	id: number;

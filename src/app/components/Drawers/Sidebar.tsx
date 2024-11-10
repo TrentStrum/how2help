@@ -1,8 +1,7 @@
 import { alpha, Drawer, SwipeableDrawer, useMediaQuery, Theme, useTheme } from '@mui/material';
 
-import { Scrollbar } from '@app/components/Scrollbar/ScrollbarWrapper-Style';
-
 import { FilterContent } from '../Filter/FilterContent';
+import { Scrollbar } from '../Scrollbar';
 
 type SidebarProps = {
 	parentContainer?: HTMLDivElement | null;

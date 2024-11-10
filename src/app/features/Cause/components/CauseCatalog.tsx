@@ -13,13 +13,13 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { useGetCauseAll } from '@api/entities/cause';
-import { CardActionAreaWrapper } from '@app/components/Cards/CardActionAreaWrapper';
+import { useGetAllCauses } from '@api/entities/cause';
+import { CardActionAreaWrapper } from '@app/components/Cards';
 
 import { LinkButton } from '../../../components/Buttons/LinkButton';
 
 const CauseCatalog = () => {
-	const { data: causes, isLoading, isError } = useGetCauseAll();
+	const { data: causes, isLoading, isError } = useGetAllCauses();
 
 	if (isLoading) return <Typography variant="body2">Loading...</Typography>;
 	if (isError) return <Typography variant="body2">Error...</Typography>;

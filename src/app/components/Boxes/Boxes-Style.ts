@@ -1,5 +1,32 @@
 import { alpha, Box, styled } from '@mui/material';
 
+export const BoxComposedContent = styled(Box)(() => ({
+	position: 'relative',
+	zIndex: 7,
+}));
+
+export const BoxComposedImage = styled(Box)(() => ({
+	position: 'absolute',
+	left: 0,
+	top: 0,
+	zIndex: 5,
+	filter: 'grayscale(50%)',
+	backgroundSize: 'cover',
+	height: '100%',
+	width: '100%',
+	borderRadius: 'inherit',
+}));
+
+export const BoxComposedBg = styled(Box)(() => ({
+	position: 'absolute',
+	left: 0,
+	top: 0,
+	zIndex: 6,
+	height: '100%',
+	width: '100%',
+	borderRadius: 'inherit',
+}));
+
 export const BoxItemWrapper = styled(Box)(({ theme }) => ({
 	borderRadius: theme.shape.borderRadius,
 	background:
@@ -39,14 +66,4 @@ export const BoxItemWrapper = styled(Box)(({ theme }) => ({
 		background: theme.palette.warning.main,
 		color: theme.palette.warning.main,
 	},
-}));
-
-export const DotLegend = styled('span')(({ theme }) => ({
-	borderRadius: theme.spacing(1.5),
-	width: theme.spacing(1.5),
-	height: theme.spacing(1.5),
-	display: 'inline-block',
-	marginRight: theme.spacing(1),
-	marginTop: theme.spacing(-0.1),
-	background: theme.palette.success.main,
 }));

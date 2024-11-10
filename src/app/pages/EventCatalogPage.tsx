@@ -3,7 +3,7 @@ import { CatalogContainer } from '@app/layouts';
 
 const EventCatalogPage = () => {
 	return (
-		<CatalogContainer>
+		<CatalogContainer entity="event">
 			<EventCatalog />
 		</CatalogContainer>
 	);

@@ -12,10 +12,10 @@ import {
 } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import React, { ReactElement, cloneElement, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { ReactElement, cloneElement } from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
-import { generateThemeColors } from '@themes/colors';
+import { useAuth } from '@app/context/AuthContext';
 
 import { UserMenu } from './userMenu';
 
@@ -33,25 +33,41 @@ function ElevationScroll(props: AppbarProps) {
 
 	return cloneElement(children, {
 		elevation: trigger ? 4 : 0,
-		style: {
+		sx: {
 			backgroundColor: trigger ? theme.palette.primary.main : 'transparent',
-			transition: trigger ? '0.3s' : '0.5s',
-			color: trigger ? generateThemeColors().light.peach.main : theme.palette.primary.main,
+			transition: 'all 0.3s ease-in-out',
+			'& .MuiTypography-root': {
+				color: trigger ? theme.palette.primary.contrastText : theme.palette.primary.main,
+				transition: 'color 0.3s ease-in-out',
+			},
+			'& .MuiTab-root': {
+				color: trigger ? theme.palette.primary.contrastText : theme.palette.primary.main,
+				transition: 'color 0.3s ease-in-out',
+			},
+			'& .MuiButton-root': {
+				color: trigger ? theme.palette.primary.contrastText : theme.palette.primary.main,
+				transition: 'color 0.3s ease-in-out',
+				'&:hover': {
+					backgroundColor: trigger ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.04)',
+				},
+			},
 		},
 	});
 }
 
 const Appbar = () => {
-	// const [ isloggedIn, setIsLoggedIn ] = useState<boolean>(false);
-	const isloggedIn = false;
-
-	const [value, setValue] = useState<string>('organizations');
-
-	function handleChange(event: React.SyntheticEvent, newValue: string) {
-		setValue(newValue);
-	}
-
+	const { isAuthenticated } = useAuth();
+	const location = useLocation();
 	const navigate = useNavigate();
+
+	const getActiveTab = () => {
+		const path = location.pathname.split('/')[1];
+		if (!path) {
+			return false;
+		}
+		return `/${path}`;
+	};
+
 	const routeChange = () => {
 		const path = '/login';
 		navigate(path);
@@ -70,7 +86,6 @@ const Appbar = () => {
 										<Box component={Link} style={{ textDecoration: 'none' }} to="/">
 											<Typography
 												color="primary"
-												// onClick={handleLogoClick}
 												sx={{ flexGrow: 1 }}
 												textAlign="center"
 												variant="h2"
@@ -82,34 +97,40 @@ const Appbar = () => {
 									<Grid alignContent="center" item justifyContent="center" xs={8}>
 										<Box>
 											<Tabs
-												aria-label="secondary tabs example"
+												aria-label="navigation tabs"
 												centered
 												indicatorColor="secondary"
-												onChange={handleChange}
 												textColor="primary"
-												value={value}
+												value={getActiveTab()}
 											>
+												<Tab component={NavLink} label="Organizations" to="/org" value="/org" />
+												<Tab component={NavLink} label="Users" to="/user" value="/user" />
+												<Tab component={NavLink} label="Causes" to="/cause" value="/cause" />
+												<Tab component={NavLink} label="Events" to="/event" value="/event" />
 												<Tab
 													component={NavLink}
-													label="Organizations"
-													to="/org"
-													value="organizations"
+													label="Activity"
+													to="/activity"
+													value="/activity"
 												/>
-												<Tab component={NavLink} label="Users" to="/user" value="user" />
-												<Tab component={NavLink} label="Causes" to="/cause" value="cause" />
-												<Tab component={NavLink} label="Events" to="/event" value="event" />
-												<Tab component={NavLink} label="Activity" to="/activity" value="activity" />
-												<Tab component={NavLink} label="404" to="/notFound" value="error" />
-												{/* <Tab component={NavLink} label="Test" to="/test" value="test" /> */}
+												<Tab component={NavLink} label="404" to="/notFound" value="/notFound" />
 											</Tabs>
 										</Box>
 									</Grid>
 									<Grid alignContent="center" item justifyContent="center" xs={2}>
 										<Box textAlign="center">
-											{isloggedIn ? (
-												<UserMenu /> // menu displayed if logged in
+											{isAuthenticated ? (
+												<UserMenu />
 											) : (
-												<Button onClick={routeChange} sx={{ color: '#333' }}>
+												<Button
+													onClick={routeChange}
+													sx={{
+														color: (theme) => theme.palette.primary.contrastText,
+														'&:hover': {
+															backgroundColor: 'rgba(255, 255, 255, 0.1)',
+														},
+													}}
+												>
 													Login
 												</Button>
 											)}

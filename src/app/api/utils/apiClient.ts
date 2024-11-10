@@ -21,33 +21,18 @@ axios.interceptors.request.use(
 	},
 );
 
-// Add auth header interceptor
-axios.interceptors.request.use(
-	(config) => {
-		const token = localStorage.getItem('token');
-
-		if (token) {
-			config.headers.Authorization = `Bearer ${token}`;
-		}
-		return config;
-	},
-	(error) => {
-		return Promise.reject(error);
-	},
-);
-
 // Response interceptor
 axios.interceptors.response.use(
-	(response) => response,
+	(response) => {
+		return response;
+	},
 	async (error) => {
 		const originalRequest = error.config;
 
-		// If error is 401 and we haven't tried to refresh token yet
-		if (error.response.status === 401 && !originalRequest._retry) {
+		if (error.response?.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true;
 
 			try {
-				// Call your refresh token endpoint
 				const response = await apiClient.post<unknown, AxiosResponse<{ token: string }>>(
 					'/auth/refresh-token',
 				);

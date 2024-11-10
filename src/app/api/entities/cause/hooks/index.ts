@@ -1,7 +1,6 @@
 // Get
 export * from './useGetCauseById';
-export * from './useGetCauses';
-export * from './useGetCausesAll';
+export * from './useGetAllCauses';
 
 // Update
 export * from './useUpdateCause';

@@ -1,63 +1,11 @@
 import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
-import {
-	alpha,
-	Box,
-	Container,
-	Grid,
-	IconButton,
-	Paper,
-	styled,
-	Tooltip,
-	Typography,
-} from '@mui/material';
+import { Box, Container, Grid, Paper, Tooltip, Typography } from '@mui/material';
+
+import { BoxComposedBg, BoxComposedImage, BoxComposedContent } from '@app/components/Boxes';
+import { RegisterIconButtonWrapper } from '@app/components/Buttons';
+import { RegisterCardActions } from '@app/components/Cards';
 
 import { RegisterForm } from './RegisterForm';
-
-const CardActions = styled(Box)(({ theme }) => ({
-	position: 'absolute',
-	right: theme.spacing(1),
-	top: theme.spacing(1),
-	zIndex: 12,
-}));
-
-const BoxComposedContent = styled(Box)(() => ({
-	position: 'relative',
-	zIndex: 7,
-}));
-
-const BoxComposedImage = styled(Box)(() => ({
-	position: 'absolute',
-	left: 0,
-	top: 0,
-	zIndex: 5,
-	filter: 'grayscale(50%)',
-	backgroundSize: 'cover',
-	height: '100%',
-	width: '100%',
-	borderRadius: 'inherit',
-}));
-
-const BoxComposedBg = styled(Box)(() => ({
-	position: 'absolute',
-	left: 0,
-	top: 0,
-	zIndex: 6,
-	height: '100%',
-	width: '100%',
-	borderRadius: 'inherit',
-}));
-
-const IconButtonWrapper = styled(IconButton)(({ theme }) => ({
-	background: 'transparent',
-	transition: theme.transitions.create(['all']),
-	color: alpha(theme.palette.common.white, 0.7),
-	borderRadius: '50px',
-
-	'&:hover': {
-		background: 'transparent',
-		color: theme.palette.common.white,
-	},
-}));
 
 const RegisterPage = () => {
 	return (
@@ -74,17 +22,17 @@ const RegisterPage = () => {
 						background: 'linear-gradient(to right, #24c6dc, #514a9d);',
 					}}
 				>
-					<CardActions alignItems="center" display="flex">
+					<RegisterCardActions alignItems="center" display="flex">
 						<Tooltip arrow placement="left" title="Get in touch with support">
-							<IconButtonWrapper
+							<RegisterIconButtonWrapper
 								sx={{
 									ml: 0.5,
 								}}
 							>
 								<HelpTwoToneIcon fontSize="small" />
-							</IconButtonWrapper>
+							</RegisterIconButtonWrapper>
 						</Tooltip>
-					</CardActions>
+					</RegisterCardActions>
 					<BoxComposedBg
 						sx={{
 							opacity: 0.4,

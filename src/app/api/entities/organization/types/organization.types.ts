@@ -1,6 +1,8 @@
 export type Organization = {
 	orgId: number;
 	name: string;
+	description: string;
+	longDescription: string;
 	causes: number[];
 	countryServing: string[];
 	stateServing?: string;

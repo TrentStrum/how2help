@@ -8,36 +8,43 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import dayjs from 'dayjs';
+import { useState } from 'react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// import { useGetActiveEventsByEntityId } from '@api/entities/events';
 import { Cause } from '@api/entities/cause';
 import { useGetActiveEventsByEntityId } from '@api/entities/events/hooks/useGetActiveEventsByEntityId';
 import { Organization } from '@api/entities/organization';
 import { User } from '@api/entities/user';
-import { SwipeIndicator, CardCalendarWrapper } from '@app/components/Cards/CardCalendarWrapper';
+import { CardCalendarWrapper } from '@app/components/Cards';
+import { SwipeIndicator } from '@app/components/SwipeIndicator-Styles';
 
 import { ProfileCalendarCard } from './ProfileCalendarCard';
 
 type Props = {
 	entityType: string;
 	entityId: string;
-	entity: User | Organization | Cause;
+	entity: Organization | Cause | User;
 };
 
 const ProfileCalendar = ({ entityId, entityType, entity }: Props) => {
+	console.log(entityId);
+	console.log(entityType);
+
+	const [currentPage, setCurrentPage] = useState(1);
+	const [limit, setLimit] = useState<number>(10);
 	const { data, isPending, isError, error } = useGetActiveEventsByEntityId(
 		entityId,
 		entityType,
-		0,
-		10,
+		currentPage,
+		limit,
 	);
 
 	if (isPending) return <Typography variant="body2">Loading...</Typography>;
 	if (isError) return <Typography variant="body2">{error.message}</Typography>;
 
 	const events = data.results;
+	console.log(events);
 
 	return (
 		<>

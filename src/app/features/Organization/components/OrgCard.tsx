@@ -1,24 +1,18 @@
-import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
-import IosShareTwoToneIcon from '@mui/icons-material/IosShareTwoTone';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ShareIcon from '@mui/icons-material/Share';
 import {
-	Stack,
 	Card,
 	CardContent,
-	CardActions,
 	Typography,
+	IconButton,
+	Stack,
 	Rating,
-	alpha,
-	Divider,
-	Grid,
-	Tooltip,
+	CardActions,
 } from '@mui/material';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useGetActivitiesByEntityId } from '@api/entities/activity';
-import { Organization, useToggleFavoriteOrg } from '@api/entities/organization';
-import { LinkButton } from '@components/Buttons/LinkButton';
-import { SoftButton } from '@components/Buttons/SoftButton';
+import { Organization } from '@api/entities/organization';
+import { LinkButton } from '@app/components/Buttons/LinkButton';
 import { CardImage } from '@components/Cards/CardImage';
 
 type Props = {
@@ -26,91 +20,56 @@ type Props = {
 };
 
 const OrgCard = ({ org }: Props) => {
-	// const { data: favoriteStatus } = useOrgFavoriteStatus(org.orgId);
-	// const [selected, setSelected] = useState(favoriteStatus?.isFavorite || false);
-	// const { mutate: toggleFavorite } = useToggleFavoriteOrg(org.orgId.toString());
-	const { data, isPending, isError, error } = useGetActivitiesByEntityId(
-		org.orgId.toString(),
-		'Organization',
-		0,
-		0,
-	);
-
-	if (isPending) return <Typography variant="body2">Loading...</Typography>;
-	if (isError) return <Typography variant="body2">{error.message}</Typography>;
-
-	const activities = data?.results || [];
-
-	const openOpportunities = activities.filter((activity) => activity.status === 'active').length;
+	if (!org?.orgId || !org?.name) {
+		return null;
+	}
 
 	return (
-		<Stack
-			direction={{ xs: 'column', sm: 'row' }}
-			spacing={{ xs: 2, sm: 3 }}
-			sx={{ height: '100%', flexGrow: 1 }}
+		<Card
+			sx={{
+				maxWidth: 345,
+				borderRadius: 2,
+				boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
+				transition: 'transform 0.3s ease-in-out',
+				'&:hover': {
+					transform: 'translateY(-4px)',
+				},
+			}}
 		>
-			<Card sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-				<Link style={{ textDecoration: 'none' }} to={`/org/${org.orgId}`}>
-					<CardImage
-						Id={org.orgId}
-						avatarImageUrl={org.avatarImageUrl}
-						height={300}
-						imageAltDesc={`${org.name} + 's profile image`}
-						maxWidth="100%"
-					/>
-				</Link>
-				<CardContent>
-					<Link style={{ textDecoration: 'none' }} to={`/org/${org.orgId}`}>
-						<Typography color="primary" component="div" gutterBottom variant="h5">
-							{org.name}
-						</Typography>
-					</Link>
-					{!org.userRating ? '' : <Rating defaultValue={org.userRating} precision={0.5} readOnly />}
-				</CardContent>
-				<CardActions sx={{ m: 'auto', justifyContent: 'center', mb: 1 }}>
-					<LinkButton buttonText="Learn More" url={`/org/${org.orgId}`} />
-				</CardActions>
-				<Divider />
-				<Grid
-					alignItems="left"
-					container
-					display="flex"
-					justifyContent="space-between"
-					p={1}
+			<Link aria-label={`View details for ${org.name}`} to={`/org/${org.orgId}`}>
+				<CardImage avatarImageUrl={org.avatarImageUrl} height={250} imageAltDesc={org.name} />
+			</Link>
+			<CardContent>
+				<Typography
+					component={Link}
 					sx={{
-						backgroundColor: (theme) =>
-							theme.palette.mode === 'dark' ? alpha(theme.palette.neutral[25], 0.02) : 'neutral.25',
+						textDecoration: 'none',
+						color: 'text.primary',
+						'&:hover': {
+							color: 'primary.main',
+						},
 					}}
+					to={`/org/${org.orgId}`}
+					variant="h6"
 				>
-					<Grid item>
-						<SoftButton
-							// color={selected ? 'error' : undefined}
-							// onClick={() => {
-							// 	toggleFavorite(!selected);
-							// 	setSelected(!selected);
-							// }}
-							size="small"
-							sx={{ width: 38, minWidth: 0, height: 38, mr: 1 }}
-						>
-							<FavoriteTwoToneIcon fontSize="small" />
-						</SoftButton>
-						<SoftButton color="secondary" size="small" sx={{ width: 38, minWidth: 0, height: 38 }}>
-							<IosShareTwoToneIcon fontSize="small" />
-						</SoftButton>
-					</Grid>
-					<Grid item>
-						<Typography sx={{ display: 'flex', alignItems: 'center' }} variant="subtitle2">
-							Open opportunities:
-							<Tooltip title="Hover to show modal of list of activities that are clickable straight to activity profile">
-								<Typography color="text.primary" component="span" sx={{ pl: 0.5 }} variant="h4">
-									{openOpportunities ? openOpportunities : 0}
-								</Typography>
-							</Tooltip>
-						</Typography>
-					</Grid>
-				</Grid>
-			</Card>
-		</Stack>
+					{org.name}
+				</Typography>
+				{org.userRating ? <Rating defaultValue={org.userRating} precision={0.5} readOnly /> : null}
+			</CardContent>
+			<CardActions>
+				<Stack alignItems="center" direction="row" justifyContent="space-between" width="100%">
+					<LinkButton buttonText="Learn More" url={`/org/${org.orgId}`} />
+					<Stack direction="row" ml="auto" spacing={1}>
+						<IconButton aria-label="Add to favorites" size="small">
+							<FavoriteBorderIcon fontSize="small" />
+						</IconButton>
+						<IconButton aria-label="Share" size="small">
+							<ShareIcon fontSize="small" />
+						</IconButton>
+					</Stack>
+				</Stack>
+			</CardActions>
+		</Card>
 	);
 };
 

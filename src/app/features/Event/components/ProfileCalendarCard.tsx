@@ -7,7 +7,7 @@ import { User } from '@api/entities/user';
 
 type Props = {
 	event: Event;
-	entity: User | Organization | Cause;
+	entity: Organization | Cause | User;
 };
 
 const ProfileCalendarCard = ({ event, entity }: Props) => {

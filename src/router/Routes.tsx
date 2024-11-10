@@ -1,4 +1,4 @@
-import { Outlet, RouteObject } from 'react-router';
+import { RouteObject } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '@app/App';
@@ -20,7 +20,7 @@ import {
 	ActivityCatalogPage,
 } from '@app/pages';
 
-import { ProtectedRoute } from './ProtectedRoutes';
+// import { ProtectedRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
 	{
@@ -48,57 +48,57 @@ export const routes: RouteObject[] = [
 				element: <LoginPage />,
 			},
 			// Protected routes
+			// {
+			// 	element: (
+			// 		<ProtectedRoute>
+			// 			<Outlet />
+			// 		</ProtectedRoute>
+			// 	),
+			// 	children: [
 			{
-				element: (
-					<ProtectedRoute>
-						<Outlet />
-					</ProtectedRoute>
-				),
-				children: [
-					{
-						path: '/cause',
-						element: <CauseCatalogPage />,
-					},
-					{
-						path: '/cause/:causeId',
-						element: <CauseProfilePage />,
-					},
-					{
-						path: '/event',
-						element: <EventCatalogPage />,
-					},
-					{
-						path: '/event/:eventId',
-						element: <EventProfilePage />,
-					},
-					{
-						path: '/activity',
-						element: <ActivityCatalogPage />,
-					},
-					{
-						path: '/activity/:activityId',
-						element: <ActivityProfilePage />,
-					},
-					{
-						path: '/org',
-						element: <OrganizationCatalogPage />,
-					},
-					{
-						path: '/org/:orgId',
-						element: <OrganizationProfilePage />,
-					},
-					{
-						path: '/user',
-						element: <UserCatalogPage />,
-					},
-					{
-						path: '/user/:userId',
-						element: <UserProfilePage />,
-					},
-				],
+				path: '/cause',
+				element: <CauseCatalogPage />,
+			},
+			{
+				path: '/cause/:causeId',
+				element: <CauseProfilePage />,
+			},
+			{
+				path: '/event',
+				element: <EventCatalogPage />,
+			},
+			{
+				path: '/event/:eventId',
+				element: <EventProfilePage />,
+			},
+			{
+				path: '/activity',
+				element: <ActivityCatalogPage />,
+			},
+			{
+				path: '/activity/:activityId',
+				element: <ActivityProfilePage />,
+			},
+			{
+				path: '/org',
+				element: <OrganizationCatalogPage />,
+			},
+			{
+				path: '/org/:orgId',
+				element: <OrganizationProfilePage />,
+			},
+			{
+				path: '/user',
+				element: <UserCatalogPage />,
+			},
+			{
+				path: '/user/:userId',
+				element: <UserProfilePage />,
 			},
 		],
 	},
 ];
+// },
+// ];
 
 export const router = createBrowserRouter(routes);

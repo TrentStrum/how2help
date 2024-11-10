@@ -1,12 +1,19 @@
-import { HeroContentLeft } from '../components/Hero/HeroContentLeft';
-import { HeroContentRight } from '../components/Hero/HeroContentRight';
-import { SideBySideLayout } from '../layouts/SideBySideLayout';
+import { Box } from '@mui/material';
+
+import { CTASection } from '@app/features/LandingPage/CtaSection';
+import { Features } from '@app/features/LandingPage/Features';
+import { HeroSection } from '@app/features/LandingPage/Hero';
+import { Testimonials } from '@app/features/LandingPage/Testimonials';
 
 const LandingPage = () => {
-	const leftHero = <HeroContentLeft />;
-	const rightHero = <HeroContentRight />;
-
-	return <SideBySideLayout leftSideContent={leftHero} rightSideContent={rightHero} />;
+	return (
+		<Box className="landing-page">
+			<HeroSection />
+			<Features />
+			<Testimonials />
+			<CTASection />
+		</Box>
+	);
 };
 
 export { LandingPage };

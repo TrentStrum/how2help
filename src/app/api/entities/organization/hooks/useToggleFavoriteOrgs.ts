@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Organization } from '@api/entities/organization';
 import { putResource } from '@api-utils/Resources/putResource';
 
-const useToggleFavoriteOrg = (orgId: string) => {
+const useToggleFavoriteOrgs = (orgId: string) => {
 	const queryClient = useQueryClient();
 
 	return useMutation({
@@ -22,4 +22,4 @@ const useToggleFavoriteOrg = (orgId: string) => {
 	});
 };
 
-export { useToggleFavoriteOrg };
+export { useToggleFavoriteOrgs };

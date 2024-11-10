@@ -43,7 +43,11 @@ const UserMenu = () => {
 						size="small"
 						sx={{ ml: 2 }}
 					>
-						<Avatar sx={{ width: 32, height: 32 }}>T</Avatar>
+						<Avatar
+							sx={{ width: 32, height: 32, bgcolor: 'primary.main', color: 'primary.contrastText' }}
+						>
+							T
+						</Avatar>
 					</IconButton>
 				</Tooltip>
 			</Box>

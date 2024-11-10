@@ -28,16 +28,17 @@ import { useGetActivitiesByEntityId } from '@api/entities/activity/hooks/useGetA
 import { SearchContained } from '@app/components/Searchbar/SearchContained';
 
 type Props = {
-	orgId: string;
+	entityType: string;
+	entityId: string;
 };
 
-const OrgActivitySearch = ({ orgId }: Props) => {
+const OrgActivitySearch = ({ entityId, entityType }: Props) => {
 	const theme = useTheme();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [limit, setLimit] = useState<number>(10);
 	const { data, isPending, isError, error } = useGetActivitiesByEntityId(
-		orgId,
-		'Organization',
+		entityId,
+		entityType,
 		currentPage,
 		limit,
 	);

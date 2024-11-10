@@ -41,9 +41,13 @@ export const handlers = [
 		const hostId = Number(url.searchParams.get('_hostId'));
 		const hostType = url.searchParams.get('_hostType');
 
+		console.log(`hostId: ${hostId}`);
+		console.log(`hostType: ${hostType}`);
+
 		const hostedEvents = mockEvents.filter(
 			(event) => event.hostType === hostType && event.hostId === hostId,
 		);
+		console.log(`hostedEvents: ${hostedEvents}`);
 
 		try {
 			const paginationParams = getPaginationParams(url);

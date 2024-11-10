@@ -5,7 +5,7 @@ import { getResource } from '@api-utils/Resources/getResource';
 
 import { Cause } from '..';
 
-const useGetCauseAll = () => {
+const useGetAllCauses = () => {
 	const query = useQuery<Cause[]>({
 		queryKey: causeKeys.all,
 		queryFn: () => getResource('/cause'),
@@ -13,4 +13,4 @@ const useGetCauseAll = () => {
 	return query;
 };
 
-export { useGetCauseAll };
+export { useGetAllCauses };

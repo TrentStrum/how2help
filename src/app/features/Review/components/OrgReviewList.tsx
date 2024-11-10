@@ -2,7 +2,16 @@ import ClearTwoToneIcon from '@mui/icons-material/ClearTwoTone';
 import DoneAllTwoToneIcon from '@mui/icons-material/DoneAllTwoTone';
 import ThumbDownTwoToneIcon from '@mui/icons-material/ThumbDownTwoTone';
 import ThumbUpTwoToneIcon from '@mui/icons-material/ThumbUpTwoTone';
-import { List, ListItem, Box, Avatar, Typography, Stack, Divider } from '@mui/material';
+import {
+	List,
+	ListItem,
+	Box,
+	Avatar,
+	Typography,
+	Stack,
+	Divider,
+	CircularProgress,
+} from '@mui/material';
 import ReactCountryFlag from 'react-country-flag';
 
 import { Organization } from '@api/entities/organization';
@@ -18,8 +27,25 @@ type Props = {
 const OrgReviewList = ({ org }: Props) => {
 	const { data: reviews, isPending, isError, error } = useGetReviewByOrgId(org.orgId.toString());
 
-	if (isPending) return <Typography variant="body2">Loading...</Typography>;
-	if (isError) return <Typography variant="body2">{error.message}</Typography>;
+	if (isPending) {
+		return (
+			<Box sx={{ p: 2 }}>
+				<Typography variant="body2">
+					<CircularProgress size={20} sx={{ mr: 1 }} />
+					Loading reviews...
+				</Typography>
+			</Box>
+		);
+	}
+	if (isError) {
+		return (
+			<Box sx={{ p: 2 }}>
+				<Typography color="error" variant="body2">
+					Error loading reviews: {error.message}
+				</Typography>
+			</Box>
+		);
+	}
 
 	return (
 		<List>

@@ -1,20 +1,50 @@
-import { CardMedia } from '@mui/material';
+import { Box, CardMedia, Skeleton } from '@mui/material';
+import { useState } from 'react';
 
-interface AvatarProps {
+interface CardImageProps {
 	avatarImageUrl?: string;
 	imageAltDesc: string;
-	height: number;
-	maxWidth: string;
+	height?: number;
+	maxWidth?: string;
+	borderRadius?: number;
 }
-const CardImage = <T extends AvatarProps>({ avatarImageUrl, imageAltDesc, height }: T) => {
+
+const CardImage = ({
+	avatarImageUrl,
+	imageAltDesc,
+	height = 200,
+	maxWidth = '100%',
+	borderRadius = 8,
+}: CardImageProps) => {
+	const [isLoading, setIsLoading] = useState(true);
+	const [hasError, setHasError] = useState(false);
+
 	return (
-		<CardMedia
-			alt={imageAltDesc}
-			component="img"
-			height={height}
-			image={avatarImageUrl}
-			sx={{ p: '1em 1em 0 1em', objectFit: 'contain' }}
-		/>
+		<Box
+			sx={{
+				position: 'relative',
+				maxWidth,
+				borderRadius: `${borderRadius}px ${borderRadius}px 0 0`,
+				overflow: 'hidden',
+			}}
+		>
+			{isLoading ? <Skeleton animation="wave" sx={{ height }} variant="rectangular" /> : null}
+
+			<CardMedia
+				alt={imageAltDesc}
+				component="img"
+				image={hasError ? '/placeholders/image-placeholder.jpg' : avatarImageUrl}
+				onError={() => {
+					setIsLoading(false);
+					setHasError(true);
+				}}
+				onLoad={() => setIsLoading(false)}
+				sx={{
+					height,
+					objectFit: 'cover',
+				}}
+			/>
+		</Box>
 	);
 };
 

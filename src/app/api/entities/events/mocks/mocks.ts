@@ -8,7 +8,7 @@ export const mockEvents: Event[] = [
 		eventDate: '5/1/2025',
 		location: 'My city, CA',
 		hostId: 1,
-		hostType: 'User',
+		hostType: 'Organization',
 		causeIds: [1],
 		organizationIds: [1, 6],
 		avatarImageUrl: '../../src/assets/images/lgtbq.jpg',

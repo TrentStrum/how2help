@@ -10,7 +10,6 @@ import {
 	Divider,
 	Grid,
 	Checkbox,
-	styled,
 	Avatar,
 } from '@mui/material';
 import clsx from 'clsx';
@@ -18,7 +17,7 @@ import { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useGetUserById } from '@api/entities/user';
-import { UserCardWrapper } from '@app/components/Cards/UserCardWrapper';
+import { UserCardWrapper } from '@app/components/Cards';
 import { LinkButton } from '@components/Buttons/LinkButton';
 import { SoftButton } from '@components/Buttons/SoftButton';
 

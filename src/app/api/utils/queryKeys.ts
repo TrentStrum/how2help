@@ -17,7 +17,7 @@ export const userKeys = {
 export const causeKeys = {
 	all: ['cause'] as const,
 	lists: () => [...causeKeys.all, 'list'] as const,
-	list: (filters: string) => [...causeKeys.lists(), { filters }] as const,
+	list: (entityId: number) => [...causeKeys.lists(), { entityId }] as const,
 	details: () => [...causeKeys.all, 'detail'] as const,
 	detail: (causeId: number) => [...causeKeys.details(), causeId] as const,
 };

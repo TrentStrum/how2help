@@ -2,7 +2,7 @@ import { useMediaQuery, Stack, Box, Tab, Select, MenuItem, useTheme } from '@mui
 import { useState, SyntheticEvent } from 'react';
 
 import { Event } from '@api/entities/events';
-import { TabsShadow } from '@app/components/Tabs/TabsShadow-Style';
+import { TabsShadow } from '@app/components/Tabs';
 
 import { EventOrgSearch } from './EventOrgSearch';
 

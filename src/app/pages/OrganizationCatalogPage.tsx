@@ -1,12 +1,7 @@
 import { OrgCatalog } from '@app/features/Organization';
-import { CatalogContainer } from '@app/layouts/CatalogContainer';
 
 const OrganizationCatalogPage = () => {
-	return (
-		<CatalogContainer entity="organizations">
-			<OrgCatalog />
-		</CatalogContainer>
-	);
+	return <OrgCatalog />;
 };
 
 export { OrganizationCatalogPage };

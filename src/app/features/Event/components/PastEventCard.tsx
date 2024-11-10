@@ -2,7 +2,8 @@ import { Typography, Tooltip, Stack, Chip, useTheme } from '@mui/material';
 import { toast } from 'react-toastify';
 
 import { Event } from '@api/entities/events';
-import { BoxItemWrapper, DotLegend } from '@app/components/Cards/ActiveEventCard-Style';
+import { BoxItemWrapper } from '@app/components/Boxes';
+import { DotLegend } from '@app/components/DotLegend-Style';
 
 type Props = {
 	event: Event;

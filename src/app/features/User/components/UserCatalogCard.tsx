@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 
 import { User } from '@api/entities/user';
-import { UserCardActions } from '@app/components/Cards/CardActions';
+import { UserCardActions } from '@app/components/Cards';
 
 type Props = {
 	user: User;

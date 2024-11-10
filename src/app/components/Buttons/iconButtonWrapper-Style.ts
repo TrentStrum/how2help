@@ -1,4 +1,4 @@
-import { IconButton, styled } from '@mui/material';
+import { alpha, IconButton, styled } from '@mui/material';
 
 export const IconButtonWrapper = styled(IconButton)(({ theme }) => ({
 	mr: 1.5,
@@ -18,5 +18,17 @@ export const IconButtonWrapper = styled(IconButton)(({ theme }) => ({
 		'.MuiSvgIcon-root': {
 			transform: 'scale(1.3)',
 		},
+	},
+}));
+
+export const RegisterIconButtonWrapper = styled(IconButton)(({ theme }) => ({
+	background: 'transparent',
+	transition: theme.transitions.create(['all']),
+	color: alpha(theme.palette.common.white, 0.7),
+	borderRadius: '50px',
+
+	'&:hover': {
+		background: 'transparent',
+		color: theme.palette.common.white,
 	},
 }));
