@@ -104,7 +104,6 @@ const Appbar = () => {
 												value={getActiveTab()}
 											>
 												<Tab component={NavLink} label="Organizations" to="/org" value="/org" />
-												<Tab component={NavLink} label="Users" to="/user" value="/user" />
 												<Tab component={NavLink} label="Causes" to="/cause" value="/cause" />
 												<Tab component={NavLink} label="Events" to="/event" value="/event" />
 												<Tab
@@ -113,6 +112,7 @@ const Appbar = () => {
 													to="/activity"
 													value="/activity"
 												/>
+												<Tab component={NavLink} label="Users" to="/user" value="/user" />
 												<Tab component={NavLink} label="404" to="/notFound" value="/notFound" />
 											</Tabs>
 										</Box>

@@ -1,167 +1,171 @@
-import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {
 	alpha,
 	Avatar,
 	Badge,
 	Box,
-	Button,
 	Card,
-	Divider,
 	IconButton,
 	Link,
-	List,
-	ListItem,
-	ListItemText,
+	Stack,
 	Typography,
 	useTheme,
 } from '@mui/material';
 
 import { Event } from '@api/entities/events';
+import { useGetEventAttendees } from '@api/entities/events/hooks/useGetEventAttendees';
+import { useGetEventHost } from '@api/entities/events/hooks/useGetEventHost';
+
 type Props = {
 	event: Event;
 };
+
 const EventCatalogCard = ({ event }: Props) => {
 	const theme = useTheme();
+	const { data: attendees } = useGetEventAttendees(event.eventId);
+	const { data: hostOrg } = useGetEventHost(event.hostId);
+
+	const formattedDate = new Date(event.eventDate).toLocaleDateString('en-US', {
+		weekday: 'long',
+		month: 'long',
+		day: 'numeric',
+		year: 'numeric',
+	});
 
 	return (
 		<Card
 			sx={{
-				position: 'relative',
-				p: { xs: 2, sm: 3 },
+				height: '100%',
+				display: 'flex',
+				flexDirection: 'column',
+				bgcolor: 'background.paper',
+				transition: 'transform 0.2s, box-shadow 0.2s',
+				'&:hover': {
+					transform: 'translateY(-4px)',
+					boxShadow: theme.shadows[4],
+				},
 			}}
 		>
-			<Box
-				sx={{ position: 'absolute', right: theme.spacing(1.5), top: theme.spacing(1.5), zIndex: 7 }}
-			>
-				<IconButton color="primary" size="small">
-					<MoreHorizTwoToneIcon />
-					{/* drop down here, include quick rsvp to open modal */}
-				</IconButton>
-			</Box>
-			<Box alignItems="center" display="flex" mb={2}>
+			<Box sx={{ p: 2, display: 'flex', alignItems: 'flex-start' }}>
 				<Badge
-					anchorOrigin={{
-						vertical: 'top',
-						horizontal: 'right',
-					}}
-					badgeContent="24"
+					badgeContent={attendees?.length || 0}
 					color="success"
-					overlap="circular"
+					sx={{
+						'& .MuiBadge-badge': {
+							right: 5,
+							top: 5,
+							border: `2px solid ${theme.palette.background.paper}`,
+							padding: '0 4px',
+						},
+					}}
 				>
 					<Avatar
-						sx={{
-							fontSize: theme.typography.pxToRem(16),
-							background: theme.palette.common.black,
-							color: theme.palette.common.white,
-							borderRadius: theme.shape.borderRadius,
-							width: 95,
-							height: 95,
-						}}
 						variant="rounded"
+						sx={{
+							width: 48,
+							height: 48,
+							bgcolor: alpha(theme.palette.primary.main, 0.1),
+							color: theme.palette.primary.main,
+						}}
 					>
-						{event.avatarImageUrl}
+						{event.name.charAt(0)}
 					</Avatar>
 				</Badge>
-				<Box
-					ml={1.5}
-					sx={{
-						width: '100%',
-					}}
-				>
-					<Link
-						color="text.primary"
-						href=""
-						onClick={(e) => e.preventDefault()}
-						sx={{
-							transition: theme.transitions.create(['color']),
-							fontSize: theme.typography.pxToRem(17),
 
-							'&:hover': {
-								color: theme.palette.primary.main,
-							},
-						}}
-						underline="none"
-						variant="h5"
-					>
-						{event.name}
-					</Link>
-					<Typography color="text.secondary" gutterBottom variant="subtitle2">
-						Hashtags here
+				<Box sx={{ ml: 2, flex: 1 }}>
+					<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+						<Link
+							href={`/event/${event.eventId}`}
+							sx={{
+								textDecoration: 'none',
+								color: 'text.primary',
+								'&:hover': { color: 'primary.main' },
+							}}
+						>
+							<Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 0.5 }}>
+								{event.name}
+							</Typography>
+						</Link>
+						<IconButton size="small">
+							<MoreHorizIcon fontSize="small" />
+						</IconButton>
+					</Box>
+
+					<Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+						Hosted by{' '}
+						<Link
+							href={`/org/${event.hostId}`}
+							sx={{
+								color: 'primary.main',
+								textDecoration: 'none',
+								'&:hover': { textDecoration: 'underline' },
+							}}
+						>
+							{hostOrg?.name || 'Loading...'}
+						</Link>
 					</Typography>
 				</Box>
 			</Box>
-			<Typography color="text.secondary" variant="subtitle1">
-				{event.description}
-			</Typography>
-			<Divider
+
+			<Stack spacing={1} sx={{ px: 2, pb: 2 }}>
+				<Box>
+					<Typography variant="body2" color="text.secondary">
+						Event Date
+					</Typography>
+					<Typography variant="body2">{formattedDate}</Typography>
+				</Box>
+
+				<Box>
+					<Typography variant="body2" color="text.secondary">
+						Location
+					</Typography>
+					<Typography
+						variant="body2"
+						sx={{
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							whiteSpace: 'nowrap',
+						}}
+					>
+						{event.location}
+					</Typography>
+				</Box>
+			</Stack>
+
+			<Box
 				sx={{
-					mt: 3,
-				}}
-			/>
-			<List
-				disablePadding
-				sx={{
-					my: 1.5,
+					mt: 'auto',
+					p: 2,
+					pt: 1,
+					borderTop: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
 				}}
 			>
-				<ListItem disableGutters>
-					<ListItemText
-						primary="Host:"
-						primaryTypographyProps={{
-							variant: 'subtitle2',
-							fontWeight: 500,
-							color: 'text.secondary',
-						}}
-					/>
-					<Typography variant="subtitle2">{event.organizationIds}</Typography>
-				</ListItem>
-				<ListItem disableGutters>
-					<ListItemText
-						primary="Event Date:"
-						primaryTypographyProps={{
-							variant: 'subtitle2',
-							fontWeight: 500,
-							color: 'text.secondary',
-						}}
-					/>
-					<Typography variant="subtitle2">{event.eventDate}</Typography>
-				</ListItem>
-				<ListItem disableGutters>
-					<ListItemText
-						primary="Location:"
-						primaryTypographyProps={{
-							variant: 'subtitle2',
-							fontWeight: 500,
-							color: 'text.secondary',
-						}}
-					/>
-					<Typography variant="subtitle2">{event.location}</Typography>
-				</ListItem>
-			</List>
-			<Divider
-				sx={{
-					mb: 3,
-				}}
-			/>
-			<Link href={`/event/${event.eventId}`}>
-				<Button
-					color="primary"
-					fullWidth
+				<Link
+					href={`/event/${event.eventId}`}
 					sx={{
-						backgroundColor: alpha(theme.palette.primary.main, 0.1),
-						textTransform: 'uppercase',
+						display: 'block',
+						textAlign: 'center',
 						py: 1,
+						px: 2,
+						bgcolor: alpha(theme.palette.primary.main, 0.1),
+						color: 'primary.main',
+						borderRadius: 1,
+						textDecoration: 'none',
+						textTransform: 'uppercase',
+						fontSize: '0.75rem',
+						fontWeight: 600,
+						letterSpacing: '0.5px',
 						'&:hover': {
-							backgroundColor: theme.palette.primary.main,
-							color: theme.palette.primary.contrastText,
+							bgcolor: 'primary.main',
+							color: 'primary.contrastText',
 						},
 					}}
-					variant="text"
 				>
-					View event details
-				</Button>
-			</Link>
+					View Event Details
+				</Link>
+			</Box>
 		</Card>
 	);
 };
+
 export { EventCatalogCard };

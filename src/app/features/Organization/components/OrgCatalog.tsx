@@ -1,5 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import {
 	Box,
 	Drawer,
@@ -20,10 +21,10 @@ import { useState } from 'react';
 import { useGetOrgsAll, OrgFilters } from '@api/entities/organization';
 import { H2hPagination } from '@app/components/Pagination/H2hPagination';
 import { H2hSkeleton } from '@app/components/skeleton/Skeleton';
-import { OrgCard } from '@app/features/Organization/index';
+import { OrgCatalogCard } from '@app/features/Organization/index';
 
 const OrgCatalog = () => {
-	const limitCount = 8;
+	const limitCount = 12;
 	const [currentPage, setCurrentPage] = useState(1);
 	const [search, setSearch] = useState<OrgFilters['search']>('');
 	const [isFocused, setIsFocused] = useState(false);
@@ -43,7 +44,6 @@ const OrgCatalog = () => {
 		currentPage,
 		limitCount,
 		search,
-		// activeFilters,
 	);
 
 	const handleSearch = (value: string) => {
@@ -120,8 +120,8 @@ const OrgCatalog = () => {
 				<TextField
 					InputProps={{
 						startAdornment: !isFocused && (
-							<InputAdornment position="start" sx={{ ml: -2.5 }}>
-								<img alt="search2" height={60} src="src\assets\images\Search.png" width={60} />
+							<InputAdornment position="start" sx={{ ml: 1 }}>
+								<SearchTwoToneIcon />
 							</InputAdornment>
 						),
 					}}
@@ -177,10 +177,10 @@ const OrgCatalog = () => {
 
 			{/* Organizations Grid */}
 			<Box sx={{ flexGrow: 1, minHeight: '60vh' }}>
-				<Grid columns={{ xs: 12, sm: 12, md: 12, lg: 12 }} container spacing={3}>
+				<Grid columns={{ xs: 1, sm: 8, md: 12, lg: 12 }} container spacing={{ xs: 2, sm: 3 }}>
 					{orgs.map((org) => (
-						<Grid item key={org.orgId} lg={3} md={4} sm={6} xs={12}>
-							<OrgCard org={org} />
+						<Grid item key={org.orgId} lg={3} md={4} sm={4} xs={1}>
+							<OrgCatalogCard org={org} />
 						</Grid>
 					))}
 				</Grid>

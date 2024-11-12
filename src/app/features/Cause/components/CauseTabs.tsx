@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 import { Cause } from '@api/entities/cause';
 import { TabsShadow } from '@app/components/Tabs';
-import { ProfileCalendar } from '@app/features/Event/components/ProfileCalendar';
 
 import { CauseOrgSearch } from './CauseOrgSearch';
 
@@ -32,7 +31,6 @@ const CauseTabs = ({ cause }: Props) => {
 			break;
 		}
 		case '1': {
-			displayTab = <ProfileCalendar entity={cause} entityId="" entityType="Cause" />;
 			break;
 		}
 		// case '2': {

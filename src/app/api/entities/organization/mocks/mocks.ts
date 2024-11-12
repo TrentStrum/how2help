@@ -7,6 +7,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+		bannerImageUrl: '../../src/assets/images/lgtbq.jpg',
 		causes: [1, 2],
 		countryServing: ['USA', 'Canada', 'Germany', 'France', 'UK', 'Mexico', 'Argentina'],
 		stateServing: 'Many',
@@ -28,7 +29,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/unrwa-banner.jpg',
 		causes: [],
 		countryServing: ['Palestine'],
 		stateServing: '',
@@ -50,7 +51,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/PCRF-banner.jpg',
 		causes: [4],
 		countryServing: ['Palestine'],
 		stateServing: '',
@@ -72,7 +73,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/The_Trevor_Project_Logo-banner.jpg',
 		causes: [1, 2],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -94,6 +95,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+		bannerImageUrl: '../../src/assets/images/sandyHookPromise-banner.jpg',
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -115,7 +117,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/womensMarch-banner.jpg',
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -137,7 +139,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/centerForReproductiveRights-banner.jpg',
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -159,7 +161,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/everyTown-banner.jpg',
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -181,7 +183,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/standInPride-banner.jpg',
 		causes: [1],
 		countryServing: ['USA', 'Canada', 'Germany', 'France', 'UK', 'Mexico', 'Argentina'],
 		stateServing: 'Many',
@@ -203,7 +205,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/unrwa-banner.jpg',
 		causes: [],
 		countryServing: ['Palestine'],
 		stateServing: '',
@@ -225,7 +227,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/PCRF-banner.jpg',
 		causes: [4],
 		countryServing: ['Palestine'],
 		stateServing: '',
@@ -247,7 +249,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/The_Trevor_Project_Logo-banner.jpg',
 		causes: [1, 2],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -269,7 +271,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/sandyHookPromise-banner.jpg',
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -291,7 +293,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/womensMarch-banner.jpg',
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -312,6 +314,7 @@ export const mockOrgs: Organization[] = [
 		name: 'Org 15',
 		description: 'Org 15',
 		longDescription: 'Org 15',
+		bannerImageUrl: '../../src/assets/images/centerForReproductiveRights-banner.jpg',
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -333,7 +336,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/everyTown-banner.jpg',
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -355,7 +358,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/centerForReproductiveRights-banner.jpg',
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -377,7 +380,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/everyTown-banner.jpg',
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -399,7 +402,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/centerForReproductiveRights-banner.jpg',
 		causes: [5],
 		countryServing: ['USA'],
 		stateServing: '',
@@ -421,7 +424,7 @@ export const mockOrgs: Organization[] = [
 		description: 'Lorem ipsum dolor sit amet',
 		longDescription:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-
+		bannerImageUrl: '../../src/assets/images/everyTown-banner.jpg',
 		causes: [3],
 		countryServing: ['USA'],
 		stateServing: '',

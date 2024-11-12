@@ -14,7 +14,6 @@ import {
 	Link,
 	Menu,
 	MenuItem,
-	Pagination,
 	Rating,
 	Stack,
 	Typography,
@@ -22,9 +21,9 @@ import {
 } from '@mui/material';
 import { formatDistance, subDays } from 'date-fns';
 import { useRef, useState } from 'react';
-import { toast } from 'react-toastify';
 
 import { useGetActivitiesByEntityId } from '@api/entities/activity/hooks/useGetActivitiesByEntityId';
+import { H2hPagination } from '@app/components/Pagination/H2hPagination';
 import { SearchContained } from '@app/components/Searchbar/SearchContained';
 
 type Props = {
@@ -33,25 +32,17 @@ type Props = {
 
 const OrgProfileActivitiesTab = ({ orgId }: Props) => {
 	const theme = useTheme();
-	const [currentPage, setCurrentPage] = useState(1);
-	const [limit, setLimit] = useState<number>(10);
-	const { data, isPending, isError, error } = useGetActivitiesByEntityId(
+	const [currentPage, setCurrentPage] = useState(0);
+	const limitCount = 2;
+	const { data, isPending, isError, error, isFetching } = useGetActivitiesByEntityId(
 		orgId,
-		'Organization',
+		'organization',
 		currentPage,
-		limit,
+		limitCount,
 	);
 
 	const actionRef1 = useRef<any>(null);
 	const [openPeriod, setOpenMenuPeriod] = useState<boolean>(false);
-
-	const handleDelete = () => {
-		toast.error('You clicked on delete!');
-	};
-
-	const handleClick = () => {
-		toast.success('You clicked on the chip!');
-	};
 
 	const periods = [
 		{
@@ -149,61 +140,75 @@ const OrgProfileActivitiesTab = ({ orgId }: Props) => {
 							elevation={0}
 							sx={{
 								p: 2,
+								height: '100%',
+								display: 'flex',
+								flexDirection: 'column',
 								background: alpha(theme.palette.background.default, 0.3),
 								boxShadow: theme.shadows[8],
+								variant: 'outlined',
 							}}
-							variant="outlined"
 						>
-							<Box>
+							<Box sx={{ mb: 2 }}>
 								<Rating defaultValue={4.5} precision={0.5} readOnly value={4.5} />
 							</Box>
+
 							<Link
 								color="text.primary"
 								href=""
 								onClick={(e) => e.preventDefault()}
+								sx={{
+									display: '-webkit-box',
+									WebkitLineClamp: 2,
+									WebkitBoxOrient: 'vertical',
+									overflow: 'hidden',
+									mb: 2,
+									lineHeight: 1.2,
+								}}
 								underline="hover"
 								variant="h4"
 							>
-								{activity.description}
+								{activity.name}
 							</Link>
-							<Stack direction="row" flexWrap={{ xs: 'wrap', md: 'nowrap' }} gap={1} py={2}>
-								<Chip
-									color="secondary"
-									label="Hosting"
-									onClick={handleClick}
-									onDelete={handleDelete}
-									size="small"
-								/>
-								<Chip
-									color="secondary"
-									label="Security"
-									onClick={handleClick}
-									onDelete={handleDelete}
-									size="small"
-								/>
+
+							<Stack direction="row" flexWrap="wrap" gap={1} sx={{ mb: 2 }}>
+								<Link href="/activity">
+									<Chip color="secondary" label="#hosting" size="small" />
+								</Link>
+								<Link href="/activity">
+									<Chip color="secondary" label="#security" size="small" />
+								</Link>
 							</Stack>
+
 							<Typography
 								color="text.secondary"
 								sx={{
-									pb: 2,
+									mb: 2,
+									display: '-webkit-box',
+									WebkitLineClamp: 3,
+									WebkitBoxOrient: 'vertical',
+									overflow: 'hidden',
+									flex: 1,
 								}}
 								variant="subtitle1"
 							>
-								Ensure optimal performance and security by upgrading the hosting platform.
+								{activity.description ||
+									'Ensure optimal performance and security by upgrading the hosting platform.'}
 							</Typography>
-							<Link href={`/activity/${activity.activityId}`}>
-								<Button size="small" variant="contained">
-									View task
-								</Button>
-							</Link>
-							<Divider
-								sx={{
-									my: 2,
-								}}
-							/>
+
+							<Box sx={{ mb: 2 }}>
+								<Link href={`/activity/${activity.activityId}`}>
+									<Button size="small" variant="contained">
+										View task
+									</Button>
+								</Link>
+							</Box>
+
+							<Divider sx={{ mb: 2 }} />
+
 							<CardActions
 								sx={{
 									p: 0,
+									mt: 'auto',
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'space-between',
@@ -216,11 +221,7 @@ const OrgProfileActivitiesTab = ({ orgId }: Props) => {
 									noWrap
 									variant="subtitle2"
 								>
-									<TodayTwoToneIcon
-										sx={{
-											mr: 1,
-										}}
-									/>
+									<TodayTwoToneIcon sx={{ mr: 1 }} />
 									{formatDistance(subDays(new Date(), 24), new Date(), {
 										addSuffix: true,
 									})}
@@ -242,7 +243,12 @@ const OrgProfileActivitiesTab = ({ orgId }: Props) => {
 					pt: { xs: 2, sm: 3 },
 				}}
 			>
-				<Pagination color="primary" count={15} defaultPage={6} shape="rounded" siblingCount={0} />
+				<H2hPagination
+					changePage={setCurrentPage}
+					count={limitCount}
+					isFetching={isFetching}
+					page={currentPage}
+				/>
 			</Box>
 		</>
 	);

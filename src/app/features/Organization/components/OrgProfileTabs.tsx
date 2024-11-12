@@ -33,7 +33,7 @@ const OrgProfileTabs = ({ orgId }: Props) => {
 			<Container maxWidth="lg" sx={{ mt: 4 }}>
 				{ORG_TAB_CONFIG.map((tab, index) => (
 					<TabPanel index={index} key={tab.id} value={activeTab}>
-						<tab.Component entity={org} entityId={org.orgId.toString()} entityType="Organization" />
+						<tab.Component entity={org} entityId={org.orgId.toString()} />
 					</TabPanel>
 				))}
 			</Container>

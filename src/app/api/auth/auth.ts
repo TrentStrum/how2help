@@ -24,6 +24,7 @@ export const useUser = () => {
 		queryFn: () => getResource<User>('/auth/me'),
 		retry: false,
 		staleTime: Infinity,
+		enabled: isAuthenticated(),
 	});
 };
 
@@ -34,33 +35,26 @@ export const useLogin = () => {
 		mutationFn: (credentials) =>
 			postResource<LoginCredentials, AuthResponse>('/auth/login', credentials),
 		onSuccess: (data: AuthResponse) => {
-			// Store JWT token
-			localStorage.setItem('token', data.token);
-			// Update user data in cache
+			localStorage.setItem(TOKEN_KEY, data.token);
 			queryClient.setQueryData(['auth-user'], data.user);
 		},
 		onError: (error) => {
-			// Handle login errors (e.g., invalid credentials)
-			localStorage.removeItem('token');
+			localStorage.removeItem(TOKEN_KEY);
 			queryClient.setQueryData(['auth-user'], null);
-			throw error; // Or handle error messaging
+			throw error;
 		},
 	});
 };
 
-// Logout mutation
 export const useLogout = () => {
 	const queryClient = useQueryClient();
 
 	return useMutation({
-		mutationFn: () => Promise.resolve(),
+		mutationFn: () => postResource('/auth/logout'),
 		onSuccess: () => {
-			// Clear token
-			localStorage.removeItem('token');
-			// Reset auth user cache
+			localStorage.removeItem(TOKEN_KEY);
 			queryClient.setQueryData(['auth-user'], null);
-			// Optional: Reset all queries
-			queryClient.clear();
+			queryClient.invalidateQueries();
 		},
 	});
 };
@@ -72,7 +66,7 @@ export const useRegister = () => {
 		mutationFn: (credentials) =>
 			postResource<RegisterCredentials, AuthResponse>('/auth/register', credentials),
 		onSuccess: (data: AuthResponse) => {
-			localStorage.setItem('token', data.token);
+			localStorage.setItem(TOKEN_KEY, data.token);
 			queryClient.setQueryData(['auth-user'], data.user);
 		},
 	});
@@ -89,30 +83,13 @@ export const useAuthState = () => {
 };
 
 export const useRefreshToken = () => {
+	const queryClient = useQueryClient();
+
 	return useMutation({
 		mutationFn: () => postResource<void, AuthResponse>('/auth/refresh-token'),
 		onSuccess: (data: AuthResponse) => {
 			localStorage.setItem(TOKEN_KEY, data.token);
+			queryClient.setQueryData(['auth-user'], data.user);
 		},
 	});
-};
-
-export const login = async (credentials: { username: string; password: string }) => {
-	const response = await fetch('/api/login', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(credentials),
-	});
-
-	const data = await response.json();
-
-	if (response.ok) {
-		// Store the token
-		localStorage.setItem('token', data.token);
-		return data;
-	}
-
-	throw new Error('Login failed');
 };

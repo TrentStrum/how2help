@@ -14,7 +14,7 @@ const useGetActiveEventsByEntityId = (
 	options?: QueryOptions<GetEventResponse, AxiosError<ErrorResponse>>,
 ) => {
 	return useQuery({
-		queryKey: [entityId, entitytype, { page: currentPage, limit: limitCount }],
+		queryKey: ['events', entityId, entitytype, { page: currentPage, limit: limitCount }],
 		queryFn: async () => {
 			return getResource<GetEventResponse>(
 				`/events/org?_hostId=${entityId}&_hostType=${entitytype}&_limit=${limitCount}&_page=${currentPage}`,

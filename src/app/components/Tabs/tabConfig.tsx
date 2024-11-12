@@ -1,7 +1,7 @@
 import { Organization } from '@api/entities/organization';
-import { ProfileCalendar } from '@app/features/Event';
 import { OrgProfileActivitiesTab } from '@app/features/Organization';
 import { OrgProfileAdditionalInfo } from '@app/features/Organization/components/OrgProfileAdditionalInfo';
+import { OrgProfileEventsTab } from '@app/features/Organization/components/OrgProfileEventsTab';
 import { OrgReviewsContainer } from '@app/features/Review';
 
 type BaseProps = {
@@ -21,8 +21,8 @@ export const ORG_TAB_CONFIG = [
 	{
 		id: 'events',
 		label: 'Events',
-		Component: ({ entity, entityId, entityType }: BaseProps) => {
-			return <ProfileCalendar entity={entity} entityId={entityId} entityType={entityType} />;
+		Component: ({ entityId }: Pick<BaseProps, 'entityId'>) => {
+			return <OrgProfileEventsTab orgId={entityId} />;
 		},
 	},
 	{

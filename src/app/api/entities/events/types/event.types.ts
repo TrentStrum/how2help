@@ -5,6 +5,7 @@ export type Event = {
 	name: string;
 	description: string;
 	eventDate: string;
+	startTime: string;
 	location: string;
 	hostId: number;
 	hostType: string;

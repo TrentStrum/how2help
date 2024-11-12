@@ -14,7 +14,7 @@ const useGetActivitiesByEntityId = (
 	options?: QueryOptions<GetActivityResponse, AxiosError<ErrorResponse>>,
 ) => {
 	return useQuery({
-		queryKey: [entityId, entitytype, { page: currentPage, limit: limitCount }],
+		queryKey: ['activities', entityId, entitytype, { page: currentPage, limit: limitCount }],
 		queryFn: async () => {
 			return getResource<GetActivityResponse>(
 				`/activity/by-org?_hostId=${entityId}&_hostType=${entitytype}&_limit=${limitCount}&_page=${currentPage}`,

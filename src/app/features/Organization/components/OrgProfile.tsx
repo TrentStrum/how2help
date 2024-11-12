@@ -1,4 +1,4 @@
-import { Paper, Stack, Typography } from '@mui/material';
+import { Paper, Stack, Typography, Divider } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 import { useGetOrgById } from '@api/entities/organization';
@@ -24,8 +24,14 @@ const OrgProfile = () => {
 				overflow: 'hidden',
 			}}
 		>
-			<Stack p={{ xs: 3, sm: 4 }} spacing={4}>
-				<OrgProfileBanner org={org} />
+			<OrgProfileBanner org={org} />
+			<Divider />
+			<Stack
+				spacing={4}
+				sx={{
+					p: { xs: 3, sm: 4 },
+				}}
+			>
 				<OrgProfileTabs orgId={org.orgId} />
 			</Stack>
 		</Paper>

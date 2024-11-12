@@ -14,11 +14,22 @@ export const handlers = [
 		try {
 			const url = new URL(request.url);
 			const paginationParams = getPaginationParams(url);
+			const search = url.searchParams.get('_search')?.toLowerCase() || '';
 
-			const paginatedResponse = createPaginatedResponse(mockEvents, paginationParams);
+			// Filter events by search term if present
+			const filteredEvents = search
+				? mockEvents.filter(
+						(event) =>
+							event.name.toLowerCase().includes(search) ||
+							event.description.toLowerCase().includes(search),
+					)
+				: mockEvents;
+
+			// Create paginated response using the filtered events
+			const paginatedResponse = createPaginatedResponse(filteredEvents, paginationParams);
 			return HttpResponse.json(paginatedResponse, { status: 200 });
 		} catch (error) {
-			return HttpResponse.json({ error: 'Internal server error', status: 500 });
+			return HttpResponse.json({ error: 'Internal server error' }, { status: 500 });
 		}
 	}),
 
@@ -148,5 +159,23 @@ export const handlers = [
 		};
 
 		return HttpResponse.json(getActiveEventsByOrgId(numId));
+	}),
+
+	// Add this handler to your existing handlers array
+	http.get('/event/:eventId/attendees', ({ params }) => {
+		try {
+			const { eventId } = params;
+			const numId = Number(eventId);
+
+			if (!numId) {
+				return HttpResponse.json({ error: 'Invalid event ID' }, { status: 400 });
+			}
+
+			const eventAttendees = mockEventAttendees.filter((attendee) => attendee.eventId === numId);
+
+			return HttpResponse.json(eventAttendees, { status: 200 });
+		} catch (error) {
+			return HttpResponse.json({ error: 'Internal server error' }, { status: 500 });
+		}
 	}),
 ];

@@ -12,6 +12,7 @@ export type Organization = {
 	orgWebUrl?: string;
 	status: string;
 	avatarImageUrl?: string;
+	bannerImageUrl?: string;
 	images?: Array<{ id: number; image: string }>;
 	reviews: number[];
 	events: number[];
