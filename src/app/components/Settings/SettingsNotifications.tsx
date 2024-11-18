@@ -11,7 +11,13 @@ import {
 } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 
-const SettingsNotifications = () => {
+import { User } from '@api/entities/user/types/user.types';
+
+interface Props {
+	user: User;
+}
+
+const SettingsNotifications = ({ user }: Props) => {
 	const [state, setState] = useState({
 		checkedA: true,
 		checkedB: false,
@@ -30,7 +36,7 @@ const SettingsNotifications = () => {
 		<Grid container spacing={{ xs: 2, sm: 3 }}>
 			<Grid xs={12}>
 				<Box pb={2}>
-					<Typography variant="h3">Account</Typography>
+					<Typography variant="h3">{user.username}&apos;s Notifications</Typography>
 					<Typography color="text.secondary" variant="subtitle1">
 						Choose what notifications you want to receive
 					</Typography>

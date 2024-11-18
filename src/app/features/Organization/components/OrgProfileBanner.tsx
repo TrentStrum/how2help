@@ -1,6 +1,8 @@
-import { Box, Typography, Rating } from '@mui/material';
+import { Box, Typography, Rating, Chip } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import { Organization } from '@api/entities/organization';
+import { useGetCausesByOrg } from '@api/entities/organization/hooks/useGetCausesByOrg';
 import { OptimizedImage } from '@app/components/Images/OptimizedImage';
 
 interface Props {
@@ -8,6 +10,9 @@ interface Props {
 }
 
 const OrgProfileBanner = ({ org }: Props) => {
+	const navigate = useNavigate();
+	const { data: causes } = useGetCausesByOrg(org.orgId.toString());
+
 	return (
 		<Box sx={{ position: 'relative', mb: { xs: 3, sm: 4 } }}>
 			{/* Banner Image Container */}
@@ -106,6 +111,26 @@ const OrgProfileBanner = ({ org }: Props) => {
 					>
 						{org.name}
 					</Typography>
+					{/* Organization Causes Tags */}
+					<Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
+						{causes?.map((cause) => {
+							return (
+								<Chip
+									key={cause.causeId}
+									label={`#${cause.name}`}
+									onClick={() => {
+										navigate(`/cause/${cause.causeId}`);
+									}}
+									size="small"
+									sx={{
+										bgcolor: 'background.default',
+										color: 'text.secondary',
+										fontWeight: 500,
+									}}
+								/>
+							);
+						})}
+					</Box>
 
 					{/* Short Description */}
 					{org.description ? (

@@ -1,19 +1,44 @@
-import FilterListIcon from '@mui/icons-material/FilterList';
-import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
-import { Typography, Box, Grid, InputAdornment, TextField, Button } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+	Typography,
+	Box,
+	Grid,
+	Button,
+	Stack,
+	Chip,
+	Drawer,
+	FormGroup,
+	Checkbox,
+	FormControlLabel,
+	IconButton,
+} from '@mui/material';
 import { useState } from 'react';
 
 import { useGetAllActiveEvents } from '@api/entities/events/hooks/useGetAllActiveEvents';
+import { EventFilters } from '@api/entities/events/types/event.types';
+import { SearchOutlineFilters } from '@app/components/Filter/SearchOutlineFilters';
 import { H2hPagination } from '@app/components/Pagination/H2hPagination';
+import { SearchOutline } from '@app/components/Searchbar/SearchOutline';
 import { H2hSkeleton } from '@app/components/skeleton/Skeleton';
 
 import { EventCatalogCard } from './EventCatalogCard';
 
 const EventCatalog = () => {
 	const limitCount = 12; // Match org/cause catalog pagination
-	const [currentPage, setCurrentPage] = useState(1);
-	const [search, setSearch] = useState<string>('');
-	const [isFocused, setIsFocused] = useState(false);
+	const [currentPage, setCurrentPage] = useState(0);
+	const [search, setSearch] = useState<EventFilters['search']>('');
+	const [isFilterOpen, setIsFilterOpen] = useState(false);
+	const [activeFilters, setActiveFilters] = useState<{
+		categories: string[];
+		locations: string[];
+		size: string[];
+	}>({
+		categories: [],
+		locations: [],
+		size: [],
+	});
+
+	const [tempFilters, setTempFilters] = useState(activeFilters);
 
 	const { data, isPending, isError, error, isFetching } = useGetAllActiveEvents(
 		currentPage,
@@ -23,7 +48,37 @@ const EventCatalog = () => {
 
 	const handleSearch = (value: string) => {
 		setSearch(value);
+		setCurrentPage(0);
+	};
+
+	const handleFilterChange = (type: keyof typeof tempFilters, value: string) => {
+		setTempFilters((prev) => ({
+			...prev,
+			[type]: prev[type].includes(value)
+				? prev[type].filter((item) => item !== value)
+				: [...prev[type], value],
+		}));
+	};
+
+	const handleApplyFilters = () => {
+		setActiveFilters(tempFilters);
 		setCurrentPage(1);
+		setIsFilterOpen(false);
+	};
+
+	const handleCloseFilters = () => {
+		setTempFilters(activeFilters); // Reset temp filters to active filters
+		setIsFilterOpen(false);
+	};
+
+	const clearFilters = () => {
+		const emptyFilters = {
+			categories: [],
+			locations: [],
+			size: [],
+		};
+		setActiveFilters(emptyFilters);
+		setTempFilters(emptyFilters);
 	};
 
 	if (isPending) return <H2hSkeleton />;
@@ -32,6 +87,8 @@ const EventCatalog = () => {
 	const events = data?.results || [];
 	const total = data?.total || 0;
 	const count = Math.max(1, Math.ceil(total / limitCount));
+
+	const totalActiveFilters = Object.values(activeFilters).flat().length;
 
 	return (
 		<Box sx={{ px: { xs: 2, sm: 3 } }}>
@@ -46,38 +103,48 @@ const EventCatalog = () => {
 			</Box>
 
 			{/* Search Bar */}
-			<Box sx={{ maxWidth: 'md', mx: 'auto', mb: 6, display: 'flex', gap: 2 }}>
-				<TextField
-					InputProps={{
-						startAdornment: !isFocused && (
-							<InputAdornment position="start" sx={{ ml: 1 }}>
-								<SearchTwoToneIcon />
-							</InputAdornment>
-						),
-					}}
-					onBlur={() => setIsFocused(false)}
-					onChange={(e) => handleSearch(e.target.value)}
-					onFocus={() => setIsFocused(true)}
-					placeholder={isFocused ? '' : 'Search by event name...'}
-					sx={{
-						flex: 1,
-						'& .MuiInputBase-root': {
-							borderRadius: 2,
-							bgcolor: 'background.paper',
-							boxShadow: isFocused ? 4 : 1,
-							transition: 'box-shadow 0.3s ease-in-out',
-						},
-						'& .MuiInputBase-input': {
-							pl: 1,
-							py: 2,
-						},
-					}}
-					value={search}
+			<Box
+				sx={{
+					maxWidth: 'md',
+					mx: 'auto',
+					mb: 6,
+					display: 'flex',
+					gap: 2,
+				}}
+			>
+				<Box sx={{ flex: 1 }}>
+					<SearchOutline
+						onSearch={handleSearch}
+						placeholder="Search by event name..."
+						searchValue={search}
+					/>
+				</Box>
+				<SearchOutlineFilters
+					onFilterClick={() => setIsFilterOpen(true)}
+					totalActiveFilters={totalActiveFilters}
 				/>
-				<Button startIcon={<FilterListIcon />} sx={{ px: 3 }} variant="outlined">
-					Filters
-				</Button>
 			</Box>
+
+			{/* Active Filters */}
+			{totalActiveFilters > 0 ? (
+				<Box sx={{ maxWidth: 'md', mx: 'auto', mb: 3 }}>
+					<Stack alignItems="center" direction="row" flexWrap="wrap" spacing={1} useFlexGap>
+						{Object.entries(activeFilters).map(([type, values]) =>
+							values.map((value) => (
+								<Chip
+									key={`${type}-${value}`}
+									label={value}
+									onDelete={() => handleFilterChange(type as keyof typeof activeFilters, value)}
+									sx={{ mb: 1 }}
+								/>
+							)),
+						)}
+						<Button color="error" onClick={clearFilters} size="small" sx={{ mb: 1 }}>
+							Clear all
+						</Button>
+					</Stack>
+				</Box>
+			) : null}
 
 			{/* Events Grid */}
 			<Box sx={{ flexGrow: 1, minHeight: '60vh' }}>
@@ -101,6 +168,105 @@ const EventCatalog = () => {
 					/>
 				</Box>
 			) : null}
+			{/* Filter Drawer */}
+			<Drawer
+				PaperProps={{
+					sx: { width: { xs: '100%', sm: 400 } },
+				}}
+				anchor="right"
+				onClose={handleCloseFilters}
+				open={isFilterOpen}
+			>
+				<Box
+					sx={{
+						p: 3,
+						display: 'flex',
+						flexDirection: 'column',
+						height: '100%',
+					}}
+				>
+					<Box
+						sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}
+					>
+						<Typography variant="h6">Filters</Typography>
+						<IconButton onClick={handleCloseFilters}>
+							<CloseIcon />
+						</IconButton>
+					</Box>
+
+					{/* Filter Sections */}
+					<Box sx={{ flex: 1, overflow: 'auto' }}>
+						<Stack spacing={3}>
+							{/* Categories */}
+							<Box>
+								<Typography sx={{ mb: 2 }} variant="subtitle1">
+									Categories
+								</Typography>
+								<FormGroup>
+									{['Education', 'Healthcare', 'Environment', 'Social Services'].map((category) => (
+										<FormControlLabel
+											control={
+												<Checkbox
+													checked={tempFilters.categories.includes(category)}
+													onChange={() => handleFilterChange('categories', category)}
+												/>
+											}
+											key={category}
+											label={category}
+										/>
+									))}
+								</FormGroup>
+							</Box>
+
+							{/* Locations */}
+							<Box>
+								<Typography sx={{ mb: 2 }} variant="subtitle1">
+									Locations
+								</Typography>
+								<FormGroup>
+									{['New York', 'Los Angeles', 'Chicago', 'Houston'].map((location) => (
+										<FormControlLabel
+											control={
+												<Checkbox
+													checked={tempFilters.locations.includes(location)}
+													onChange={() => handleFilterChange('locations', location)}
+												/>
+											}
+											key={location}
+											label={location}
+										/>
+									))}
+								</FormGroup>
+							</Box>
+
+							{/* Organization Size */}
+							<Box>
+								<Typography sx={{ mb: 2 }} variant="subtitle1">
+									Organization Size
+								</Typography>
+								<FormGroup>
+									{['1-50', '51-200', '201-500', '500+'].map((size) => (
+										<FormControlLabel
+											control={
+												<Checkbox
+													checked={tempFilters.size.includes(size)}
+													onChange={() => handleFilterChange('size', size)}
+												/>
+											}
+											key={size}
+											label={size}
+										/>
+									))}
+								</FormGroup>
+							</Box>
+						</Stack>
+					</Box>
+
+					<Button color="primary" onClick={handleApplyFilters} variant="contained">
+						Apply Filters
+					</Button>
+				</Box>
+			</Drawer>
 		</Box>
 	);
 };

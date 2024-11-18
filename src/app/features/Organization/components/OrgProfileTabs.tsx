@@ -3,8 +3,8 @@ import { SyntheticEvent, useState } from 'react';
 
 import { useGetOrgById } from '@api/entities/organization';
 import { TabStyle } from '@app/components/Tabs';
-import { ORG_TAB_CONFIG } from '@app/components/Tabs/tabConfig';
 
+import { ORG_TAB_CONFIG } from './tabConfig';
 import { TabPanel } from '../../../components/Tabs/TabPanel';
 
 interface Props {

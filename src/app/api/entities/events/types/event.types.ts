@@ -18,3 +18,7 @@ export type Event = {
 };
 
 export type GetEventResponse = H2hPaginatedResponse<Event>;
+
+export type EventFilters = {
+	search: string;
+};

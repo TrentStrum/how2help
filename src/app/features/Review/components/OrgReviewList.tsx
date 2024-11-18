@@ -63,7 +63,10 @@ const OrgReviewList = ({ org }: Props) => {
 							pb: { xs: 2, sm: 0 },
 						}}
 					>
-						<Avatar src={review.avatar} />
+						<Avatar
+							alt={`User ${review.userId}`}
+							src={`/src/assets/avatars/${review.userId}.png`}
+						/>
 						<Typography
 							sx={{
 								my: 1,
@@ -72,19 +75,22 @@ const OrgReviewList = ({ org }: Props) => {
 						>
 							{review.title}
 						</Typography>
-						<ReactCountryFlag
-							countryCode={review.flag}
-							style={{
-								width: '2.6em',
-								height: '2.6em',
-							}}
-							svg
-						/>
+						{review.flag ? (
+							<ReactCountryFlag
+								countryCode={review.flag}
+								style={{
+									width: '2.6em',
+									height: '2.6em',
+								}}
+								svg
+							/>
+						) : null}
 					</Box>
 					<Box flex={1}>
 						<Typography
 							sx={{
 								mb: { xs: 2, sm: 3 },
+								mt: { xs: 2, sm: 0 },
 							}}
 						>
 							{review.review}

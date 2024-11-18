@@ -18,7 +18,13 @@ import {
 	Typography,
 } from '@mui/material';
 
-const UserProfileActivityTab = () => {
+import { User } from '@api/entities/user';
+
+type Props = {
+	user: User;
+};
+
+const UserProfileActivityTab = ({ user }: Props) => {
 	return (
 		<Card>
 			<CardHeader
@@ -40,19 +46,7 @@ const UserProfileActivityTab = () => {
 						}}
 					/>
 				}
-				subheader={
-					<>
-						Managing Partner,{' '}
-						<Link href="" onClick={(e) => e.preventDefault()} underline="hover">
-							#software
-						</Link>
-						,{' '}
-						<Link href="" onClick={(e) => e.preventDefault()} underline="hover">
-							#managers
-						</Link>
-						, Google Inc.
-					</>
-				}
+				subheader={<Typography variant="subtitle2">{user.role}</Typography>}
 				subheaderTypographyProps={{ variant: 'subtitle2' }}
 				sx={{
 					'& .MuiCardHeader-action': {

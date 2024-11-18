@@ -1,8 +1,6 @@
 import { HttpResponse, http } from 'msw';
 
-import { H2hPaginatedResponse } from '@api/utils/types';
-
-import { mockUsers, User } from '..';
+import { mockUsers } from '..';
 
 interface LoginInput {
 	email: string;
@@ -10,25 +8,54 @@ interface LoginInput {
 }
 
 export const handlers = [
-	http.get('/user', () => {
-		const urlParams = new URLSearchParams(document.location.search);
+	http.get('/user', async ({ request }) => {
+		try {
+			const url = new URL(request.url);
+			const page = Number(url.searchParams.get('_page')) || 0;
+			const limit = Number(url.searchParams.get('_limit')) || 10;
+			const search = url.searchParams.get('_search')?.toLowerCase();
 
-		const pageNumber = parseInt(urlParams.get('page') || '1', 10);
-		const pageSize = parseInt(urlParams.get('limit') || '8', 10);
-		const status = 200;
-		const statusText = 'Success';
-		const start = (pageNumber - 1) * pageSize;
-		const paginatedUsers = mockUsers.slice(start, start + pageSize);
-		const total = mockUsers.length;
-		const responseBody = {
-			results: paginatedUsers,
-			total,
-			pageNumber,
-			pageSize,
-			status,
-			statusText,
-		};
-		return HttpResponse.json<H2hPaginatedResponse<User>>(responseBody, { status: 200 });
+			// Get filter values
+			const categories = url.searchParams.getAll('_categories');
+			const locations = url.searchParams.getAll('_locations');
+
+			let filteredUsers = [...mockUsers];
+
+			// Apply search filter
+			if (search) {
+				filteredUsers = filteredUsers.filter(
+					(user) =>
+						user.username.toLowerCase().includes(search) ||
+						user.firstName.toLowerCase().includes(search) ||
+						user.lastName.toLowerCase().includes(search),
+				);
+			}
+
+			// Apply other filters
+			if (categories.length) {
+				filteredUsers = filteredUsers.filter((user) => categories.includes(user.username));
+			}
+
+			if (locations.length) {
+				filteredUsers = filteredUsers.filter((user) => user.city && locations.includes(user.city));
+			}
+
+			// Calculate pagination
+			const start = page * limit;
+			const paginatedUsers = filteredUsers.slice(start, start + limit);
+
+			return HttpResponse.json(
+				{
+					results: paginatedUsers,
+					total: filteredUsers.length,
+					pageNumber: page,
+					pageSize: limit,
+				},
+				{ status: 200 },
+			);
+		} catch (error) {
+			return HttpResponse.json({ error: 'Internal server error' }, { status: 500 });
+		}
 	}),
 
 	http.get('/user/:userId', ({ params }) => {
@@ -88,7 +115,7 @@ export const handlers = [
 			);
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		} catch (error) {
-			return HttpResponse.json({ message: 'Invaluid or expired token' }, { status: 401 });
+			return HttpResponse.json({ message: 'Invalid or expired token' }, { status: 401 });
 		}
 	}),
 ];

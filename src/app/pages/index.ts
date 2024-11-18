@@ -26,3 +26,7 @@ export * from './UserProfilePage';
 // Activity
 export * from './ActivityCatalogPage';
 export * from './ActivityProfilePage';
+
+// Legal
+export * from './PrivacyPage';
+export * from './TermsPage';

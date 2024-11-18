@@ -16,7 +16,26 @@ const useGetOrgById = (orgId: number) => {
 			if (!data || typeof data !== 'object') {
 				throw new Error('Invalid organization data received');
 			}
-			return data;
+
+			// Ensure all required fields are present
+			const requiredFields = ['orgId', 'name', 'description', 'type'];
+			for (const field of requiredFields) {
+				if (!(field in data)) {
+					throw new Error(`Missing required field: ${field}`);
+				}
+			}
+
+			// Transform the data to include optional new fields with defaults
+			return {
+				...data,
+				mission: data.mission || null,
+				foundedYear: data.foundedYear || null,
+				size: data.size || null,
+				email: data.email || null,
+				phone: data.phone || null,
+				address: data.address || null,
+				website: data.website || data.orgWebUrl || null,
+			};
 		},
 		retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
 	});

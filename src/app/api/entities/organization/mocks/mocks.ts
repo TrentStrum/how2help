@@ -22,6 +22,14 @@ export const mockOrgs: Organization[] = [
 		events: [1],
 		activities: [1, 2],
 		type: 'Organization',
+		mission:
+			'To promote equality and acceptance for all LGBTQ+ individuals through advocacy, education, and community support.',
+		foundedYear: 2010,
+		size: '50-100 employees',
+		email: 'contact@standinpride.org',
+		phone: '+1 (555) 123-4567',
+		address: '123 Pride Avenue, San Francisco, CA 94105',
+		website: 'https://standinpride.org',
 	},
 	{
 		orgId: 2,
@@ -44,6 +52,13 @@ export const mockOrgs: Organization[] = [
 		events: [1],
 		activities: [1, 2],
 		type: 'Organization',
+		mission: 'To provide humanitarian assistance and protection to registered Palestine refugees.',
+		foundedYear: 1949,
+		size: '1000+ employees',
+		email: 'info@unrwa.org',
+		phone: '+972 2 589 0222',
+		address: 'Headquarters, East Jerusalem',
+		website: 'https://www.unrwa.org',
 	},
 	{
 		orgId: 3,

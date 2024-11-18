@@ -1,2 +1,2 @@
-export * from './Searchbar';
+export * from './SearchOutline';
 export * from './SearchContained';

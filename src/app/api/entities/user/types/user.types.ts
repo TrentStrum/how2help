@@ -7,13 +7,15 @@ export type User = {
 	lastName: string;
 	username: string;
 	password: string;
+	dateOfBirth?: string;
 	email: string;
 	phone?: string;
 	streetAddress?: string;
 	altAddress?: string;
 	city?: string;
-	State?: string;
-	Country?: string;
+	state?: string;
+	zipCode?: string;
+	country?: string;
 	role?: string;
 	favoriteOrgs?: number[];
 	favoriteCauses?: number[];

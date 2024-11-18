@@ -102,32 +102,57 @@ export const handlers = [
 		}
 	}),
 
-	http.get('/org/by-cause/:causeId', ({ params }) => {
-		const { causeId } = params;
+	http.get('/org/by-cause/:causeId', async ({ request, params }) => {
+		try {
+			const { causeId } = params;
+			const numId = Number(causeId);
+			const url = new URL(request.url);
+			const searchTerm = url.searchParams.get('_search')?.toLowerCase();
+			const paginationParams = getPaginationParams(url);
 
-		const numId: number = Number(causeId);
+			if (!numId) {
+				return new HttpResponse(null, { status: 404 });
+			}
 
-		if (!numId) {
-			return new HttpResponse(null, { status: 404 });
+			// Filter organizations by cause
+			let filteredOrgs = mockOrgs.filter((org) => org.causes.some((causeId) => causeId === numId));
+
+			// Apply search if present
+			if (searchTerm) {
+				filteredOrgs = filteredOrgs.filter(
+					(org) =>
+						org.name.toLowerCase().includes(searchTerm) ||
+						org.description.toLowerCase().includes(searchTerm),
+				);
+			}
+
+			const paginatedResponse = createPaginatedResponse(filteredOrgs, paginationParams);
+			return HttpResponse.json(paginatedResponse, { status: 200 });
+		} catch (error) {
+			return HttpResponse.json({ error: 'Internal server error' }, { status: 500 });
 		}
-
-		return HttpResponse.json(
-			mockOrgs.filter((u) => {
-				return u.causes.some((i) => {
-					return i === numId;
-				});
-			}),
-		);
 	}),
 
 	http.get('/org', async ({ request }) => {
 		try {
 			const url = new URL(request.url);
+			const searchTerm = url.searchParams.get('_search')?.toLowerCase();
 			const paginationParams = getPaginationParams(url);
-			const paginatedResponse = createPaginatedResponse(mockOrgs, paginationParams);
+
+			// Filter organizations based on search term
+			let filteredOrgs = [...mockOrgs];
+			if (searchTerm) {
+				filteredOrgs = mockOrgs.filter(
+					(org) =>
+						org.name.toLowerCase().includes(searchTerm) ||
+						org.description.toLowerCase().includes(searchTerm),
+				);
+			}
+
+			const paginatedResponse = createPaginatedResponse(filteredOrgs, paginationParams);
 			return HttpResponse.json(paginatedResponse, { status: 200 });
 		} catch (error) {
-			return HttpResponse.json({ error: 'Internal server error', status: 500 });
+			return HttpResponse.json({ error: 'Internal server error' }, { status: 500 });
 		}
 	}),
 ];

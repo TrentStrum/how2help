@@ -1,14 +1,18 @@
-import { BookmarkBorder, CalendarToday, AccessTime, LocationOn } from '@mui/icons-material';
-import { Avatar, Box, Button, Card, Chip, IconButton, Typography } from '@mui/material';
+import { CalendarToday, LocationOn } from '@mui/icons-material';
+import { Box, Button, Card, Chip, Typography } from '@mui/material';
 import { format } from 'date-fns';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { RsvpModal } from '../../../components/Modals/RsvpModal';
 
 type Props = {
 	avatarImageUrl?: string;
 	name: string;
-	description: string;
 	eventDate: string;
 	startTime: string;
 	location: string;
+	eventId: string;
 };
 
 const formatTime = (timeString: string | null | undefined) => {
@@ -34,94 +38,102 @@ const formatDate = (dateString: string | null | undefined) => {
 const OrgProfileEventCard = ({
 	avatarImageUrl,
 	name,
-	description,
 	eventDate,
 	startTime,
 	location,
+	eventId,
 }: Props) => {
+	const navigate = useNavigate();
+	const [isRsvpModalOpen, setIsRsvpModalOpen] = useState(false);
+
+	const handleRsvpClick = () => {
+		setIsRsvpModalOpen(true);
+	};
+
+	const handleRsvpClose = () => {
+		setIsRsvpModalOpen(false);
+	};
+
+	const handleLearnMore = () => {
+		navigate(`/event/${eventId}`);
+	};
+
 	return (
-		<Card
-			elevation={2}
-			sx={{
-				height: '100%',
-				width: '100%',
-				display: 'flex',
-				flexDirection: 'column',
-				borderRadius: 3,
-				transition: 'all 0.3s ease',
-				'&:hover': {
-					transform: 'translateY(-4px)',
-					boxShadow: (theme) => theme.shadows[8],
-				},
-			}}
-		>
-			<Box
+		<>
+			<Card
+				elevation={2}
 				sx={{
-					height: 80,
-					position: 'relative',
-					bgcolor: 'primary.light',
-					backgroundImage: { avatarImageUrl },
-					backgroundSize: 'cover',
-					backgroundPosition: 'center',
+					height: '100%',
+					width: '100%',
+					display: 'flex',
+					flexDirection: 'column',
+					borderRadius: 3,
+					transition: 'all 0.3s ease',
+					'&:hover': {
+						transform: 'translateY(-4px)',
+						boxShadow: (theme) => theme.shadows[8],
+					},
 				}}
 			>
-				<IconButton
-					sx={{
-						position: 'absolute',
-						right: 8,
-						top: 8,
-						bgcolor: 'rgba(255,255,255,0.9)',
-						'&:hover': { bgcolor: 'white' },
-					}}
-				>
-					<BookmarkBorder />
-				</IconButton>
 				<Box
 					sx={{
-						position: 'absolute',
-						bottom: -20,
-						left: 16,
+						height: 50,
+						position: 'relative',
+						bgcolor: 'primary.light',
+						backgroundImage: { avatarImageUrl },
+						backgroundSize: 'cover',
+						backgroundPosition: 'center',
 					}}
 				>
-					<Avatar
+					{/* <IconButton
+						sx={{
+							position: 'absolute',
+							right: 8,
+							top: 8,
+							bgcolor: 'rgba(255,255,255,0.9)',
+							'&:hover': { bgcolor: 'white' },
+						}}
+					>
+						<BookmarkBorder />
+					</IconButton> */}
+					{/* <Avatar
 						src={avatarImageUrl}
 						sx={{
-							width: 40,
-							height: 40,
-							border: '2px solid white',
+							position: 'absolute',
+							bottom: '-24px',
+							left: 16,
+							width: 48,
+							height: 48,
+							border: '3px solid white',
 							boxShadow: 2,
 						}}
 					>
-						{name}
-					</Avatar>
+						{name.charAt(0)}
+					</Avatar> */}
 				</Box>
-			</Box>
-			<Box sx={{ p: 2, pt: 3, flexGrow: 1, minHeight: 0 }}>
-				<Box>
+				<Box sx={{ p: 3, pt: 4, flexGrow: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
 					<Typography
 						sx={{
-							fontWeight: 'bold',
-							mb: 1,
-							fontSize: '0.9rem',
-							lineHeight: 1.2,
+							fontWeight: 600,
+							fontSize: '1rem',
+							lineHeight: 1.3,
 						}}
-						variant="subtitle1"
+						variant="h6"
 					>
 						{name}
 					</Typography>
-					<Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
+					<Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
 						<Chip
-							icon={<CalendarToday sx={{ fontSize: 12 }} />}
-							label={formatDate(eventDate)}
+							icon={<CalendarToday sx={{ fontSize: 16 }} />}
+							label={formatDate(eventDate) + ' - ' + formatTime(startTime)}
 							size="small"
-							sx={{ height: 24 }}
-							variant="outlined"
-						/>
-						<Chip
-							icon={<AccessTime sx={{ fontSize: 12 }} />}
-							label={formatTime(startTime)}
-							size="small"
-							sx={{ height: 24 }}
+							sx={{
+								height: 28,
+								'& .MuiChip-label': {
+									px: 1,
+									fontSize: '0.85rem',
+								},
+							}}
 							variant="outlined"
 						/>
 					</Box>
@@ -130,63 +142,56 @@ const OrgProfileEventCard = ({
 							sx={{
 								display: 'flex',
 								alignItems: 'center',
-								gap: 0.5,
+								gap: 1,
 								color: 'text.secondary',
-								mb: 1,
 							}}
 						>
-							<LocationOn sx={{ fontSize: 14 }} />
-							<Typography noWrap variant="caption">
-								{location}
-							</Typography>
+							<LocationOn sx={{ fontSize: 16 }} />
+							<Typography sx={{ fontSize: '0.9rem' }}>{location}</Typography>
 						</Box>
 					) : null}
 				</Box>
-				<Typography
-					color="text.secondary"
-					sx={{
-						display: '-webkit-box',
-						WebkitLineClamp: 2,
-						WebkitBoxOrient: 'vertical',
-						overflow: 'hidden',
-						fontSize: '0.8rem',
-						lineHeight: 1.4,
-						mb: 1,
-					}}
-					variant="body2"
-				>
-					{description}
-				</Typography>
-			</Box>
-			<Box sx={{ px: 2, pb: 2, pt: 0 }}>
-				<Button
-					color="primary"
-					fullWidth
-					size="small"
-					sx={{
-						mb: 1,
-						borderRadius: 1.5,
-						textTransform: 'none',
-						fontSize: '0.8rem',
-					}}
-					variant="contained"
-				>
-					RSVP Now
-				</Button>
-				<Button
-					fullWidth
-					size="small"
-					sx={{
-						borderRadius: 1.5,
-						textTransform: 'none',
-						fontSize: '0.8rem',
-					}}
-					variant="outlined"
-				>
-					Learn More
-				</Button>
-			</Box>
-		</Card>
+				<Box sx={{ p: 3, pt: 0 }}>
+					<Button
+						color="primary"
+						fullWidth
+						onClick={handleRsvpClick}
+						size="medium"
+						sx={{
+							mb: 1.5,
+							borderRadius: 2,
+							textTransform: 'none',
+							fontSize: '0.9rem',
+							py: 1,
+						}}
+						variant="contained"
+					>
+						RSVP Now
+					</Button>
+					<Button
+						fullWidth
+						onClick={handleLearnMore}
+						size="medium"
+						sx={{
+							borderRadius: 2,
+							textTransform: 'none',
+							fontSize: '0.9rem',
+							py: 1,
+						}}
+						variant="outlined"
+					>
+						Learn More
+					</Button>
+				</Box>
+			</Card>
+
+			<RsvpModal
+				eventId={eventId}
+				eventName={name}
+				onClose={handleRsvpClose}
+				open={isRsvpModalOpen}
+			/>
+		</>
 	);
 };
 

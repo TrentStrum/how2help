@@ -13,7 +13,13 @@ import {
 	Typography,
 } from '@mui/material';
 
-const EditProfileDetails = () => {
+import { User } from '@api/entities/user';
+
+type Props = {
+	user: User;
+};
+
+const EditProfileDetails = ({ user }: Props) => {
 	return (
 		<Grid container spacing={{ xs: 2, sm: 3 }}>
 			<Grid item xs={12}>
@@ -48,7 +54,7 @@ const EditProfileDetails = () => {
 								</Grid>
 								<Grid item md={9} sm={8} xs={12}>
 									<Typography fontWeight={500} variant="h6">
-										Craig Donin
+										{user.firstName} {user.lastName}
 									</Typography>
 								</Grid>
 								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
@@ -56,7 +62,7 @@ const EditProfileDetails = () => {
 								</Grid>
 								<Grid item md={9} sm={8} xs={12}>
 									<Typography fontWeight={500} variant="h6">
-										15 March 1977
+										{user.dateOfBirth}
 									</Typography>
 								</Grid>
 								<Grid item md={3} sm={4} textAlign={{ sm: 'right' }} xs={12}>
@@ -69,7 +75,8 @@ const EditProfileDetails = () => {
 										}}
 									>
 										<Typography fontWeight={500} variant="h6">
-											1749 High Meadow Lane, SEQUOIA NATIONAL PARK, California, 93262
+											{user.streetAddress} {user.city}, {user.altAddress}, {user.state}{' '}
+											{user.zipCode}
 										</Typography>
 									</Box>
 								</Grid>
@@ -172,7 +179,7 @@ const EditProfileDetails = () => {
 								<Grid item md={9} sm={8} xs={12}>
 									<Stack alignItems="center" direction="row" spacing={1}>
 										<Typography fontWeight={500} lineHeight={1} variant="h6">
-											example@demo.com
+											{user.email}
 										</Typography>
 										<Chip
 											color="success"

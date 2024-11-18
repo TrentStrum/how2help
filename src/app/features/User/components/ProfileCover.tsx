@@ -1,115 +1,109 @@
 import LocationOnTwoToneIcon from '@mui/icons-material/LocationOnTwoTone';
 import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
-import {
-	Box,
-	Typography,
-	Button,
-	Stack,
-	Divider,
-	Chip,
-	useTheme,
-	// useMediaQuery,
-	Avatar,
-	Paper,
-} from '@mui/material';
+import { Box, Typography, Button, Stack, Chip, useTheme, Avatar, Paper } from '@mui/material';
 
 import { User } from '@api/entities/user';
 import { ButtonIcon } from '@app/components/Buttons/ButtonIcon';
 
 type Props = {
 	user: User;
+	isOwner: boolean;
 };
 
-const ProfileCover = ({ user }: Props) => {
+const ProfileCover = ({ user, isOwner }: Props) => {
 	const theme = useTheme();
-	// const smUp = useMediaQuery(theme.breakpoints.up('sm'));
 
 	return (
-		<Paper
-			elevation={0}
-			sx={{
-				position: 'relative',
-				borderRadius: 2,
-				overflow: 'hidden',
-				mb: 3,
-			}}
-		>
-			<Box
-				sx={{
-					bgcolor: 'primary.main',
-					height: { xs: 160, md: 200 },
-					position: 'relative',
-				}}
-			>
+		<Paper elevation={0} sx={{ borderRadius: 2, overflow: 'hidden' }}>
+			{/* Cover Image */}
+			<Box sx={{ position: 'relative', height: 280 }}>
 				<Box
-					alt="Profile cover"
 					component="img"
 					src={user.coverImageUrl || '/placeholders/covers/1.jpg'}
 					sx={{
-						position: 'absolute',
-						top: 0,
-						left: 0,
 						width: '100%',
 						height: '100%',
 						objectFit: 'cover',
-						opacity: 0.7,
 					}}
 				/>
-			</Box>
 
-			<Box sx={{ p: 3, position: 'relative' }}>
-				<Avatar
-					src={user.avatarImageUrl || '/placeholders/avatars/default.jpg'}
+				{/* Profile Info Overlay */}
+				<Box
 					sx={{
-						width: { xs: 88, md: 128 },
-						height: { xs: 88, md: 128 },
-						border: '4px solid',
-						borderColor: 'background.paper',
-						marginTop: { xs: -6, md: -8 },
-						boxShadow: theme.shadows[3],
+						position: 'absolute',
+						bottom: 0,
+						left: 0,
+						right: 0,
+						background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+						pt: 8,
+						pb: 3,
+						px: 4,
+						color: 'white',
+						display: 'flex',
+						alignItems: 'flex-end',
+						gap: 3,
 					}}
-				/>
+				>
+					{/* Avatar */}
+					<Avatar
+						src={user.avatarImageUrl || '/placeholders/avatars/default.jpg'}
+						sx={{
+							width: 120,
+							height: 120,
+							border: '4px solid',
+							borderColor: 'background.paper',
+							boxShadow: theme.shadows[3],
+						}}
+					/>
 
-				<Box sx={{ mt: 2 }}>
-					<Typography component="h1" gutterBottom variant="h3">
-						{user.firstName} {user.lastName}
-						<Typography color="text.secondary" component="span" sx={{ ml: 1 }} variant="h5">
-							({user.role})
+					{/* User Info */}
+					<Box sx={{ flex: 1 }}>
+						<Typography sx={{ color: 'white', mb: 1 }} variant="h3">
+							{user.firstName} {user.lastName}
 						</Typography>
-					</Typography>
+						<Stack alignItems="center" direction="row" spacing={2}>
+							<Chip
+								icon={<LocationOnTwoToneIcon />}
+								label={`${user.city}, ${user.state}`}
+								sx={{
+									bgcolor: 'rgba(255,255,255,0.1)',
+									color: 'white',
+									'& .MuiChip-icon': { color: 'white' },
+								}}
+							/>
+							<Typography sx={{ color: 'rgba(255,255,255,0.7)' }} variant="body2">
+								{user.email}
+							</Typography>
+						</Stack>
+					</Box>
 
-					<Stack
-						alignItems={{ xs: 'flex-start', sm: 'center' }}
-						direction={{ xs: 'column', sm: 'row' }}
-						spacing={2}
-					>
-						<Chip
-							color="primary"
-							icon={<LocationOnTwoToneIcon />}
-							label={`${user.city}, ${user.State}`}
-							variant="outlined"
-						/>
-						<Typography color="text.secondary" variant="subtitle1">
-							{user.email}
-						</Typography>
-					</Stack>
-
-					<Stack
-						direction="row"
-						divider={<Divider flexItem orientation="vertical" />}
-						spacing={2}
-						sx={{ mt: 3 }}
-					>
-						<Button size="large" variant="contained">
-							Follow
-						</Button>
-						<Button size="large" variant="outlined">
-							Message
-						</Button>
-						<ButtonIcon color="primary">
-							<MoreHorizTwoToneIcon />
-						</ButtonIcon>
-					</Stack>
+					{/* Action Buttons */}
+					{!isOwner ? (
+						<Stack direction="row" spacing={1}>
+							<Button
+								sx={{
+									bgcolor: 'primary.main',
+									'&:hover': { bgcolor: 'primary.dark' },
+								}}
+								variant="contained"
+							>
+								Follow
+							</Button>
+							<Button
+								sx={{
+									borderColor: 'white',
+									color: 'white',
+									'&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' },
+								}}
+								variant="outlined"
+							>
+								Message
+							</Button>
+							<ButtonIcon sx={{ color: 'white' }}>
+								<MoreHorizTwoToneIcon />
+							</ButtonIcon>
+						</Stack>
+					) : null}
 				</Box>
 			</Box>
 		</Paper>

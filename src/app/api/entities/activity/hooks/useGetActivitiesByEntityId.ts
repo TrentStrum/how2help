@@ -11,13 +11,20 @@ const useGetActivitiesByEntityId = (
 	entitytype: string,
 	currentPage: number,
 	limitCount: number,
+	search?: string,
 	options?: QueryOptions<GetActivityResponse, AxiosError<ErrorResponse>>,
 ) => {
 	return useQuery({
-		queryKey: ['activities', entityId, entitytype, { page: currentPage, limit: limitCount }],
+		queryKey: [
+			'activities',
+			entityId,
+			entitytype,
+			{ page: currentPage, limit: limitCount },
+			search,
+		],
 		queryFn: async () => {
 			return getResource<GetActivityResponse>(
-				`/activity/by-org?_hostId=${entityId}&_hostType=${entitytype}&_limit=${limitCount}&_page=${currentPage}`,
+				`/activity/by-org?_hostId=${entityId}&_hostType=${entitytype}&_limit=${limitCount}&_page=${currentPage}&_search=${search}`,
 			);
 		},
 		...options,
@@ -25,5 +32,4 @@ const useGetActivitiesByEntityId = (
 		staleTime: 1000 * 60 * 5,
 	});
 };
-
 export { useGetActivitiesByEntityId };

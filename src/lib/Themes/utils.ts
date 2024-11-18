@@ -16,10 +16,10 @@ export const getPrimaryDark = (preset?: ColorPreset): PaletteColor => {
 export const getPrimary = (preset?: ColorPreset): PaletteColor => {
 	if (!preset) {
 		console.error('Preset is not available!');
-		return lightTheme.forestGreen; // Default case
+		return lightTheme.royalBlue; // Default case
 	}
 	const color = lightTheme[preset.replace('-', '')];
-	return color ? color : lightTheme.forestGreen; // Fallback
+	return color ? color : lightTheme.royalBlue; // Fallback
 };
 
 // Extended Sidebar Layout

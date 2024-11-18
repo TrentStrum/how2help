@@ -1,13 +1,9 @@
 import CloseIcon from '@mui/icons-material/Close';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import {
 	Box,
 	Drawer,
 	Grid,
 	IconButton,
-	InputAdornment,
-	TextField,
 	Typography,
 	Button,
 	Chip,
@@ -19,15 +15,16 @@ import {
 import { useState } from 'react';
 
 import { useGetOrgsAll, OrgFilters } from '@api/entities/organization';
+import { SearchOutlineFilters } from '@app/components/Filter/SearchOutlineFilters';
 import { H2hPagination } from '@app/components/Pagination/H2hPagination';
+import { SearchOutline } from '@app/components/Searchbar/SearchOutline';
 import { H2hSkeleton } from '@app/components/skeleton/Skeleton';
 import { OrgCatalogCard } from '@app/features/Organization/index';
 
 const OrgCatalog = () => {
 	const limitCount = 12;
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(0);
 	const [search, setSearch] = useState<OrgFilters['search']>('');
-	const [isFocused, setIsFocused] = useState(false);
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
 	const [activeFilters, setActiveFilters] = useState<{
 		categories: string[];
@@ -48,7 +45,7 @@ const OrgCatalog = () => {
 
 	const handleSearch = (value: string) => {
 		setSearch(value);
-		setCurrentPage(1);
+		setCurrentPage(0);
 	};
 
 	const handleFilterChange = (type: keyof typeof tempFilters, value: string) => {
@@ -117,41 +114,17 @@ const OrgCatalog = () => {
 					gap: 2,
 				}}
 			>
-				<TextField
-					InputProps={{
-						startAdornment: !isFocused && (
-							<InputAdornment position="start" sx={{ ml: 1 }}>
-								<SearchTwoToneIcon />
-							</InputAdornment>
-						),
-					}}
-					onBlur={() => setIsFocused(false)}
-					onChange={(e) => handleSearch(e.target.value)}
-					onFocus={() => setIsFocused(true)}
-					placeholder={isFocused ? '' : 'Search by organization name...'}
-					sx={{
-						flex: 1,
-						'& .MuiInputBase-root': {
-							borderRadius: 2,
-							bgcolor: 'background.paper',
-							boxShadow: isFocused ? 4 : 1,
-							transition: 'box-shadow 0.3s ease-in-out',
-						},
-						'& .MuiInputBase-input': {
-							pl: 1,
-							py: 2,
-						},
-					}}
-					value={search}
+				<Box sx={{ flex: 1 }}>
+					<SearchOutline
+						onSearch={handleSearch}
+						placeholder="Search by organization name..."
+						searchValue={search}
+					/>
+				</Box>
+				<SearchOutlineFilters
+					onFilterClick={() => setIsFilterOpen(true)}
+					totalActiveFilters={totalActiveFilters}
 				/>
-				<Button
-					onClick={() => setIsFilterOpen(true)}
-					startIcon={<FilterListIcon />}
-					sx={{ px: 3 }}
-					variant="outlined"
-				>
-					Filters {totalActiveFilters > 0 ? `(${totalActiveFilters})` : null}
-				</Button>
 			</Box>
 
 			{/* Active Filters */}

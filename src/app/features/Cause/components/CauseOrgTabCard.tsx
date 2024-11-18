@@ -8,12 +8,13 @@ import {
 	Card,
 	Divider,
 	IconButton,
+	Rating,
 	styled,
 	Typography,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import { Organization } from '../../../api/entities/organization';
-import { AvatarGroupTooltips } from '../../../components/Avatar/AvatarGroupTooltips';
 
 const IconButtonFav = styled(IconButton)(({ theme }) => ({
 	position: 'absolute',
@@ -44,7 +45,9 @@ type Props = {
 	org: Organization;
 };
 
-const CauseOrgSearchCard = ({ org }: Props) => {
+const CauseOrgTabCard = ({ org }: Props) => {
+	const navigate = useNavigate();
+
 	return (
 		<Card
 			sx={{
@@ -68,15 +71,22 @@ const CauseOrgSearchCard = ({ org }: Props) => {
 					noWrap
 					sx={{
 						pt: 3,
+						mb: 1,
 					}}
 					variant="h4"
 				>
 					{org.name}
 				</Typography>
-				<Typography color="text.secondary" noWrap sx={{ pb: 2 }} variant="subtitle1">
-					{org.status}
-				</Typography>
-				<AvatarGroupTooltips />
+				<Rating defaultValue={org.userRating} precision={0.5} readOnly sx={{ mb: 1 }} />
+				<Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+					<Typography color="text.secondary" fontWeight="bold" variant="subtitle1">
+						Active events: {org.events?.length ? org.events : 'No email'}
+					</Typography>
+					<Typography color="text.secondary" fontWeight="bold" variant="subtitle1">
+						Open activities: {org.activities?.length ? org.activities : 'No activities'}
+					</Typography>
+				</Box>
+
 				<Divider
 					flexItem
 					sx={{
@@ -92,10 +102,13 @@ const CauseOrgSearchCard = ({ org }: Props) => {
 					<Button
 						color="secondary"
 						fullWidth
+						onClick={() => {
+							navigate(`/org/${org.orgId}`);
+						}}
 						startIcon={<AccountCircleTwoToneIcon />}
 						variant="outlined"
 					>
-						Organization profile
+						View profile
 					</Button>
 				</Box>
 			</Box>
@@ -103,4 +116,4 @@ const CauseOrgSearchCard = ({ org }: Props) => {
 	);
 };
 
-export { CauseOrgSearchCard };
+export { CauseOrgTabCard };

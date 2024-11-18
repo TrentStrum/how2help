@@ -1,74 +1,56 @@
-import {
-	Grid,
-	Tab,
-	Select,
-	MenuItem,
-	useMediaQuery,
-	useTheme,
-	SelectChangeEvent,
-} from '@mui/material';
-import { useState, ChangeEvent } from 'react';
+import { Tab, Select, MenuItem, useMediaQuery, useTheme, Box, Tabs } from '@mui/material';
+import { useState } from 'react';
 
 import { User } from '@api/entities/user/types/user.types';
 import { SettingsNotifications } from '@app/components/Settings/SettingsNotifications';
 import { SettingsSecurity } from '@app/components/Settings/SettingsSecurity';
 
 import { EditProfileDetails } from './EditProfileDetails';
+import { UserProfileAboutMe } from './UserProfileAboutMe';
 import { UserProfileActivityTab } from './UserProfileActivityTab';
-import { TabsPills } from '../services/styledComponents';
+import { UserProfileImpactTab } from './UserProfileImpactTab';
+import { UserProfileOrganizationsTab } from './UserProfileOrganizationsTab';
 
 type Props = {
+	isOwner: boolean;
 	user: User;
+	tabs: { value: number; label: string }[];
 };
 
-const UserProfileTabs = ({ user }: Props) => {
+const UserProfileTabs = ({ isOwner, tabs, user }: Props) => {
 	const theme = useTheme();
 	const smUp = useMediaQuery(theme.breakpoints.up('sm'));
-
 	const [currentTab, setCurrentTab] = useState<number>(0);
 
-	const handleTabsChange = (_event: ChangeEvent<object>, value: number): void => {
-		setCurrentTab(value);
-	};
-
-	const handleSelectChange = (event: SelectChangeEvent<number>) => {
-		setCurrentTab(event.target.value as number);
-	};
-	// pending check for authenticated user to show different menu options
-	if (user) {
-		console.log('logged in');
-	}
-
-	const tabs = [
-		{ value: 0, label: 'Activity' },
-		{ value: 1, label: 'Edit Profile' },
-		{ value: 2, label: 'Notifications' },
-		{ value: 3, label: 'Passwords/Security' },
-	];
-
 	return (
-		<Grid container>
-			<Grid item xs={12}>
+		<Box>
+			{/* Tabs Navigation */}
+			<Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
 				{smUp ? (
-					<TabsPills
-						indicatorColor="secondary"
-						onChange={handleTabsChange}
+					<Tabs
+						onChange={(_, value) => setCurrentTab(value)}
 						sx={{
 							'& .MuiTab-root': {
 								textTransform: 'none',
 								fontWeight: 500,
 								fontSize: 15,
+								minWidth: 'auto',
+								px: 3,
 							},
 						}}
-						textColor="secondary"
 						value={currentTab}
 					>
 						{tabs.map((tab) => (
 							<Tab key={tab.value} label={tab.label} value={tab.value} />
 						))}
-					</TabsPills>
+					</Tabs>
 				) : (
-					<Select fullWidth onChange={handleSelectChange} value={currentTab}>
+					<Select
+						fullWidth
+						onChange={(e) => setCurrentTab(e.target.value as number)}
+						sx={{ mb: 2 }}
+						value={currentTab}
+					>
 						{tabs.map((tab) => (
 							<MenuItem key={tab.value} value={tab.value}>
 								{tab.label}
@@ -76,14 +58,19 @@ const UserProfileTabs = ({ user }: Props) => {
 						))}
 					</Select>
 				)}
-			</Grid>
-			<Grid item xs={12}>
-				{currentTab === 0 ? <UserProfileActivityTab /> : null}
-				{currentTab === 1 ? <EditProfileDetails /> : null}
-				{currentTab === 2 ? <SettingsNotifications /> : null}
-				{currentTab === 3 ? <SettingsSecurity /> : null}
-			</Grid>
-		</Grid>
+			</Box>
+
+			{/* Tab Content */}
+			<Box sx={{ py: 2 }}>
+				{currentTab === 0 ? <UserProfileActivityTab user={user} /> : null}
+				{currentTab === 1 ? <UserProfileOrganizationsTab user={user} /> : null}
+				{currentTab === 2 ? <UserProfileImpactTab user={user} /> : null}
+				{currentTab === 3 ? <UserProfileAboutMe user={user} /> : null}
+				{isOwner && currentTab === 4 ? <EditProfileDetails user={user} /> : null}
+				{isOwner && currentTab === 5 ? <SettingsNotifications user={user} /> : null}
+				{isOwner && currentTab === 6 ? <SettingsSecurity user={user} /> : null}
+			</Box>
+		</Box>
 	);
 };
 

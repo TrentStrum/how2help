@@ -1,5 +1,8 @@
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
-// import heroImage from '@app/assets/hero-image.png'; // Add your hero image
+import { Box, Button, Container, Link, Stack, Typography } from '@mui/material';
+
+import LandingMain2 from '@assets/images/LandingMain2.png';
+
+import { Statistics } from './Statistics';
 
 const HeroSection = () => {
 	return (
@@ -25,39 +28,33 @@ const HeroSection = () => {
 					{/* Left side content */}
 					<Box sx={{ flex: 1 }}>
 						<Typography
-							variant="h1"
 							sx={{
 								fontSize: { xs: '2.5rem', md: '3.5rem' },
 								fontWeight: 'bold',
 								mb: 2,
 							}}
+							variant="h1"
 						>
-							Transform Your Workflow with Our App
+							Connect with your community and make a difference.
 						</Typography>
-						<Typography variant="h6" color="text.secondary" sx={{ mb: 4, maxWidth: 'md' }}>
-							Streamline your processes, boost productivity, and achieve more with our powerful
-							solution.
+						<Typography color="text.secondary" sx={{ mb: 4, maxWidth: 'md' }} variant="h6">
+							Find local causes and events to support.
 						</Typography>
 						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 4 }}>
-							<Button variant="contained" size="large" color="primary" sx={{ px: 4, py: 1.5 }}>
-								Get Started
-							</Button>
-							<Button variant="outlined" size="large" sx={{ px: 4, py: 1.5 }}>
-								Learn More
-							</Button>
+							<Link href="/register">
+								<Button color="primary" size="large" sx={{ px: 4, py: 1.5 }} variant="contained">
+									Get Started
+								</Button>
+							</Link>
+							<Link href="/about">
+								<Button size="large" sx={{ px: 4, py: 1.5 }} variant="outlined">
+									Learn More
+								</Button>
+							</Link>
 						</Stack>
-						<Stack
-							direction="row"
-							spacing={3}
-							sx={{
-								alignItems: 'center',
-								color: 'text.secondary',
-							}}
-						>
-							<Typography variant="body2">★★★★★ 5.0</Typography>
-							<Typography variant="body2">1000+ Happy Users</Typography>
-							<Typography variant="body2">24/7 Support</Typography>
-						</Stack>
+						<Box sx={{ mt: 2 }}>
+							<Statistics />
+						</Box>
 					</Box>
 
 					{/* Right side image */}
@@ -70,14 +67,23 @@ const HeroSection = () => {
 						}}
 					>
 						<Box
-							component="img"
-							// src={heroImage}
 							alt="Hero Image"
+							component="img"
+							src={LandingMain2}
 							sx={{
-								maxWidth: '100%',
+								maxWidth: {
+									xs: '100%', // Full width on mobile
+									sm: '120%', // 20% bigger on tablets
+									md: '130%', // 30% bigger on desktop
+								},
 								height: 'auto',
-								borderRadius: 2,
-								boxShadow: 3,
+								transform: {
+									xs: 'none',
+									sm: 'scale(1.1)', // Slight scale up on tablets
+									md: 'scale(1.2)', // Bigger scale up on desktop
+								},
+								// Optional: add transition for smooth scaling
+								transition: 'transform 0.3s ease-in-out',
 							}}
 						/>
 					</Box>

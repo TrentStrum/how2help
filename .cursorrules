@@ -1,0 +1,332 @@
+# How2Help Project Conventions
+
+## Project Overview
+A social networking app connecting people with organizations working in causes they care about. Built with React+TypeScript, Material UI, Tanstack Query, and axios.
+
+## Directory Structure 
+src/
+├── app/
+│ ├── api/
+│ │ ├── entities/ # API endpoints by entity (org, user, cause)
+│ │ └── utils/ # queryClient and API utilities
+│ ├── components/ # Shared components
+│ │ ├── Boxes/ # Box-based components
+│ │ ├── Buttons/ # Button components
+│ │ ├── Cards/ # Card components
+│ │ ├── Drawers/ # Drawer components
+│ │ ├── Hero/ # Hero section components
+│ │ ├── Menu/ # Menu components
+│ │ ├── Searchbar/ # Search components
+│ │ └── Tabs/ # Tab components
+│ ├── features/ # Feature modules
+│ │ ├── AppBar/ # Navigation components
+│ │ ├── Auth/ # Authentication
+│ │ ├── Cause/ # Cause-related features
+│ │ ├── Event/ # Event-related features
+│ │ ├── Organization/ # Organization features
+│ │ ├── Review/ # Review features
+│ │ ── User/ # User features
+│ ├── layouts/ # Layout components
+│ └── pages/ # Page components
+├── lib/
+│ ├── Themes/ # Theme configurations
+│ └── utils/ # Utility functions
+└── hooks/ # Custom hooks
+
+## Coding Patterns
+
+### Component Structure
+```typescript
+// Component template
+interface ComponentProps {
+// Props interface
+}
+const Component = ({ prop1, prop2 }: ComponentProps) => {
+return (
+<Box>
+{/ Component content /}
+</Box>
+);
+};
+export { Component };
+
+### API Hooks Pattern
+typescript
+// src/app/api/entities/[entity]/hooks/useGet[Entity].ts
+export const useGetEntity = (params: EntityParams) => {
+return useQuery({
+queryKey: ['entityKey', params],
+queryFn: () => fetchEntity(params),
+staleTime: 30000
+});
+};
+
+### Material UI Theme Usage
+typescript
+// Styled component pattern
+const StyledComponent = styled(Box)(({ theme }) => ({
+padding: theme.spacing(3),
+display: 'flex',
+flexDirection: 'column',
+height: '100%',
+backgroundColor: theme.palette.background.paper,
+borderRadius: theme.shape.borderRadius
+}));
+// Theme in components
+const Component = () => {
+return (
+<Box
+sx={{
+p: 3,
+display: 'flex',
+flexDirection: 'column',
+height: '100%'
+}}
+/>
+);
+};
+### Feature Module Structure
+feature/
+├── components/ # Feature-specific components
+├─ hooks/ # Feature-specific hooks
+├── services/ # API services
+└── index.ts # Public exports
+### Export Patterns
+typescript
+// In feature/index.ts
+export from './components';
+// export from './hooks';
+// export from './services';
+// In components/index.ts
+export from './ComponentOne';
+export from './ComponentTwo';
+### Path Aliases
+Use absolute imports with defined aliases:
+typescript
+// ✅ Correct
+import { queryClient } from '@api-utils/queryClient';
+import { CustomizationProvider } from '@themes/customization';
+// ❌ Avoid
+import { queryClient } from '../../../api/utils/queryClient';
+### Styling Conventions
+- Use MUI's `sx` prop for component-specific styles
+- Use `styled` components for reusable styles
+- Follow theme spacing and color tokens
+- Use responsive breakpoints consistently
+
+### Theme Configuration
+typescript
+interface ThemeConfig {
+colorPreset?: ColorPreset;
+direction?: Direction;
+paletteMode?: PaletteMode;
+}
+// Available color presets
+type ColorPreset =
+| 'forestGreen'
+| 'peach'
+| 'ultraViolet'
+| 'roseQuartz'
+| 'radiantOrchid'
+| 'tangerineTango'
+| 'emerald'
+| 'honeyGold'
+| 'monacoBlue'
+| 'darkViolet'
+| 'royalBlue';
+### Code Style
+typescript
+// Prettier configuration
+{
+"semi": true,
+"trailingComma": "all",
+"singleQuote": true,
+"printWidth": 100,
+"useTabs": true,
+"endOfLine": "auto"
+}
+// ESLint key rules
+{
+'react/react-in-jsx-scope': 'off',
+'react/prefer-stateless-function': 'error',
+'react/button-has-type': 'error',
+'react/no-unused-prop-types': 'error',
+'react/jsx-pascal-case': 'error'
+}
+### Common Component Props
+typescript
+// Layout props
+interface LayoutProps {
+children: ReactNode;
+maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+disablePadding?: boolean;
+}
+// Card props
+interface CardProps {
+elevation?: number;
+sx?: SxProps;
+}
+// Button props
+interface ButtonProps {
+variant?: 'contained' | 'outlined' | 'text';
+color?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
+size?: 'small' | 'medium' | 'large';
+}
+### Error Handling
+typescript
+// API error handling pattern
+const { data, error, isLoading } = useQuery({
+queryKey: ['key'],
+queryFn: async () => {
+try {
+const response = await api.get('/endpoint');
+return response.data;
+} catch (error) {
+toast.error('Error message');
+throw new Error('Meaningful error message');
+}
+}
+});
+### Responsive Design
+typescript
+// Breakpoint usage
+sx={{
+width: {
+xs: '100%',
+sm: 400
+},
+p: {
+xs: 2,
+sm: 3,
+md: 4
+}
+}}
+
+### Common Type Patterns
+```typescript
+// Entity Types
+interface BaseEntity {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// API Response Types
+interface ApiResponse<T> {
+  data: T;
+  message: string;
+  status: number;
+}
+
+// Query Params
+interface QueryParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  sort?: string;
+  filter?: Record<string, unknown>;
+}
+```
+
+### Custom Hooks Pattern
+```typescript
+// Feature-specific hooks
+const useFeature = (params: Params) => {
+  const [state, setState] = useState();
+  
+  useEffect(() => {
+    // Effect logic
+  }, [params]);
+
+  const handleAction = useCallback(() => {
+    // Action logic
+  }, []);
+
+  return {
+    state,
+    handleAction
+  };
+};
+```
+
+### Testing Patterns
+```typescript
+// Component tests
+describe('Component', () => {
+  it('renders correctly', () => {
+    render(<Component />);
+    expect(screen.getByText('text')).toBeInTheDocument();
+  });
+});
+
+// Hook tests
+test('useFeature', () => {
+  const { result } = renderHook(() => useFeature());
+  act(() => {
+    result.current.handleAction();
+  });
+  expect(result.current.state).toBe(expectedValue);
+});
+```
+
+### Form Handling
+```typescript
+// Using react-hook-form with zod
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8)
+});
+
+const Form = () => {
+  const form = useForm({
+    resolver: zodResolver(schema)
+  });
+
+  return (
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      {/* Form fields */}
+    </form>
+  );
+};
+```
+
+### Context Pattern
+```typescript
+// Context creation
+const FeatureContext = createContext<FeatureContextType | null>(null);
+
+// Provider component
+export const FeatureProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const value = useFeatureLogic();
+  return (
+    <FeatureContext.Provider value={value}>
+      {children}
+    </FeatureContext.Provider>
+  );
+};
+
+// Custom hook for context
+export const useFeatureContext = () => {
+  const context = useContext(FeatureContext);
+  if (!context) throw new Error('Must be used within FeatureProvider');
+  return context;
+};
+```
+
+### Common Utils
+```typescript
+// Date formatting
+export const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString();
+};
+
+// Error handling
+export const handleApiError = (error: unknown) => {
+  if (error instanceof ApiError) {
+    toast.error(error.message);
+  } else {
+    toast.error('An unexpected error occurred');
+  }
+};
+```
+

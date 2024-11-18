@@ -9,7 +9,7 @@ type Props = {
 };
 const H2hPagination = ({ count, changePage, page, isFetching }: Props) => {
 	const handleChange = (event: ChangeEvent<unknown>, value: number) => {
-		changePage(value);
+		changePage(value - 1);
 	};
 	return (
 		<Card>
@@ -25,7 +25,7 @@ const H2hPagination = ({ count, changePage, page, isFetching }: Props) => {
 						count={count}
 						disabled={isFetching}
 						onChange={handleChange}
-						page={page}
+						page={page + 1}
 						showFirstButton
 						showLastButton
 					/>

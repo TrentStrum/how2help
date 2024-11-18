@@ -1,4 +1,4 @@
-import { Container, CssBaseline, styled, ThemeProvider } from '@mui/material';
+import { Container, CssBaseline, styled, ThemeProvider, Box } from '@mui/material';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState, useEffect } from 'react';
@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { queryClient } from '@api-utils/queryClient';
+import { Footer } from '@components/Footer/Footer';
 import { CustomizationConsumer, CustomizationProvider } from '@themes/customization';
 
 import { createTheme } from '../lib/Themes';
@@ -33,17 +34,17 @@ const App = () => {
 	}, []);
 
 	const isAuthenticated = false;
-	let page;
+	let content;
 
 	if (isMobile) {
-		page = (
+		content = (
 			<>
 				<Outlet />
 				{isAuthenticated ? <MobileMenu /> : null}
 			</>
 		);
 	} else {
-		page = (
+		content = (
 			<>
 				{isAuthenticated ? null : <Appbar />}
 				<Offset />
@@ -61,9 +62,6 @@ const App = () => {
 					<CustomizationProvider>
 						<CustomizationConsumer>
 							{(settings) => {
-								if (!settings.isInitialized) {
-									// return null
-								}
 								const theme = createTheme({
 									colorPreset: settings.colorPreset,
 									direction: settings.direction,
@@ -73,8 +71,11 @@ const App = () => {
 								return (
 									<ThemeProvider theme={theme}>
 										<CssBaseline />
+										<Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+											<Container sx={{ maxWidth: 'xl', flex: 1 }}>{content}</Container>
+											<Footer />
+										</Box>
 										<ReactQueryDevtools initialIsOpen={true} />
-										<Container sx={{ maxWidth: 'xl' }}>{page}</Container>
 										<ToastContainer />
 									</ThemeProvider>
 								);

@@ -1,13 +1,10 @@
 import CloseIcon from '@mui/icons-material/Close';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import {
 	Box,
 	Drawer,
 	Grid,
 	IconButton,
-	InputAdornment,
-	TextField,
 	Typography,
 	Button,
 	Chip,
@@ -21,15 +18,15 @@ import { useState } from 'react';
 import { Cause } from '@api/entities/cause';
 import { useGetAllCauses } from '@api/entities/cause/hooks/useGetAllCauses';
 import { H2hPagination } from '@app/components/Pagination/H2hPagination';
+import { SearchOutline } from '@app/components/Searchbar';
 import { H2hSkeleton } from '@app/components/skeleton/Skeleton';
 
 import { CauseCatalogCard } from '.';
 
 const CauseCatalog = () => {
 	const limitCount = 12; // Match org catalog pagination
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(0);
 	const [search, setSearch] = useState<string>('');
-	const [isFocused, setIsFocused] = useState(false);
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
 	const [activeFilters, setActiveFilters] = useState<{
 		categories: string[];
@@ -52,7 +49,7 @@ const CauseCatalog = () => {
 
 	const handleSearch = (value: string) => {
 		setSearch(value);
-		setCurrentPage(1);
+		setCurrentPage(0);
 	};
 
 	const handleFilterChange = (type: keyof typeof tempFilters, value: string) => {
@@ -121,33 +118,13 @@ const CauseCatalog = () => {
 					gap: 2,
 				}}
 			>
-				<TextField
-					InputProps={{
-						startAdornment: !isFocused && (
-							<InputAdornment position="start" sx={{ ml: 1 }}>
-								<SearchTwoToneIcon />
-							</InputAdornment>
-						),
-					}}
-					onBlur={() => setIsFocused(false)}
-					onChange={(e) => handleSearch(e.target.value)}
-					onFocus={() => setIsFocused(true)}
-					placeholder={isFocused ? '' : 'Search by cause name...'}
-					sx={{
-						flex: 1,
-						'& .MuiInputBase-root': {
-							borderRadius: 2,
-							bgcolor: 'background.paper',
-							boxShadow: isFocused ? 4 : 1,
-							transition: 'box-shadow 0.3s ease-in-out',
-						},
-						'& .MuiInputBase-input': {
-							pl: 1,
-							py: 2,
-						},
-					}}
-					value={search}
-				/>
+				<Box sx={{ flex: 1 }}>
+					<SearchOutline
+						onSearch={handleSearch}
+						placeholder="Search by cause name..."
+						searchValue={search}
+					/>
+				</Box>
 				<Button
 					onClick={() => setIsFilterOpen(true)}
 					startIcon={<FilterListIcon />}

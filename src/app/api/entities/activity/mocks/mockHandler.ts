@@ -6,15 +6,26 @@ import { mockActivities } from './mocks';
 
 export const handlers = [
 	// useGetAllActivities
-	http.get('/activity', ({ request }) => {
+	http.get('/activity', async ({ request }) => {
 		try {
 			const url = new URL(request.url);
+			const searchTerm = url.searchParams.get('_search')?.toLowerCase();
 			const paginationParams = getPaginationParams(url);
 
-			const paginatedResponse = createPaginatedResponse(mockActivities, paginationParams);
+			// Filter activities based on search term
+			let filteredActivities = [...mockActivities];
+			if (searchTerm) {
+				filteredActivities = mockActivities.filter(
+					(activity) =>
+						activity.name.toLowerCase().includes(searchTerm) ||
+						activity.description.toLowerCase().includes(searchTerm),
+				);
+			}
+
+			const paginatedResponse = createPaginatedResponse(filteredActivities, paginationParams);
 			return HttpResponse.json(paginatedResponse, { status: 200 });
 		} catch (error) {
-			return HttpResponse.json({ error: 'Internal server error', status: 500 });
+			return HttpResponse.json({ error: 'Internal server error' }, { status: 500 });
 		}
 	}),
 
@@ -23,15 +34,25 @@ export const handlers = [
 		const url = new URL(request.url);
 		const hostId = Number(url.searchParams.get('_hostId'));
 		const hostType = url.searchParams.get('_hostType');
+		const search = url.searchParams.get('_search')?.toLowerCase();
 
-		const hostedActivities = mockActivities.filter(
+		// First filter by host
+		let filteredActivities = mockActivities.filter(
 			(activity) => activity.hostType === hostType && activity.hostId === hostId,
 		);
-		console.log('hostedActivities:', hostedActivities);
+
+		// Then apply search filter if search term exists
+		if (search) {
+			filteredActivities = filteredActivities.filter((activity) => {
+				const nameLower = activity.name.toLowerCase();
+				const nameMatch = nameLower.includes(search);
+				return nameMatch || activity.description?.toLowerCase().includes(search);
+			});
+		}
 
 		try {
 			const paginationParams = getPaginationParams(url);
-			const paginatedResponse = createPaginatedResponse(hostedActivities, paginationParams);
+			const paginatedResponse = createPaginatedResponse(filteredActivities, paginationParams);
 
 			return HttpResponse.json(paginatedResponse, { status: 200 });
 		} catch (error) {

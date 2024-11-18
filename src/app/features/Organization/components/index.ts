@@ -7,6 +7,7 @@ export * from './OrgCauses';
 export * from './OrgProfileBanner';
 export * from './OrgProfile';
 export * from './OrgProfileActivitiesTab';
+export * from './OrgProfileActivityCard';
 export * from './OrgProfileAdditionalInfo';
 export * from './OrgProfileDescription';
 export * from './OrgProfileTabs';

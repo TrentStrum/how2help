@@ -18,6 +18,8 @@ import {
 	UserProfilePage,
 	ActivityProfilePage,
 	ActivityCatalogPage,
+	PrivacyPage,
+	TermsPage,
 } from '@app/pages';
 
 // import { ProtectedRoute } from './ProtectedRoutes';
@@ -94,6 +96,14 @@ export const routes: RouteObject[] = [
 			{
 				path: '/user/:userId',
 				element: <UserProfilePage />,
+			},
+			{
+				path: '/privacy',
+				element: <PrivacyPage />,
+			},
+			{
+				path: '/terms',
+				element: <TermsPage />,
 			},
 		],
 	},

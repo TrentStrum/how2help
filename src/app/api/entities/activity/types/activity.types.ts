@@ -16,3 +16,7 @@ export type Activity = {
 };
 
 export type GetActivityResponse = H2hPaginatedResponse<Activity>;
+
+export type ActivityFilters = {
+	search: string;
+};

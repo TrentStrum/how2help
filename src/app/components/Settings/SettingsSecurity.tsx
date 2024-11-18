@@ -15,10 +15,15 @@ import {
 	useTheme,
 } from '@mui/material';
 
+import { User } from '@api/entities/user';
 import { AvatarState } from '@app/components/Avatar/Avatar-Style';
 import { SoftButton } from '@app/components/Buttons/SoftButton';
 
-const SettingsSecurity = () => {
+type Props = {
+	user: User;
+};
+
+const SettingsSecurity = ({ user }: Props) => {
 	const theme = useTheme();
 
 	return (
@@ -33,7 +38,7 @@ const SettingsSecurity = () => {
 		>
 			<Grid xs={12}>
 				<Box pb={2}>
-					<Typography variant="h3">Social Accounts</Typography>
+					<Typography variant="h3">{user.username}&apos;s Social Accounts</Typography>
 					<Typography color="text.secondary" variant="subtitle1">
 						Manage connected social accounts options
 					</Typography>

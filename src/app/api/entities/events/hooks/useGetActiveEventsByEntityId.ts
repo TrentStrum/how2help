@@ -11,13 +11,15 @@ const useGetActiveEventsByEntityId = (
 	entitytype: string,
 	currentPage: number,
 	limitCount: number,
+	search?: string,
 	options?: QueryOptions<GetEventResponse, AxiosError<ErrorResponse>>,
 ) => {
 	return useQuery({
-		queryKey: ['events', entityId, entitytype, { page: currentPage, limit: limitCount }],
+		queryKey: ['events', entityId, entitytype, { page: currentPage, limit: limitCount, search }],
 		queryFn: async () => {
+			const searchParam = search ? `&_search=${search}` : '';
 			return getResource<GetEventResponse>(
-				`/events/org?_hostId=${entityId}&_hostType=${entitytype}&_limit=${limitCount}&_page=${currentPage}`,
+				`/events/org?_hostId=${entityId}&_hostType=${entitytype}&_limit=${limitCount}&_page=${currentPage}${searchParam}`,
 			);
 		},
 		...options,

@@ -35,6 +35,7 @@ function ElevationScroll(props: AppbarProps) {
 		elevation: trigger ? 4 : 0,
 		sx: {
 			backgroundColor: trigger ? theme.palette.primary.main : 'transparent',
+			boxShadow: trigger ? '0px 4px 8px rgba(0, 0, 0, 0.1)' : theme.shadows[0],
 			transition: 'all 0.3s ease-in-out',
 			'& .MuiTypography-root': {
 				color: trigger ? theme.palette.primary.contrastText : theme.palette.primary.main,
