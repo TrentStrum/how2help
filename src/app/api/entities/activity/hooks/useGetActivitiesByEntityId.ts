@@ -24,7 +24,7 @@ const useGetActivitiesByEntityId = (
 		],
 		queryFn: async () => {
 			return getResource<GetActivityResponse>(
-				`/activity/by-org?_hostId=${entityId}&_hostType=${entitytype}&_limit=${limitCount}&_page=${currentPage}&_search=${search}`,
+				`/activity/by-event?_hostId=${entityId}&_hostType=${entitytype}&_limit=${limitCount}&_page=${currentPage}`,
 			);
 		},
 		...options,

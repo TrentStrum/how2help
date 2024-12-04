@@ -1,40 +1,59 @@
-import { Box, Container, Grid, Paper, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 
-import { LoginBanner } from './LoginBanner';
 import { LoginForm } from './LoginForm';
 
 const LoginCover = () => {
 	return (
-		<Grid container>
-			<LoginBanner />
-			<Grid
-				component={Paper}
-				elevation={6}
-				item
-				md={6}
-				sm={9}
-				square
+		<Container
+			maxWidth="sm"
+			sx={{
+				minHeight: '100vh',
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'center',
+				py: 3,
+			}}
+		>
+			<Box
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
-					justifyContent: 'center',
+					mb: 4,
 				}}
-				xs={12}
 			>
-				<Box mx={{ xl: 6 }} py={{ xs: 2, sm: 3 }}>
-					<Container maxWidth="sm">
-						<Typography align="center" gutterBottom variant="h3">
-							Sign in
-						</Typography>
-						<Typography align="center" fontWeight={400} variant="h6">
-							Access your account and continue your journey
-						</Typography>
-					</Container>
-					<LoginForm />
-				</Box>
-			</Grid>
-		</Grid>
+				<Box
+					alt="Logo"
+					component="img"
+					src="/path-to-your-logo.svg"
+					sx={{
+						height: 40,
+						mb: 4,
+					}}
+				/>
+				<Typography
+					sx={{
+						fontWeight: 700,
+						mb: 1,
+						textAlign: 'center',
+					}}
+					variant="h4"
+				>
+					How2Help
+				</Typography>
+			</Box>
+
+			<Box
+				sx={{
+					backgroundColor: 'background.paper',
+					borderRadius: 1,
+					p: { xs: 3, sm: 4 },
+					boxShadow: (theme) => theme.shadows[1],
+				}}
+			>
+				<LoginForm />
+			</Box>
+		</Container>
 	);
 };
 

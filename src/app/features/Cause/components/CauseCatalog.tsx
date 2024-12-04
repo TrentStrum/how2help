@@ -23,6 +23,47 @@ import { H2hSkeleton } from '@app/components/skeleton/Skeleton';
 
 import { CauseCatalogCard } from '.';
 
+interface CauseFilterCounts {
+	categories: { [key: string]: number };
+	regions: { [key: string]: number };
+	orgCount: { [key: string]: number };
+	activityLevel: { [key: string]: number };
+	priority: { [key: string]: number };
+}
+
+const getCauseFilterCounts = (causes: Cause[]): CauseFilterCounts => {
+	return causes.reduce(
+		(acc, cause) => {
+			// Count categories
+			acc.categories[cause.category] = (acc.categories[cause.category] || 0) + 1;
+
+			// Count regions
+			cause.regions.forEach((region) => {
+				acc.regions[region] = (acc.regions[region] || 0) + 1;
+			});
+
+			// Count by organization size
+			const orgCountRange = getOrgCountRange(cause.organizations.length);
+			acc.orgCount[orgCountRange] = (acc.orgCount[orgCountRange] || 0) + 1;
+
+			// Count by activity level
+			acc.activityLevel[cause.activityLevel] = (acc.activityLevel[cause.activityLevel] || 0) + 1;
+
+			// Count by priority
+			acc.priority[cause.priority] = (acc.priority[cause.priority] || 0) + 1;
+
+			return acc;
+		},
+		{
+			categories: {},
+			regions: {},
+			orgCount: {},
+			activityLevel: {},
+			priority: {},
+		} as CauseFilterCounts,
+	);
+};
+
 const CauseCatalog = () => {
 	const limitCount = 12; // Match org catalog pagination
 	const [currentPage, setCurrentPage] = useState(0);

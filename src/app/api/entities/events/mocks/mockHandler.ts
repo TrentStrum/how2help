@@ -1,5 +1,7 @@
 import { HttpResponse, PathParams, http } from 'msw';
 
+import { mockEventComments } from '@api/entities/comments/mocks/mocks';
+import { mockReactions } from '@api/entities/reactions/mocks/mocks';
 import { getPaginationParams, createPaginatedResponse } from '@api/helpers/PaginationHelper';
 import { H2hPaginatedResponse } from '@api/utils/types';
 
@@ -177,5 +179,15 @@ export const handlers = [
 		} catch (error) {
 			return HttpResponse.json({ error: 'Internal server error' }, { status: 500 });
 		}
+	}),
+	http.get('/event/:eventId/reactions', ({ params }) => {
+		const { eventId } = params;
+		// const numId = Number(eventId);
+
+		return HttpResponse.json(mockReactions.filter((reaction) => reaction.eventId === eventId));
+	}),
+	http.get('/event/:eventId/comments', ({ params }) => {
+		const { eventId } = params;
+		return HttpResponse.json(mockEventComments.filter((comment) => comment.eventId === eventId));
 	}),
 ];

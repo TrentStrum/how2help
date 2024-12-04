@@ -20,8 +20,60 @@ import { SearchOutlineFilters } from '@app/components/Filter/SearchOutlineFilter
 import { H2hPagination } from '@app/components/Pagination/H2hPagination';
 import { SearchOutline } from '@app/components/Searchbar/SearchOutline';
 import { H2hSkeleton } from '@app/components/skeleton/Skeleton';
+import { Event } from '@api/entities/event';
 
 import { EventCatalogCard } from './EventCatalogCard';
+
+interface EventFilterCounts {
+	types: { [key: string]: number };
+	status: { [key: string]: number };
+	locations: { [key: string]: number };
+	organizations: { [key: string]: number };
+	causes: { [key: string]: number };
+	dateRanges: { [key: string]: number };
+}
+
+const getEventFilterCounts = (events: Event[]): EventFilterCounts => {
+	return events.reduce(
+		(acc, event) => {
+			// Count event types
+			acc.types[event.type] = (acc.types[event.type] || 0) + 1;
+
+			// Count status
+			const status = getEventStatus(event.startDate, event.endDate);
+			acc.status[status] = (acc.status[status] || 0) + 1;
+
+			// Count locations
+			if (event.location) {
+				acc.locations[event.location] = (acc.locations[event.location] || 0) + 1;
+			}
+
+			// Count organizations
+			if (event.organizationId) {
+				acc.organizations[event.organizationId] = (acc.organizations[event.organizationId] || 0) + 1;
+			}
+
+			// Count causes
+			event.causes.forEach((cause) => {
+				acc.causes[cause] = (acc.causes[cause] || 0) + 1;
+			});
+
+			// Count date ranges
+			const dateRange = getDateRange(event.startDate);
+			acc.dateRanges[dateRange] = (acc.dateRanges[dateRange] || 0) + 1;
+
+			return acc;
+		},
+		{
+			types: {},
+			status: {},
+			locations: {},
+			organizations: {},
+			causes: {},
+			dateRanges: {},
+		} as EventFilterCounts,
+	);
+};
 
 const EventCatalog = () => {
 	const limitCount = 12; // Match org/cause catalog pagination

@@ -1,96 +1,215 @@
-import { Box, Button, Container, Link, Stack, Typography } from '@mui/material';
+import { CheckCircle } from '@mui/icons-material';
+import {
+	Avatar,
+	AvatarGroup,
+	Box,
+	Button,
+	Container,
+	Grid,
+	Stack,
+	Typography,
+	useTheme,
+} from '@mui/material';
+import { alpha } from '@mui/material/styles';
 
-import LandingMain2 from '@assets/images/LandingMain2.png';
+import { useNavigation } from '@hooks/useNavigation';
 
-import { Statistics } from './Statistics';
+export const HeroSection = () => {
+	const theme = useTheme();
+	const { handleNavigation } = useNavigation();
+	const isDark = theme.palette.mode === 'dark';
 
-const HeroSection = () => {
 	return (
 		<Box
-			component="section"
 			sx={{
-				minHeight: '80vh',
+				background: isDark
+					? `linear-gradient(to bottom, ${alpha(theme.palette.background.default, 0.9)}, ${theme.palette.background.default})`
+					: '#FFFFFF',
+				minHeight: '90vh',
 				display: 'flex',
 				alignItems: 'center',
-				bgcolor: 'background.default',
-				pt: { xs: 8, md: 0 },
+				position: 'relative',
+				overflow: 'hidden',
+				borderBottom: '1px solid',
+				borderColor: 'divider',
+				'&::before': {
+					content: '""',
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
+					background: isDark
+						? 'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.025) 0%, transparent 40%)'
+						: 'none',
+					pointerEvents: 'none',
+				},
 			}}
 		>
 			<Container maxWidth="lg">
-				<Box
-					sx={{
-						display: 'flex',
-						flexDirection: { xs: 'column', md: 'row' },
-						alignItems: 'center',
-						gap: { xs: 4, md: 8 },
-					}}
-				>
-					{/* Left side content */}
-					<Box sx={{ flex: 1 }}>
-						<Typography
-							sx={{
-								fontSize: { xs: '2.5rem', md: '3.5rem' },
-								fontWeight: 'bold',
-								mb: 2,
-							}}
-							variant="h1"
-						>
-							Connect with your community and make a difference.
-						</Typography>
-						<Typography color="text.secondary" sx={{ mb: 4, maxWidth: 'md' }} variant="h6">
-							Find local causes and events to support.
-						</Typography>
-						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 4 }}>
-							<Link href="/register">
-								<Button color="primary" size="large" sx={{ px: 4, py: 1.5 }} variant="contained">
+				<Grid alignItems="center" container spacing={8}>
+					<Grid item md={6} xs={12}>
+						<Stack spacing={4}>
+							<Box>
+								<Typography
+									sx={{
+										fontSize: { xs: '2.5rem', md: '3.75rem' },
+										fontWeight: 700,
+										color: 'text.primary',
+										lineHeight: 1.2,
+										mb: 2,
+									}}
+									variant="h1"
+								>
+									Connect & Make an{' '}
+									<Box
+										component="span"
+										sx={{
+											color: 'primary.main',
+											position: 'relative',
+											'&::after': {
+												content: '""',
+												position: 'absolute',
+												bottom: '8%',
+												left: 0,
+												width: '100%',
+												height: '8px',
+												background: (theme) =>
+													alpha(theme.palette.primary.main, isDark ? 0.2 : 0.1),
+												borderRadius: '4px',
+												zIndex: -1,
+											},
+										}}
+									>
+										Impact
+									</Box>
+								</Typography>
+								<Typography
+									sx={{
+										color: 'text.secondary',
+										fontWeight: 400,
+										lineHeight: 1.6,
+										maxWidth: '90%',
+									}}
+									variant="h5"
+								>
+									Join a community of volunteers and organizations working together to create
+									positive change
+								</Typography>
+							</Box>
+
+							<Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+								<Button
+									onClick={() => handleNavigation('/register')}
+									size="large"
+									sx={{
+										px: 4,
+										py: 1.5,
+										fontSize: '1.1rem',
+										fontWeight: 600,
+										backgroundColor: isDark ? 'primary.main' : 'white',
+										color: isDark ? 'white' : 'primary.main',
+										boxShadow: isDark
+											? `0 0 20px ${alpha(theme.palette.primary.main, 0.4)}`
+											: '0 8px 16px -4px rgba(14, 165, 233, 0.2)',
+										'&:hover': {
+											backgroundColor: isDark ? 'primary.dark' : 'white',
+											transform: 'translateY(-2px)',
+											boxShadow: isDark
+												? `0 0 30px ${alpha(theme.palette.primary.main, 0.6)}`
+												: '0 12px 20px -4px rgba(14, 165, 233, 0.3)',
+										},
+									}}
+									variant={isDark ? 'contained' : 'outlined'}
+								>
 									Get Started
 								</Button>
-							</Link>
-							<Link href="/about">
-								<Button size="large" sx={{ px: 4, py: 1.5 }} variant="outlined">
-									Learn More
+								<Button
+									onClick={() => handleNavigation('/events')}
+									size="large"
+									sx={{
+										px: 4,
+										py: 1.5,
+										fontSize: '1.1rem',
+										fontWeight: 600,
+										borderColor: isDark ? 'primary.main' : 'divider',
+										color: 'text.primary',
+										'&:hover': {
+											borderColor: 'primary.main',
+											backgroundColor: alpha(theme.palette.primary.main, 0.05),
+										},
+									}}
+									variant="outlined"
+								>
+									Browse Events
 								</Button>
-							</Link>
-						</Stack>
-						<Box sx={{ mt: 2 }}>
-							<Statistics />
-						</Box>
-					</Box>
+							</Stack>
 
-					{/* Right side image */}
-					<Box
-						sx={{
-							flex: 1,
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-						}}
-					>
+							<Box sx={{ mt: 4 }}>
+								<Stack alignItems="center" direction="row" spacing={4}>
+									<Stack alignItems="center" direction="row" spacing={1}>
+										<AvatarGroup max={4}>
+											{[1, 2, 3, 4, 5].map((i) => (
+												<Avatar
+													key={i}
+													src={`/avatars/avatar${i}.jpg`}
+													sx={{ width: 32, height: 32 }}
+												/>
+											))}
+										</AvatarGroup>
+										<Typography color="text.secondary">Join 1,000+ volunteers</Typography>
+									</Stack>
+									<Box
+										sx={{
+											display: 'flex',
+											alignItems: 'center',
+											gap: 1,
+											color: 'success.main',
+										}}
+									>
+										<CheckCircle fontSize="small" />
+										<Typography>Trusted Platform</Typography>
+									</Box>
+								</Stack>
+							</Box>
+						</Stack>
+					</Grid>
+
+					<Grid item md={6} xs={12}>
 						<Box
-							alt="Hero Image"
-							component="img"
-							src={LandingMain2}
 							sx={{
-								maxWidth: {
-									xs: '100%', // Full width on mobile
-									sm: '120%', // 20% bigger on tablets
-									md: '130%', // 30% bigger on desktop
+								position: 'relative',
+								'&::before': {
+									content: '""',
+									position: 'absolute',
+									top: '10%',
+									right: '10%',
+									width: '80%',
+									height: '80%',
+									background: (theme) => alpha(theme.palette.primary.main, isDark ? 0.1 : 0.05),
+									borderRadius: '20px',
+									transform: 'rotate(-6deg)',
 								},
-								height: 'auto',
-								transform: {
-									xs: 'none',
-									sm: 'scale(1.1)', // Slight scale up on tablets
-									md: 'scale(1.2)', // Bigger scale up on desktop
-								},
-								// Optional: add transition for smooth scaling
-								transition: 'transform 0.3s ease-in-out',
 							}}
-						/>
-					</Box>
-				</Box>
+						>
+							<img
+								alt="Volunteers working together"
+								src="/images/hero-image.jpg"
+								style={{
+									width: '100%',
+									height: 'auto',
+									borderRadius: '20px',
+									position: 'relative',
+									boxShadow: isDark
+										? '0 20px 40px -12px rgba(0,0,0,0.3)'
+										: '0 20px 40px -12px rgba(0,0,0,0.1)',
+									filter: isDark ? 'brightness(0.8)' : 'none',
+								}}
+							/>
+						</Box>
+					</Grid>
+				</Grid>
 			</Container>
 		</Box>
 	);
 };
-
-export { HeroSection };

@@ -20,8 +20,57 @@ import { SearchOutlineFilters } from '@app/components/Filter/SearchOutlineFilter
 import { H2hPagination } from '@app/components/Pagination/H2hPagination';
 import { SearchOutline } from '@app/components/Searchbar/SearchOutline';
 import { H2hSkeleton } from '@app/components/skeleton/Skeleton';
+import { Activity } from '@api/entities/activity';
 
 import { ActivityCatalogCard } from './ActivityCatalogCard';
+
+interface ActivityFilterCounts {
+	types: { [key: string]: number };
+	duration: { [key: string]: number };
+	impact: { [key: string]: number };
+	skills: { [key: string]: number };
+	status: { [key: string]: number };
+	organizations: { [key: string]: number };
+}
+
+const getActivityFilterCounts = (activities: Activity[]): ActivityFilterCounts => {
+	return activities.reduce(
+		(acc, activity) => {
+			// Count activity types
+			acc.types[activity.type] = (acc.types[activity.type] || 0) + 1;
+
+			// Count duration ranges
+			const durationRange = getDurationRange(activity.duration);
+			acc.duration[durationRange] = (acc.duration[durationRange] || 0) + 1;
+
+			// Count impact levels
+			acc.impact[activity.impactLevel] = (acc.impact[activity.impactLevel] || 0) + 1;
+
+			// Count required skills
+			activity.requiredSkills.forEach((skill) => {
+				acc.skills[skill] = (acc.skills[skill] || 0) + 1;
+			});
+
+			// Count status
+			acc.status[activity.status] = (acc.status[activity.status] || 0) + 1;
+
+			// Count organizations
+			if (activity.organizationId) {
+				acc.organizations[activity.organizationId] = (acc.organizations[activity.organizationId] || 0) + 1;
+			}
+
+			return acc;
+		},
+		{
+			types: {},
+			duration: {},
+			impact: {},
+			skills: {},
+			status: {},
+			organizations: {},
+		} as ActivityFilterCounts,
+	);
+};
 
 const ActivityCatalog = () => {
 	const limitCount = 12;

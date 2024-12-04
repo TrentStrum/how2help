@@ -1,9 +1,14 @@
 import { H2hPaginatedResponse } from '@api/utils/types';
 
 export type Activity = {
+	location: string;
+	duration: string;
+	spotsAvailable: number;
+	requirements: any;
 	activityId: number;
 	name: string;
 	description: string;
+	tags?: string[];
 	postedDate: string;
 	startDate: string;
 	endDate: string;

@@ -34,21 +34,21 @@ const common = {
 };
 
 const baseColors = [
-	{ name: 'forestGreen', value: '#607274' },
-	{ name: 'peach', value: '#EC8F5E' },
-	{ name: 'ultraViolet', value: '#894AE0' },
-	{ name: 'roseQuartz', value: '#da3c42' },
-	{ name: 'radiantOrchid', value: '#d427af' },
-	{ name: 'tangerineTango', value: '#cf4c10' },
-	{ name: 'emerald', value: '#02876f' },
-	{ name: 'honeyGold', value: '#967210' },
-	{ name: 'monacoBlue', value: '#0C74E4' },
-	{ name: 'darkViolet', value: '#B741FB' },
-	{ name: 'royalBlue', value: '#4656E8' },
-	{ name: 'success', value: '#47a992' },
-	{ name: 'info', value: '#00425A' },
-	{ name: 'warning', value: '#e6c229' },
-	{ name: 'error', value: '#c85c5c' },
+	{ name: 'forestGreen', value: '#0EA5E9' },
+	{ name: 'peach', value: '#F43F5E' },
+	{ name: 'ultraViolet', value: '#8B5CF6' },
+	{ name: 'emerald', value: '#10B981' },
+	{ name: 'monacoBlue', value: '#3B82F6' },
+	{ name: 'royalBlue', value: '#2563EB' },
+	{ name: 'roseQuartz', value: '#EC4899' },
+	{ name: 'radiantOrchid', value: '#A855F7' },
+	{ name: 'tangerineTango', value: '#F97316' },
+	{ name: 'honeyGold', value: '#FBBF24' },
+	{ name: 'darkViolet', value: '#7C3AED' },
+	{ name: 'success', value: '#10B981' },
+	{ name: 'info', value: '#0EA5E9' },
+	{ name: 'warning', value: '#F97316' },
+	{ name: 'error', value: '#EF4444' },
 ];
 
 export const adjustColorForLightTheme = (color: string) => color;

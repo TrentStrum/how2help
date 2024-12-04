@@ -1,150 +1,132 @@
+import { DarkMode, LightMode } from '@mui/icons-material';
 import {
-	AppBar,
-	Box,
+	AppBar as MuiAppBar,
 	Button,
 	Container,
-	Grid,
-	Tab,
-	Tabs,
+	IconButton,
+	Stack,
 	Toolbar,
 	Typography,
 	useTheme,
 } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { ReactElement, cloneElement } from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
-import { useAuth } from '@app/context/AuthContext';
-
-import { UserMenu } from './userMenu';
-
-interface AppbarProps {
-	children: ReactElement;
-}
-
-function ElevationScroll(props: AppbarProps) {
-	const theme = useTheme();
-	const { children } = props;
-	const trigger = useScrollTrigger({
-		disableHysteresis: true,
-		threshold: 0,
-	});
-
-	return cloneElement(children, {
-		elevation: trigger ? 4 : 0,
-		sx: {
-			backgroundColor: trigger ? theme.palette.primary.main : 'transparent',
-			boxShadow: trigger ? '0px 4px 8px rgba(0, 0, 0, 0.1)' : theme.shadows[0],
-			transition: 'all 0.3s ease-in-out',
-			'& .MuiTypography-root': {
-				color: trigger ? theme.palette.primary.contrastText : theme.palette.primary.main,
-				transition: 'color 0.3s ease-in-out',
-			},
-			'& .MuiTab-root': {
-				color: trigger ? theme.palette.primary.contrastText : theme.palette.primary.main,
-				transition: 'color 0.3s ease-in-out',
-			},
-			'& .MuiButton-root': {
-				color: trigger ? theme.palette.primary.contrastText : theme.palette.primary.main,
-				transition: 'color 0.3s ease-in-out',
-				'&:hover': {
-					backgroundColor: trigger ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.04)',
-				},
-			},
-		},
-	});
-}
+import { useCustomization } from '@hooks/useCustomization';
 
 const Appbar = () => {
-	const { isAuthenticated } = useAuth();
-	const location = useLocation();
-	const navigate = useNavigate();
+	const theme = useTheme();
+	const { paletteMode, handleUpdate } = useCustomization();
+	const isDark = paletteMode === 'dark';
 
-	const getActiveTab = () => {
-		const path = location.pathname.split('/')[1];
-		if (!path) {
-			return false;
-		}
-		return `/${path}`;
-	};
-
-	const routeChange = () => {
-		const path = '/login';
-		navigate(path);
+	const handleThemeToggle = () => {
+		handleUpdate({ paletteMode: isDark ? 'light' : 'dark' });
 	};
 
 	return (
-		<>
-			<CssBaseline />
-			<ElevationScroll>
-				<AppBar position="fixed">
-					<Box sx={{ flexGrow: 1 }}>
-						<Container maxWidth="xl">
-							<Toolbar>
-								<Grid container>
-									<Grid alignContent="center" item xs={2}>
-										<Box component={Link} style={{ textDecoration: 'none' }} to="/">
-											<Typography
-												color="primary"
-												sx={{ flexGrow: 1 }}
-												textAlign="center"
-												variant="h2"
-											>
-												How2Help
-											</Typography>
-										</Box>
-									</Grid>
-									<Grid alignContent="center" item justifyContent="center" xs={8}>
-										<Box>
-											<Tabs
-												aria-label="navigation tabs"
-												centered
-												indicatorColor="secondary"
-												textColor="primary"
-												value={getActiveTab()}
-											>
-												<Tab component={NavLink} label="Organizations" to="/org" value="/org" />
-												<Tab component={NavLink} label="Causes" to="/cause" value="/cause" />
-												<Tab component={NavLink} label="Events" to="/event" value="/event" />
-												<Tab
-													component={NavLink}
-													label="Activity"
-													to="/activity"
-													value="/activity"
-												/>
-												<Tab component={NavLink} label="Users" to="/user" value="/user" />
-												<Tab component={NavLink} label="404" to="/notFound" value="/notFound" />
-											</Tabs>
-										</Box>
-									</Grid>
-									<Grid alignContent="center" item justifyContent="center" xs={2}>
-										<Box textAlign="center">
-											{isAuthenticated ? (
-												<UserMenu />
-											) : (
-												<Button
-													onClick={routeChange}
-													sx={{
-														color: (theme) => theme.palette.primary.contrastText,
-														'&:hover': {
-															backgroundColor: 'rgba(255, 255, 255, 0.1)',
-														},
-													}}
-												>
-													Login
-												</Button>
-											)}
-										</Box>
-									</Grid>
-								</Grid>
-							</Toolbar>
-						</Container>
-					</Box>
-				</AppBar>
-			</ElevationScroll>
-			<Box sx={{ mb: 1 }} />
-		</>
+		<MuiAppBar
+			elevation={0}
+			position="sticky"
+			sx={{
+				backgroundColor:
+					theme.palette.mode === 'dark' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.98)',
+				borderBottom: '1px solid',
+				borderColor: 'divider',
+				backdropFilter: 'blur(6px)',
+				borderRadius: 0,
+			}}
+		>
+			<Container maxWidth="xl">
+				<Toolbar
+					disableGutters
+					sx={{
+						minHeight: 64,
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+					}}
+				>
+					<Stack direction="row" spacing={3} alignItems="center">
+						<Typography
+							variant="h6"
+							component={RouterLink}
+							to="/"
+							sx={{
+								textDecoration: 'none',
+								color: 'primary.main',
+								fontWeight: 700,
+								fontSize: '1.5rem',
+							}}
+						>
+							How2Help
+						</Typography>
+
+						<Stack direction="row" spacing={1}>
+							{['ORGANIZATIONS', 'CAUSES', 'EVENTS', 'ACTIVITY'].map((item) => (
+								<Button
+									key={item}
+									component={RouterLink}
+									to={`/${item.toLowerCase()}`}
+									sx={{
+										color: 'text.secondary',
+										fontWeight: 500,
+										fontSize: '0.95rem',
+										'&:hover': {
+											backgroundColor: 'transparent',
+											color: 'primary.main',
+										},
+									}}
+								>
+									{item}
+								</Button>
+							))}
+						</Stack>
+					</Stack>
+
+					<Stack direction="row" spacing={2} alignItems="center">
+						<IconButton
+							onClick={handleThemeToggle}
+							sx={{
+								color: 'text.primary',
+								'&:hover': {
+									backgroundColor: 'action.hover',
+								},
+							}}
+						>
+							{isDark ? <LightMode /> : <DarkMode />}
+						</IconButton>
+						<Button
+							variant="outlined"
+							component={RouterLink}
+							to="/login"
+							sx={{
+								borderWidth: 2,
+								borderRadius: 0,
+								'&:hover': {
+									borderWidth: 2,
+								},
+							}}
+						>
+							Login
+						</Button>
+						<Button
+							variant="contained"
+							component={RouterLink}
+							to="/register"
+							sx={{
+								boxShadow: 'none',
+								borderRadius: 0,
+								'&:hover': {
+									boxShadow: 'none',
+									transform: 'translateY(-1px)',
+								},
+							}}
+						>
+							Sign Up
+						</Button>
+					</Stack>
+				</Toolbar>
+			</Container>
+		</MuiAppBar>
 	);
 };
 

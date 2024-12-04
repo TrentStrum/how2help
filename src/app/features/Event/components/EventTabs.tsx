@@ -1,66 +1,63 @@
-import { useMediaQuery, Stack, Box, Tab, Select, MenuItem, useTheme } from '@mui/material';
-import { useState, SyntheticEvent } from 'react';
+import { Box, Tab, Tabs } from '@mui/material';
+import { SyntheticEvent, useState } from 'react';
 
-import { Event } from '@api/entities/events';
-import { TabsShadow } from '@app/components/Tabs';
+import { EventDetails } from './EventDetails';
+import { EventAttendees } from './EventAttendees';
+import { EventComments } from './EventComments';
+import { EventActivities } from './EventActivities';
+import { EventTabPanelProps, EventTabProps, EventTabType } from '../types/event.types';
 
-import { EventOrgSearch } from './EventOrgSearch';
-
-type Props = {
-	event: Event;
-};
-
-const EventTabs = ({ event }: Props) => {
-	const theme = useTheme();
-	const smUp = useMediaQuery(theme.breakpoints.up('sm'));
-
-	const [value, setValue] = useState('0');
-
-	const handleTabChange = (event: SyntheticEvent, newValue: string) => {
-		setValue(String(newValue));
-	};
-
-	const handleSelectChange = (event: SyntheticEvent, newValue: string) => {
-		setValue(newValue);
-	};
-
-	let displayTab = <EventOrgSearch eventId={event.eventId.toString()} />;
-
-	switch (value) {
-		case '0': {
-			displayTab = <EventOrgSearch eventId={event.eventId.toString()} />;
-			break;
-		}
-	}
+const TabPanel = (props: EventTabPanelProps) => {
+	const { children, value, index, ...other } = props;
 
 	return (
-		<>
-			<Stack
-				alignItems="center"
-				direction={{ xs: 'column', sm: 'row' }}
-				justifyContent="center"
-				margin={{ xs: 1 }}
-				spacing={{ xs: 2, sm: 3 }}
-			>
-				<Box width="100%">
-					{smUp ? (
-						<TabsShadow centered onChange={handleTabChange} value={value}>
-							<Tab label="Organizations" value="0" />
-							<Tab label="events" value="1" />
-							<Tab label="Education" value="2" />
-						</TabsShadow>
-					) : (
-						<Select fullWidth onChange={() => handleSelectChange} value={value}>
-							<MenuItem value="0">Organizations</MenuItem>
-							<MenuItem value="1">events</MenuItem>
-							<MenuItem value="2">Education</MenuItem>
-						</Select>
-					)}
-				</Box>
-			</Stack>
-			{displayTab}
-		</>
+		<div
+			aria-labelledby={`event-tab-${index}`}
+			hidden={value !== index}
+			id={`event-tabpanel-${index}`}
+			role="tabpanel"
+			{...other}
+		>
+			{value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+		</div>
 	);
 };
 
-export { EventTabs };
+export const EventTabs = ({ event }: EventTabProps) => {
+	const [currentTab, setCurrentTab] = useState<EventTabType>('details');
+
+	const handleTabChange = (event: SyntheticEvent, newValue: EventTabType) => {
+		setCurrentTab(newValue);
+	};
+
+	return (
+		<Box sx={{ width: '100%' }}>
+			<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+				<Tabs
+					aria-label="event tabs"
+					onChange={handleTabChange}
+					value={currentTab}
+					variant="scrollable"
+					scrollButtons="auto"
+				>
+					<Tab label="Details" value="details" />
+					<Tab label="Attendees" value="attendees" />
+					<Tab label="Comments" value="comments" />
+					<Tab label="Activities" value="activities" />
+				</Tabs>
+			</Box>
+			<TabPanel value={currentTab} index="details">
+				<EventDetails event={event} />
+			</TabPanel>
+			<TabPanel value={currentTab} index="attendees">
+				<EventAttendees event={event} />
+			</TabPanel>
+			<TabPanel value={currentTab} index="comments">
+				<EventComments event={event} />
+			</TabPanel>
+			<TabPanel value={currentTab} index="activities">
+				<EventActivities event={event} />
+			</TabPanel>
+		</Box>
+	);
+};

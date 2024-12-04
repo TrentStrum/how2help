@@ -1,4 +1,3 @@
-export * from './LoginBanner';
 export * from './LoginCover';
 export * from './LoginForm';
 export * from './logo';

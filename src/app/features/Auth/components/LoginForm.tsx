@@ -1,13 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
-import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
 import {
 	Stack,
-	Container,
 	Button,
-	Divider,
 	Typography,
-	Grid,
 	FormControl,
 	OutlinedInput,
 	InputAdornment,
@@ -85,132 +81,142 @@ const LoginForm = () => {
 	};
 
 	return (
-		<Container component="form" maxWidth="sm" onSubmit={handleSubmit(onSubmit)}>
-			<Stack
-				alignItems="center"
-				justifyContent="center"
-				mt={{ xs: 2, sm: 3 }}
-				spacing={{ xs: 2, sm: 3 }}
-			>
-				<Container maxWidth="sm">
-					<Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="center" spacing={1}>
-						<Button
-							color="secondary"
-							fullWidth
-							startIcon={<img alt="Google" src={GoogleLogo} style={{ height: 24, width: 24 }} />}
-							sx={{ whiteSpace: 'nowrap' }}
-							variant="outlined"
-						>
-							Sign in with Google (COMING SOON)
-						</Button>
-					</Stack>
-				</Container>
-				<Divider flexItem>
-					<Typography variant="subtitle1">or with email</Typography>
-				</Divider>
-				<Container maxWidth="sm">
-					<Grid container spacing={2}>
-						<Grid item xs={12}>
-							<FormControl error={!!errors.email} fullWidth>
-								<Typography
-									component="label"
-									fontWeight={500}
-									gutterBottom
-									htmlFor="email-input"
-									variant="h6"
-								>
-									Email
-								</Typography>
-								<OutlinedInput
-									{...register('email')}
-									id="email-input"
-									placeholder="Write your email"
-									startAdornment={
-										<InputAdornment position="start">
-											<MailOutlineRoundedIcon fontSize="small" />
-										</InputAdornment>
-									}
-									type="email"
-								/>
-								<FormHelperText>{errors.email?.message}</FormHelperText>
-							</FormControl>
-						</Grid>
-						<Grid item xs={12}>
-							<FormControl error={!!errors.password} fullWidth>
-								<Typography
-									component="label"
-									fontWeight={500}
-									gutterBottom
-									htmlFor="password-input"
-									variant="h6"
-								>
-									Password
-								</Typography>
-								<OutlinedInput
-									{...register('password')}
-									endAdornment={
-										<InputAdornment position="end">
-											<Button onClick={handlePasswordVisibility}>
-												{showPassword ? (
-													<VisibilityOff fontSize="small" />
-												) : (
-													<Visibility fontSize="small" />
-												)}
-											</Button>
-										</InputAdornment>
-									}
-									id="password-input"
-									placeholder="Write your password"
-									type={showPassword ? 'text' : 'password'}
-								/>
-								<FormHelperText>{errors.password?.message}</FormHelperText>
-							</FormControl>
-						</Grid>
-						<Grid item xs={12}>
-							<Box alignItems="center" display="flex" justifyContent="space-between">
-								<FormControlLabel
-									control={<Checkbox color="primary" name="terms" />}
-									label={<Typography variant="body1">Keep me signed in</Typography>}
-								/>
-								{/* <Link
-									href='#'
-									onClick={(e) => e.preventDefault()}
-									underline='hover'
-								>
-									Recover password
-								</Link> */}
-							</Box>
-						</Grid>
-						<Grid item xs={12}>
-							<Button
-								disabled={isSubmitting}
-								fullWidth
-								size="large"
-								type="submit"
-								variant="contained"
-							>
-								{isSubmitting ? 'Logging in...' : 'Login'}
-							</Button>
-						</Grid>
-						{/* {isError ? (
-							<Grid item textAlign="center" xs={12}>
-								<Typography color="error">
-									{(error as AxiosError)?.message || 'Login failed'}
-								</Typography>
-							</Grid>
-						) : null} */}
-						<Grid item textAlign="center" xs={12}>
-							<Typography color="text.secondary" component="span">
-								Not a Member yet?
-							</Typography>{' '}
-							<Link href="/register" underline="hover" fontWeight={500}>
-								Sign up
-							</Link>
-						</Grid>
-					</Grid>
-				</Container>
+		<Box component="form" onSubmit={handleSubmit(onSubmit)}>
+			<Stack spacing={3}>
+				<FormControl error={!!errors.email}>
+					<Typography
+						component="label"
+						sx={{
+							mb: 1,
+							color: 'text.primary',
+							fontSize: '0.875rem',
+						}}
+					>
+						Email
+					</Typography>
+					<OutlinedInput
+						{...register('email')}
+						fullWidth
+						placeholder="Enter your email"
+						sx={{
+							bgcolor: 'background.paper',
+							'& .MuiOutlinedInput-notchedOutline': {
+								borderColor: 'divider',
+							},
+						}}
+					/>
+					<FormHelperText>{errors.email?.message}</FormHelperText>
+				</FormControl>
+
+				<FormControl error={!!errors.password}>
+					<Typography
+						component="label"
+						sx={{
+							mb: 1,
+							color: 'text.primary',
+							fontSize: '0.875rem',
+						}}
+					>
+						Password
+					</Typography>
+					<OutlinedInput
+						{...register('password')}
+						endAdornment={
+							<InputAdornment position="end">
+								<Button onClick={handlePasswordVisibility} sx={{ minWidth: 'auto' }}>
+									{showPassword ? <VisibilityOff /> : <Visibility />}
+								</Button>
+							</InputAdornment>
+						}
+						fullWidth
+						placeholder="••••••••"
+						sx={{
+							bgcolor: 'background.paper',
+							'& .MuiOutlinedInput-notchedOutline': {
+								borderColor: 'divider',
+							},
+						}}
+						type={showPassword ? 'text' : 'password'}
+					/>
+					<FormHelperText>{errors.password?.message}</FormHelperText>
+				</FormControl>
+
+				<Box
+					sx={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
+				>
+					<FormControlLabel
+						control={<Checkbox size="small" />}
+						label="Remember me"
+						sx={{ '& .MuiTypography-root': { fontSize: '0.875rem' } }}
+					/>
+					<Link
+						href="/forgot-password"
+						sx={{
+							fontSize: '0.875rem',
+							textDecoration: 'none',
+							color: 'primary.main',
+							'&:hover': { textDecoration: 'underline' },
+						}}
+					>
+						Forgot password?
+					</Link>
+				</Box>
+
+				<Button
+					disabled={isSubmitting}
+					fullWidth
+					size="large"
+					sx={{
+						py: 1.5,
+						mt: 2,
+						bgcolor: 'primary.main',
+						color: 'primary.contrastText',
+					}}
+					type="submit"
+					variant="contained"
+				>
+					{isSubmitting ? 'Signing in...' : 'Sign in'}
+				</Button>
+
+				<Button
+					fullWidth
+					startIcon={<img alt="Google" src={GoogleLogo} width={20} />}
+					sx={{
+						py: 1.5,
+						color: 'text.primary',
+						borderColor: 'divider',
+					}}
+					variant="outlined"
+				>
+					Sign in with Google
+				</Button>
+
+				<Typography
+					align="center"
+					sx={{
+						color: 'text.secondary',
+						fontSize: '0.875rem',
+					}}
+				>
+					Don&apos;t have an account?{' '}
+					<Link
+						href="/register"
+						sx={{
+							color: 'primary.main',
+							textDecoration: 'none',
+							fontWeight: 500,
+							'&:hover': { textDecoration: 'underline' },
+						}}
+					>
+						Sign up
+					</Link>
+				</Typography>
 			</Stack>
-		</Container>
+		</Box>
 	);
 };
 

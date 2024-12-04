@@ -24,6 +24,9 @@ type Props = {
 const OrgProfileActivityCard = ({ activity }: Props) => {
 	const theme = useTheme();
 
+	// Take only the first 3 tags
+	const displayTags = activity.tags?.slice(0, 3) || [];
+
 	return (
 		<Card
 			elevation={0}
@@ -44,25 +47,41 @@ const OrgProfileActivityCard = ({ activity }: Props) => {
 					height: 45,
 					bgcolor: 'primary.light',
 					position: 'relative',
+					overflow: 'hidden',
 				}}
 			>
 				<Stack
 					direction="row"
-					flexWrap="wrap"
-					gap={1}
+					spacing={1}
 					sx={{
 						position: 'absolute',
 						top: '50%',
 						transform: 'translateY(-50%)',
 						px: 2,
+						width: '100%',
 					}}
 				>
-					<Chip
-						label="#hosting"
-						size="small"
-						sx={{ bgcolor: 'primary.dark', color: 'grey.300' }}
-						variant="filled"
-					/>
+					{displayTags.map((tag) => (
+						<Chip
+							key={tag}
+							label={tag}
+							size="small"
+							sx={{
+								bgcolor: 'primary.dark',
+								color: 'grey.300',
+								'&:hover': {
+									bgcolor: 'primary.main',
+								},
+								maxWidth: '33%',
+								'& .MuiChip-label': {
+									whiteSpace: 'nowrap',
+									overflow: 'hidden',
+									textOverflow: 'ellipsis',
+								},
+							}}
+							variant="filled"
+						/>
+					))}
 				</Stack>
 			</Box>
 
@@ -117,7 +136,7 @@ const OrgProfileActivityCard = ({ activity }: Props) => {
 					</RouterLink>
 				</Box>
 
-				<Divider />
+				<Divider sx={{ my: 1 }} />
 
 				{/* Footer */}
 				<CardActions
