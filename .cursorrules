@@ -1,0 +1,42 @@
+# Syntax rules
+language typescript
+
+# Import rules
+import_style path-aliases
+import_prefer @api-utils/* @themes/* @components/* @features/* @hooks/*
+import_avoid ../../../
+
+# File organization
+root src/
+group api entities/ utils/
+group components Boxes/ Buttons/ Cards/ Drawers/ Hero/ Menu/ Searchbar/ Tabs/
+group features AppBar/ Auth/ Cause/ Event/ Organization/ Review/ User/
+group lib Themes/ utils/
+
+# Naming conventions
+component_suffix Component
+hook_prefix use
+api_hook_pattern useGet[Entity]
+test_file_suffix .test.tsx
+
+# Code style
+prettier semi=true
+prettier trailingComma=all
+prettier singleQuote=true
+prettier printWidth=100
+prettier useTabs=true
+
+# TypeScript patterns
+type_suffix Props Interface Type Config
+interface_prefix I
+enum_suffix Enum
+
+# Component patterns
+require_props_interface
+require_typed_props
+require_export_named
+
+# Testing patterns
+test_pattern describe-it
+test_framework jest
+

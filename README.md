@@ -1,0 +1,3 @@
+How2Help is a social networking app create to help people connect with organizations that are working in causes they care about. The intent is to provide users with a way to be active in a cause/organization in a volunteer capacity, rather than just donating. Indirectly, by consolidating organizations into a single location, it will allow organizations to coordinate with each other to create events/campaigns, rather than independently, in order to maximize their impact towards a common goal. 
+
+This app is being created using React+Typescript, Material UI, Tanstack Query, and axios to produce the front-end. The MVP for this app will use MSW with json files to mimick the back-end during development. 
